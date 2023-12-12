@@ -1,4 +1,4 @@
-package com.emir.albayrak.ws.business.abstracts;
+package com.emir.albayrak.ws.business.abstracts.model;
 
 import com.emir.albayrak.ws.model.Parent;
 import com.emir.albayrak.ws.model.Student;

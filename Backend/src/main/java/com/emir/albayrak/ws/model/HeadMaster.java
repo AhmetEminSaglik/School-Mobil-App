@@ -11,4 +11,10 @@ public class HeadMaster extends User {
     void setRoleId() {
         setRoleId(EnumUserRoleId.HEADMASTER.getId());
     }
+
+    @Override
+    public String toString() {
+        return "Headmaster{" + super.toString() +'\'' +
+                "}";
+    }
 }

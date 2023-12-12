@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Teacher extends User {
     private String branch;
     private String graduatedUniversity;
@@ -17,6 +16,13 @@ public class Teacher extends User {
     @Override
     void setRoleId() {
         setRoleId(EnumUserRoleId.TEACHER.getId());
+    }
 
+    @Override
+    public String toString() {
+        return "Teacher{" + super.toString() +
+                ", branch='" + branch +'\'' +
+                ", graduatedUniversity='" + graduatedUniversity +'\'' +
+                "}";
     }
 }

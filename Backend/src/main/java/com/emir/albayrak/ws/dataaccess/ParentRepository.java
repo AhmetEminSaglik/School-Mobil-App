@@ -1,6 +1,5 @@
 package com.emir.albayrak.ws.dataaccess;
 
-import com.emir.albayrak.ws.business.abstracts.ParentService;
 import com.emir.albayrak.ws.model.Parent;
 import org.springframework.data.jpa.repository.JpaRepository;
 

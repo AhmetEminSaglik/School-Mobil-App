@@ -1,11 +1,12 @@
 package com.emir.albayrak.ws;
 
-import com.emir.albayrak.ws.business.abstracts.ParentService;
-import com.emir.albayrak.ws.business.abstracts.StudentService;
-import com.emir.albayrak.ws.business.abstracts.UserService;
+import com.emir.albayrak.ws.business.abstracts.model.ParentService;
+import com.emir.albayrak.ws.business.abstracts.model.StudentService;
+import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.HeadMaster;
 import com.emir.albayrak.ws.model.Parent;
 import com.emir.albayrak.ws.model.Student;
+import com.emir.albayrak.ws.model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,7 @@ public class InitialDataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (userService.findAll().size() == 0) {
             saveHeadMaster();
+            saveTeacher();
             saveStudent();
         } else {
             customLog.info("Users are not saved at the InitialDataLoader. Because it is already filled.");
@@ -62,10 +64,23 @@ public class InitialDataLoader implements CommandLineRunner {
         customLog.info("Headmaster is saved. Now find all User in db : " + headMaster);
     }
 
+    private void saveTeacher() {
+        Teacher teacher = new Teacher();
+        teacher.setName("Hacer");
+        teacher.setLastname("Özyurt");
+        teacher.setUsername("hacer");
+        teacher.setPassword("pass");
+        teacher.setBranch("Mobil Uygulama");
+        teacher.setGraduatedUniversity("KTU");
+        teacher= (Teacher) userService.save(teacher);
+        customLog.info("teacher is registered : "+teacher);
+
+    }
 
     private void saveStudent() {
         Parent parent = saveParent();
         Student student = new Student();
+        student.setNo("1100");
         student.setName("Ahmet Emin");
         student.setLastname("Saglik");
         student.setUsername("385931");

@@ -1,7 +1,7 @@
 package com.emir.albayrak.ws.controller;
 
 import com.emir.albayrak.ws.business.abstracts.LoginService;
-import com.emir.albayrak.ws.business.abstracts.UserService;
+import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.LoginCredentials;
 import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;

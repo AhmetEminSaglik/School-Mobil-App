@@ -1,6 +1,6 @@
 package com.emir.albayrak.ws.business.concretes;
 
-import com.emir.albayrak.ws.business.abstracts.UserService;
+import com.emir.albayrak.ws.business.abstracts.model.UserService;
 //import com.emir.albayrak.ws.dataaccess.FakeUserRepository;
 import com.emir.albayrak.ws.dataaccess.UserRepository;
 import com.emir.albayrak.ws.model.User;

@@ -10,12 +10,9 @@ import lombok.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "user_type")
-//@AllArgsConstructor
-//@NoArgsConstructor
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 @Getter
 @Setter
-@ToString
 public abstract class User {
     public User() {
         setRoleId();
@@ -39,5 +36,14 @@ public abstract class User {
 
     abstract void setRoleId();
 
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roleId=" + roleId +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'';
+    }
 }
 
