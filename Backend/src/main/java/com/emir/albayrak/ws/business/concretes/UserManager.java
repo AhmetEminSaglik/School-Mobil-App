@@ -6,6 +6,7 @@ import com.emir.albayrak.ws.dataaccess.UserRepository;
 import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import utility.exception.InvalidSignupUsernameException;
 
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class UserManager implements UserService {
 
     @Override
     public User save(User user) {
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            throw new InvalidSignupUsernameException();
+        }
         return userRepository.save(user);
     }
 }
