@@ -6,12 +6,13 @@ import lombok.*;
 
 @Entity
 @AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
 public class Student extends User {
 
+    private int parentId;
     @Override
     void setRoleId() {
         setRoleId(EnumUserRoleId.STUDENT.getId());

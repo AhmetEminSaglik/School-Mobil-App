@@ -1,6 +1,7 @@
 package com.emir.albayrak.ws;
 
 import com.emir.albayrak.ws.business.abstracts.ParentService;
+import com.emir.albayrak.ws.business.abstracts.StudentService;
 import com.emir.albayrak.ws.business.abstracts.UserService;
 import com.emir.albayrak.ws.model.HeadMaster;
 import com.emir.albayrak.ws.model.Parent;
@@ -14,20 +15,32 @@ import utility.CustomLog;
 public class InitialDataLoader implements CommandLineRunner {
     private UserService userService;
     private ParentService parentService;
+    private StudentService studentService;
     private CustomLog customLog = new CustomLog(getClass());
 
 
     @Autowired
-    public InitialDataLoader(UserService userService, ParentService parentService) {
+    public InitialDataLoader(UserService userService,
+                             StudentService studentService,
+                             ParentService parentService
+    ) {
         this.userService = userService;
+        this.studentService = studentService;
         this.parentService = parentService;
     }
 
     @Override
     public void run(String... args) throws Exception {
+        if (userService.findAll().size() == 0) {
+            saveHeadMaster();
+            saveStudent();
+        } else {
+            customLog.info("Users are not saved at the InitialDataLoader. Because it is already filled.");
+        }
 
-        saveHeadMaster();
-        saveStudent();
+        Student student = studentService.findAll().get(0);
+        customLog.info("Found Student Data : " + student);
+        customLog.info("Found Parent Data Of Student ID(" + student.getId() + ") : " + studentService.findParent(student.getParentId()));
         //        User user = new User("Emir", "ALBAYRAK");
 //        User user2 = new User("Ahmet Emin", "SAGLIK");
 //        userService.addUser(user);
@@ -38,6 +51,7 @@ public class InitialDataLoader implements CommandLineRunner {
     }
 
     private void saveHeadMaster() {
+
         HeadMaster headMaster = new HeadMaster();
         headMaster.setName("Emir");
         headMaster.setLastname("Albayrak");
@@ -48,26 +62,27 @@ public class InitialDataLoader implements CommandLineRunner {
         customLog.info("Headmaster is saved. Now find all User in db : " + headMaster);
     }
 
+
     private void saveStudent() {
+        Parent parent = saveParent();
         Student student = new Student();
         student.setName("Ahmet Emin");
         student.setLastname("Saglik");
         student.setUsername("385931");
         student.setPassword("pass");
-
+        student.setParentId(parent.getId());
         student = (Student) userService.save(student);
         customLog.info("Student is saved. Now find all User in db : " + student);
         userService.findAll().forEach(System.out::println);
-        saveParent(student.getId());
     }
 
-    private void saveParent(int studentId) {
+    private Parent saveParent() {
         Parent parent = new Parent();
-        parent.setStudentId(studentId);
         parent.setName("Veli Hasan");
         parent.setLastname("Can");
         parent.setPhoneNo("505 505 55 00");
         parent = parentService.save(parent);
-        customLog.info("Parent is saved. Now find all Parent in db : " + parentService.find(studentId));
+        customLog.info("Parent is saved. Now find all Parent in db : " + parent);
+        return parent;
     }
 }

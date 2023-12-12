@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ParentRepository extends JpaRepository<Parent, Integer> {
     Parent save(Parent parent);
 
-    Parent findByStudentId(int studentId);
+    Parent findById(int id);
 }

@@ -21,7 +21,5 @@ public class Parent {
     private String lastname;
     @Column
     private String phoneNo;
-    @Column
-    private int studentId;
 
 }

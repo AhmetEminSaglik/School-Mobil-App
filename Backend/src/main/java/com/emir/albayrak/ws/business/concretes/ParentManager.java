@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ParentManager implements ParentService {
-    private ParentRepository parentRepository;
+    private final ParentRepository parentRepository;
 
     @Autowired
     public ParentManager(ParentRepository parentRepository) {
@@ -18,10 +18,5 @@ public class ParentManager implements ParentService {
     @Override
     public Parent save(Parent parent) {
         return parentRepository.save(parent);
-    }
-
-    @Override
-    public Parent find(int studentId) {
-        return parentRepository.findByStudentId(studentId);
     }
 }
