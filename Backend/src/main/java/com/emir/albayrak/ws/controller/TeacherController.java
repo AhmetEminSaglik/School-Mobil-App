@@ -3,12 +3,15 @@ package com.emir.albayrak.ws.controller;
 import com.emir.albayrak.ws.business.abstracts.model.TeacherService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.Teacher;
+import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utility.CustomLog;
+import utility.exception.InvalidSignupUsernameException;
 import utility.result.DataResult;
+import utility.result.ErrorDataResult;
 import utility.result.SuccessDataResult;
 
 import java.util.List;
@@ -27,11 +30,14 @@ public class TeacherController {
     }
 
     @PostMapping()
-    public ResponseEntity<DataResult<Teacher>> saveTeacher(@RequestBody Teacher teacher) {
-        teacher = (Teacher) userService.save(teacher);
+    public ResponseEntity<DataResult<User>> saveTeacher(@RequestBody Teacher teacher) {
+        DataResult<User> dataResult = userService.save(teacher);
+        if (!dataResult.isSuccess()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDataResult<>(null, dataResult.getMessage()));
+        }
         customLog.info("Teacher is saved successfully in " + getClass().getSimpleName());
         String msg = "Öğretmen başarılı bir şekilde kaydedildi.";
-        DataResult<Teacher> dataResult = new SuccessDataResult<>(teacher, msg);
+        dataResult = new SuccessDataResult<>(teacher, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 

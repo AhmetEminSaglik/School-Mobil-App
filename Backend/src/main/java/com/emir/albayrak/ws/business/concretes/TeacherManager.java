@@ -21,4 +21,9 @@ public class TeacherManager implements TeacherService {
     public List<Teacher> findAll() {
         return teacherRepository.findAll();
     }
+
+    @Override
+    public Teacher findById(int id) {
+        return teacherRepository.findById(id);
+    }
 }

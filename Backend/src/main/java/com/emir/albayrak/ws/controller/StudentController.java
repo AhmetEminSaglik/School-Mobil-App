@@ -3,12 +3,14 @@ package com.emir.albayrak.ws.controller;
 import com.emir.albayrak.ws.business.abstracts.model.StudentService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.Student;
+import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utility.CustomLog;
 import utility.result.DataResult;
+import utility.result.ErrorDataResult;
 import utility.result.SuccessDataResult;
 
 import java.util.List;
@@ -27,11 +29,14 @@ public class StudentController {
     }
 
     @PostMapping()
-    public ResponseEntity<DataResult<Student>> saveStudent(@RequestBody Student student) {
-        student = (Student) userService.save(student);
+    public ResponseEntity<DataResult<User>> saveStudent(@RequestBody Student student) {
+        DataResult<User> dataResult = userService.save(student);
+        if (!dataResult.isSuccess()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDataResult<>(null, dataResult.getMessage()));
+        }
         customLog.info("Student is saved successfully");
         String msg = "Öğrenci başarılı bir şekilde kaydedildi.";
-        DataResult<Student> dataResult = new SuccessDataResult<>(student, msg);
+        dataResult = new SuccessDataResult<>(student, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 

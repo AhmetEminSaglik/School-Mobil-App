@@ -60,7 +60,7 @@ public class InitialDataLoader implements CommandLineRunner {
         headMaster.setUsername("emir");
         headMaster.setPassword("pass");
         customLog.info("headmaster to save: " + headMaster);
-        headMaster = (HeadMaster) userService.save(headMaster);
+        headMaster = (HeadMaster) userService.save(headMaster).getData();
         customLog.info("Headmaster is saved. Now find all User in db : " + headMaster);
     }
 
@@ -72,7 +72,7 @@ public class InitialDataLoader implements CommandLineRunner {
         teacher.setPassword("pass");
         teacher.setBranch("Mobil Uygulama");
         teacher.setGraduatedUniversity("KTU");
-        teacher= (Teacher) userService.save(teacher);
+        teacher= (Teacher) userService.save(teacher).getData();
         customLog.info("teacher is registered : "+teacher);
 
     }
@@ -86,7 +86,7 @@ public class InitialDataLoader implements CommandLineRunner {
         student.setUsername("385931");
         student.setPassword("pass");
         student.setParentId(parent.getId());
-        student = (Student) userService.save(student);
+        student = (Student) userService.save(student).getData();
         customLog.info("Student is saved. Now find all User in db : " + student);
         userService.findAll().forEach(System.out::println);
     }
