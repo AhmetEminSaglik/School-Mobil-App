@@ -5,8 +5,6 @@ import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.dataaccess.UserRepository;
 import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import utility.CustomLog;
 import utility.exception.InvalidSignupUsernameException;
@@ -36,7 +34,7 @@ public class UserManager implements UserService {
     @Override
     public DataResult<User> save(User user) {
         String msg;
-        if (userRepository.findByUsername(user.getUsername()) != null) {
+        if (findByUsername(user.getUsername()) != null) {
             customLog.info("BURADA THROW YAPILLIYOR ");
             msg = InvalidSignupUsernameException.customErrorMsg;
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDataResult<>(null, msg));

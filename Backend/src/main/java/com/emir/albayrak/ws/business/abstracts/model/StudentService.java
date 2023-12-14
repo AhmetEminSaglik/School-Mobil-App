@@ -9,4 +9,5 @@ public interface StudentService {
     Parent findParent(int parentId);
 
     List<Student> findAll();
+
 }

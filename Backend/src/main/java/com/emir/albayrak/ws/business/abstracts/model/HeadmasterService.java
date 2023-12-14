@@ -1,3 +1,4 @@
+/*
 package com.emir.albayrak.ws.business.abstracts.model;
 
 import com.emir.albayrak.ws.model.Student;
@@ -10,3 +11,4 @@ public interface HeadmasterService {
     Student saveStudent(Student student);
 
 }
+*/
