@@ -1,4 +1,8 @@
-package com.example.testproject.restapi;
+package com.example.testproject.restapi.base;
+
+import com.example.testproject.restapi.headmaster.abstracts.RestApiHeadMasterService;
+import com.example.testproject.restapi.student.abstracts.RestApiStudentService;
+import com.example.testproject.restapi.teacher.abstracts.RestApiTeacherService;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,19 +33,6 @@ public class RestApiClient {
         return retrofit.create(clazz);
     }
 
-  /*  public static RestApiUserService getUserRestApi(String url) {
-//        Retrofit retrofit = getRetrofit(url);
-//        RestApiUserService restAPIUserService = retrofit.create(RestApiUserService.class);
-//        return restAPIUserService;
-        return (RestApiUserService) getService(url, RestApiUserService.class);
-    }*/
-/*
-    public static RestApiBookService getBookRestApi(String url) {
-//        Retrofit retrofit = getRetrofit(url);
-//        RestApiBookService restApiBookService = retrofit.create(RestApiBookService.class);
-//        return restApiBookService;
-        return (RestApiBookService) getService(url, RestApiBookService.class);
-    }*/
   public static RestApiHeadMasterService getHeadMasterRestApi(String url) {
       return (RestApiHeadMasterService) getService(url,RestApiHeadMasterService.class);
   }

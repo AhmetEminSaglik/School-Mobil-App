@@ -10,8 +10,8 @@ import com.example.testproject.model.Student;
 import com.example.testproject.model.Teacher;
 import com.example.testproject.model.response.abstracts.RestApiErrorResponse;
 import com.example.testproject.model.response.abstracts.RestApiResponse;
-import com.example.testproject.restapi.ManagerAllStudent;
-import com.example.testproject.restapi.ManagerAllTeacher;
+import com.example.testproject.restapi.student.concretes.ManagerAllStudent;
+import com.example.testproject.restapi.teacher.concretes.ManagerAllTeacher;
 import com.example.testproject.utility.StrictModePolicy;
 import com.google.gson.Gson;
 
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tv = findViewById(R.id.txt);
         String text = getAllTeachers();
+//        String text = getAllStudents();
         Log.e("SON GELEN TEXT : ", text);
         tv.setText(text);
 
@@ -41,76 +42,22 @@ public class MainActivity extends AppCompatActivity {
 
     private String getAllTeachers() {
         String text = "";
-        Call<RestApiResponse<List<Teacher>>> call = ManagerAllTeacher.getInstance().getAllTeacher();
+        List<Teacher> list = ManagerAllTeacher.getInstance().getAllTeacher();
 
-        try {
-            List<Teacher> teacherList = null;
-            Response<RestApiResponse<List<Teacher>>> response = call.execute();
-            Log.e("response : ", response.toString());
-            if (response.code() == 200) {
-                teacherList = response.body().getData();
-            } else {
-                Gson gson = new Gson();
-                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
-                String errMsg = errorResponse.getMessage();
-                if (errMsg != null) {
-                    Log.e("Error  ", errMsg);
-                }
-                // Toast.makeText(context, errMsg, Toast.LENGTH_LONG).show();
-            }
-            String data = "";
-            if (teacherList == null) {
-                data = "NULL geldi";
-            }
-            for (int i = 0; i < teacherList.size(); i++) {
-                System.out.println("Teacher : " + teacherList.get(i));
-                text += "\n\nTeacher : " + teacherList.get(i);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            // return null;
+        StringBuilder sb = new StringBuilder();
+        for (Teacher tmp : list) {
+            sb.append(tmp).append("\n");
         }
-        return text;
-    }
+        return sb.toString();
+}
 
     private String getAllStudents() {
-        String text = "";
-        Call<RestApiResponse<List<Student>>> call = ManagerAllStudent.getInstance().getAllStudents();
+        List<Student> studentList = ManagerAllStudent.getInstance().getAllStudents();
 
-        try {
-            List<Student> studentList = null;
-            Response<RestApiResponse<List<Student>>> response = call.execute();
-            Log.e("response : ", response.toString());
-            if (response.code() == 200) {
-                studentList = response.body().getData();
-            } else/* if (response.code() == 400) */ {
-                Gson gson = new Gson();
-                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
-                String errMsg = errorResponse.getMessage();
-                if (errMsg != null) {
-                    Log.e("Error  ", errMsg);
-                }
-                // Toast.makeText(context, errMsg, Toast.LENGTH_LONG).show();
-            }
-            //return getRecommendedAuthor(authorList, EnumRecommendReason.HIGH_POINT.getName());
-            String data = "";
-            if (studentList == null) {
-                data = "NULL geldi";
-            } else {
-                data = " Teacher size " + studentList.size();
-            }
-            Log.e("teacher list : ", data);
-            System.out.println("teacher list : " + data);
-            for (int i = 0; i < studentList.size(); i++) {
-                System.out.println("Teacher : " + studentList.get(i));
-                text += "\n\nTeacher : " + studentList.get(i);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            // return null;
+        StringBuilder sb = new StringBuilder();
+        for (Student tmp : studentList) {
+            sb.append(tmp).append("\n");
         }
-        return text;
+        return sb.toString();
     }
 }

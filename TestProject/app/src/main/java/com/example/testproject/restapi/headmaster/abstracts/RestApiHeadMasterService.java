@@ -1,4 +1,4 @@
-package com.example.testproject.restapi;
+package com.example.testproject.restapi.headmaster.abstracts;
 
 
 import com.example.testproject.model.HeadMaster;

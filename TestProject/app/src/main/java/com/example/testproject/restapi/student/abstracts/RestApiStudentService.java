@@ -1,4 +1,4 @@
-package com.example.testproject.restapi;
+package com.example.testproject.restapi.student.abstracts;
 
 
 import com.example.testproject.model.Student;

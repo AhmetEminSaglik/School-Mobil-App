@@ -1,19 +1,19 @@
-package com.example.testproject.restapi;
+package com.example.testproject.restapi.headmaster.concretes;
 
 
-import com.example.testproject.model.Student;
 import com.example.testproject.model.Teacher;
 import com.example.testproject.model.response.abstracts.RestApiResponse;
+import com.example.testproject.restapi.base.BaseManager;
 
 import java.util.List;
 
 import retrofit2.Call;
 
-public class ManagerAllTeacher extends BaseManager {
-    private static ManagerAllTeacher managerAllTeacher = new ManagerAllTeacher();
+public class ManagerAllHeadMaster extends BaseManager {
+    private static ManagerAllHeadMaster managerAllHeadMaster = new ManagerAllHeadMaster();
 
-    public static synchronized ManagerAllTeacher getInstance() {
-        return managerAllTeacher;
+    public static synchronized ManagerAllHeadMaster getInstance() {
+        return managerAllHeadMaster;
     }
 
     public Call<RestApiResponse<List<Teacher>>> getAllTeacher() {

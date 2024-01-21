@@ -1,13 +1,19 @@
-package com.example.testproject.restapi;
+package com.example.testproject.restapi.student.concretes;
 
+
+import android.util.Log;
 
 import com.example.testproject.model.Student;
-import com.example.testproject.model.Teacher;
+import com.example.testproject.model.response.abstracts.RestApiErrorResponse;
 import com.example.testproject.model.response.abstracts.RestApiResponse;
+import com.example.testproject.restapi.base.BaseManager;
+import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Response;
 
 public class ManagerAllStudent extends BaseManager {
     private static ManagerAllStudent managerAll = new ManagerAllStudent();
@@ -16,8 +22,26 @@ public class ManagerAllStudent extends BaseManager {
         return managerAll;
     }
 
-    public Call<RestApiResponse<List<Student>>> getAllStudents() {
-        return getStudentRestApiClient().getAll();
+    public List<Student> getAllStudents() {
+        Call<RestApiResponse<List<Student>>> call = getStudentRestApiClient().getAll();
+        List<Student> list = null;
+        try {
+            Response<RestApiResponse<List<Student>>> response = call.execute();
+            Log.e("response : ", response.toString());
+            if (response.code() == 200) {
+                list = response.body().getData();
+            } else {
+                Gson gson = new Gson();
+                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
+                String errMsg = errorResponse.getMessage();
+                if (errMsg != null) {
+                    Log.e("Error  ", errMsg);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 //    public Call<List<User>> getAllUser() {
