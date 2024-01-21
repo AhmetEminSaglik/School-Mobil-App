@@ -17,7 +17,7 @@ import utility.result.SuccessDataResult;
 import java.util.List;
 
 @RestController
-@RequestMapping("/teachers")
+@RequestMapping("/teachers/")
 public class TeacherController {
     private final UserService userService;
     private final TeacherService teacherService;

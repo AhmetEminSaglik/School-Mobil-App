@@ -15,4 +15,7 @@ public enum EnumUserRoleId {
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
 }

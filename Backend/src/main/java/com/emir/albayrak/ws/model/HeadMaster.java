@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 public class HeadMaster extends User {
     @Override
     void setRoleId() {
-        setRoleId(EnumUserRoleId.HEADMASTER.getId());
+        roleId = EnumUserRoleId.TEACHER.getId();
     }
 
     @Override
