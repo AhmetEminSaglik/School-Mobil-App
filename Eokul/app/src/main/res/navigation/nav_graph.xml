@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/anaGirisFragment">
+
+    <fragment
+        android:id="@+id/anaGirisFragment"
+        android:name="com.example.e_okul.view.AnaGirisFragment"
+        android:label="fragment_ana_giris"
+        tools:layout="@layout/fragment_ana_giris" >
+        <action
+            android:id="@+id/action_anaGirisFragment_to_mudurGirisFragment"
+            app:destination="@id/mudurGirisFragment" />
+        <action
+            android:id="@+id/action_anaGirisFragment_to_ogrenciGirisFragment"
+            app:destination="@id/ogrenciGirisFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mudurGirisFragment"
+        android:name="com.example.e_okul.view.mudur.MudurGirisFragment"
+        android:label="fragment_mudur_giris"
+        tools:layout="@layout/fragment_mudur_giris" >
+        <action
+            android:id="@+id/action_mudurGirisFragment_to_mudurAnaSayfaFragment"
+            app:destination="@id/mudurAnaSayfaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mudurAnaSayfaFragment"
+        android:name="com.example.e_okul.view.mudur.MudurAnaSayfaFragment"
+        android:label="fragment_mudur_ana_sayfa"
+        tools:layout="@layout/fragment_mudur_ana_sayfa" >
+        <action
+            android:id="@+id/action_mudurAnaSayfaFragment_to_mudurOgrenciIslemleriFragment"
+            app:destination="@id/mudurOgrenciIslemleriFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mudurOgrenciIslemleriFragment"
+        android:name="com.example.e_okul.view.mudur.MudurOgrenciIslemleriFragment"
+        android:label="fragment_mudur_ogrenci_islemleri"
+        tools:layout="@layout/fragment_mudur_ogrenci_islemleri" >
+        <action
+            android:id="@+id/action_mudurOgrenciIslemleriFragment_to_mudurOgrenciEkleFragment"
+            app:destination="@id/mudurOgrenciEkleFragment" />
+        <action
+            android:id="@+id/action_mudurOgrenciIslemleriFragment_to_mudurOgrenciListesiFragment"
+            app:destination="@id/mudurOgrenciListesiFragment" />
+        <action
+            android:id="@+id/action_mudurOgrenciIslemleriFragment_to_mudurOgrenciAraFragment"
+            app:destination="@id/mudurOgrenciAraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mudurOgrenciAraFragment"
+        android:name="com.example.e_okul.view.mudur.MudurOgrenciAraFragment"
+        android:label="fragment_mudur_ogrenci_ara"
+        tools:layout="@layout/fragment_mudur_ogrenci_ara" />
+    <fragment
+        android:id="@+id/mudurOgrenciEkleFragment"
+        android:name="com.example.e_okul.view.mudur.MudurOgrenciEkleFragment"
+        android:label="fragment_mudur_ogrenci_ekle"
+        tools:layout="@layout/fragment_mudur_ogrenci_ekle" />
+    <fragment
+        android:id="@+id/mudurOgrenciListesiFragment"
+        android:name="com.example.e_okul.view.mudur.MudurOgrenciListesiFragment"
+        android:label="fragment_mudur_ogrenci_listesi"
+        tools:layout="@layout/fragment_mudur_ogrenci_listesi" >
+        <action
+            android:id="@+id/action_mudurOgrenciListesiFragment_to_mudurOgrenciGuncelleFragment"
+            app:destination="@id/mudurOgrenciGuncelleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mudurOgrenciGuncelleFragment"
+        android:name="com.example.e_okul.view.mudur.MudurOgrenciGuncelleFragment"
+        android:label="fragment_mudur_ogrenci_guncelle"
+        tools:layout="@layout/fragment_mudur_ogrenci_guncelle" />
+    <fragment
+        android:id="@+id/ogrenciGirisFragment"
+        android:name="com.example.e_okul.view.ogrenci.OgrenciGirisFragment"
+        android:label="fragment_ogrenci_giris"
+        tools:layout="@layout/fragment_ogrenci_giris" >
+        <action
+            android:id="@+id/action_ogrenciGirisFragment_to_ogrenciAnaSayfaFragment"
+            app:destination="@id/ogrenciAnaSayfaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ogrenciAnaSayfaFragment"
+        android:name="com.example.e_okul.view.ogrenci.OgrenciAnaSayfaFragment"
+        android:label="fragment_ogrenci_ana_sayfa"
+        tools:layout="@layout/fragment_ogrenci_ana_sayfa" />
+</navigation>
