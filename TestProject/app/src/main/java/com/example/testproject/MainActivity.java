@@ -3,16 +3,15 @@ package com.example.testproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.testproject.model.Student;
 import com.example.testproject.model.Teacher;
 import com.example.testproject.model.response.abstracts.RestApiErrorResponse;
 import com.example.testproject.model.response.abstracts.RestApiResponse;
-import com.example.testproject.restapi.ManagerAll;
+import com.example.testproject.restapi.ManagerAllStudent;
+import com.example.testproject.restapi.ManagerAllTeacher;
 import com.example.testproject.utility.StrictModePolicy;
 import com.google.gson.Gson;
 
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         TextView tv = findViewById(R.id.txt);
-        String text = getAllStudents();
+        String text = getAllTeachers();
         Log.e("SON GELEN TEXT : ", text);
         tv.setText(text);
 
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String getAllTeachers() {
         String text = "";
-        Call<RestApiResponse<List<Teacher>>> call = ManagerAll.getInstance().getAllTeacher();
+        Call<RestApiResponse<List<Teacher>>> call = ManagerAllTeacher.getInstance().getAllTeacher();
 
         try {
             List<Teacher> teacherList = null;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("response : ", response.toString());
             if (response.code() == 200) {
                 teacherList = response.body().getData();
-            } else{
+            } else {
                 Gson gson = new Gson();
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
                 String errMsg = errorResponse.getMessage();
@@ -59,15 +58,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // Toast.makeText(context, errMsg, Toast.LENGTH_LONG).show();
             }
-            //return getRecommendedAuthor(authorList, EnumRecommendReason.HIGH_POINT.getName());
             String data = "";
             if (teacherList == null) {
                 data = "NULL geldi";
-            }/* else {
-                data = " Teacher size " + teacherList.size();
-            }*/
-//            Log.e("teacher list : ", data);
-//            System.out.println("teacher list : " + data);
+            }
             for (int i = 0; i < teacherList.size(); i++) {
                 System.out.println("Teacher : " + teacherList.get(i));
                 text += "\n\nTeacher : " + teacherList.get(i);
@@ -82,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String getAllStudents() {
         String text = "";
-        Call<RestApiResponse<List<Student>>> call = ManagerAll.getInstance().getAllStudents();
+        Call<RestApiResponse<List<Student>>> call = ManagerAllStudent.getInstance().getAllStudents();
 
         try {
             List<Student> studentList = null;

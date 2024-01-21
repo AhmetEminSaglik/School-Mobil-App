@@ -1,3 +1,4 @@
+/*
 package com.emir.albayrak.ws.controller;
 
 import com.emir.albayrak.ws.business.abstracts.model.ParentService;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import utility.CustomLog;
 
 @RestController
-@RequestMapping("/headmasters")
+@RequestMapping("/headmasters/")
 public class HeadmasterController {
     private final UserService userService;
     private final ParentService parentService;
@@ -22,3 +23,4 @@ public class HeadmasterController {
 
 
 }
+*/

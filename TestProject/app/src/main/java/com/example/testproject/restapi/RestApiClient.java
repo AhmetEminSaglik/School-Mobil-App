@@ -42,7 +42,11 @@ public class RestApiClient {
 //        return restApiBookService;
         return (RestApiBookService) getService(url, RestApiBookService.class);
     }*/
-  public static RestApiStudentService getStudentRestApi(String url) {
+  public static RestApiHeadMasterService getHeadMasterRestApi(String url) {
+      return (RestApiHeadMasterService) getService(url,RestApiHeadMasterService.class);
+  }
+
+    public static RestApiStudentService getStudentRestApi(String url) {
       return (RestApiStudentService) getService(url, RestApiStudentService.class);
   }
 

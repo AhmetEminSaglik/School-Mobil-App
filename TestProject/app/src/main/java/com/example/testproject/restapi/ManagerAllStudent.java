@@ -9,15 +9,11 @@ import java.util.List;
 
 import retrofit2.Call;
 
-public class ManagerAll extends BaseManager {
-    private static ManagerAll managerAll = new ManagerAll();
+public class ManagerAllStudent extends BaseManager {
+    private static ManagerAllStudent managerAll = new ManagerAllStudent();
 
-    public static synchronized ManagerAll getInstance() {
+    public static synchronized ManagerAllStudent getInstance() {
         return managerAll;
-    }
-
-    public Call<RestApiResponse<List<Teacher>>> getAllTeacher() {
-        return getTeacherRestApiClient().getAll();
     }
 
     public Call<RestApiResponse<List<Student>>> getAllStudents() {
