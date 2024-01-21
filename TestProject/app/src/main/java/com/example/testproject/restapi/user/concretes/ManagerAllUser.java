@@ -1,35 +1,38 @@
-package com.example.testproject.restapi.student.concretes;
+package com.example.testproject.restapi.user.concretes;
 
 
 import android.util.Log;
 
 import com.example.testproject.model.LoginCredentials;
-import com.example.testproject.model.Student;
+import com.example.testproject.model.User;
 import com.example.testproject.model.response.abstracts.RestApiErrorResponse;
-import com.example.testproject.model.response.abstracts.RestApiResponse;
+import com.example.testproject.model.response.concrete.LoginResponse;
 import com.example.testproject.restapi.base.BaseManager;
+import com.example.testproject.restapi.userfactory.UserFactory;
 import com.google.gson.Gson;
 
 import java.io.IOException;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class ManagerAllStudent extends BaseManager {
-    private static ManagerAllStudent managerAll = new ManagerAllStudent();
+public class ManagerAllUser extends BaseManager {
+    private static ManagerAllUser managerAll = new ManagerAllUser();
 
-    public static synchronized ManagerAllStudent getInstance() {
+    public static synchronized ManagerAllUser getInstance() {
         return managerAll;
     }
 
-    public Student login(LoginCredentials credentials) {
-        Call<RestApiResponse<Student>> call = getStudentRestApiClient().login(credentials);
-        Student student = null;
+    public User login(LoginCredentials credentials) {
+        Call<LoginResponse> call = getUserRestApiClient().loginUser(credentials);
+        User user = null;
         try {
-            Response<RestApiResponse<Student>> response = call.execute();
+            Response<LoginResponse> response = call.execute();
             if (response.code() == 200) {
-                student = response.body().getData();
+//                Gson gson = new Gson();
+                user = response.body().getData();
+                Log.e("User res: ", user.toString());
+//                Student student = (Student) UserFactory.getUserByRoleId(user);
             } else {
                 Gson gson = new Gson();
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
@@ -41,29 +44,7 @@ public class ManagerAllStudent extends BaseManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return student;
-    }
-
-    public List<Student> getAllStudents() {
-        Call<RestApiResponse<List<Student>>> call = getStudentRestApiClient().getAll();
-        List<Student> list = null;
-        try {
-            Response<RestApiResponse<List<Student>>> response = call.execute();
-            Log.e("response : ", response.toString());
-            if (response.code() == 200) {
-                list = response.body().getData();
-            } else {
-                Gson gson = new Gson();
-                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
-                String errMsg = errorResponse.getMessage();
-                if (errMsg != null) {
-                    Log.e("Error  ", errMsg);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
+        return user;
     }
 
 //    public Call<List<User>> getAllUser() {

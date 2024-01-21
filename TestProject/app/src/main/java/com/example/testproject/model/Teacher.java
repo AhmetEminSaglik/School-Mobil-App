@@ -20,10 +20,10 @@ public class Teacher extends User {
         this.graduatedUniversity = graduatedUniversity;
     }
 
-    @Override
+   /* @Override
     void setRoleId() {
         this.roleId = EnumUserRoleId.TEACHER.getId();
-    }
+    }*/
 
     @Override
     public String toString() {

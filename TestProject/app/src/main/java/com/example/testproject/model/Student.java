@@ -4,10 +4,10 @@ public class Student extends User {
     private String no;
     private int parentId;
 
-    @Override
+ /*   @Override
     void setRoleId() {
         roleId = EnumUserRoleId.STUDENT.getId();
-    }
+    }*/
 
     public String getNo() {
         return no;

@@ -1,7 +1,9 @@
 package com.emir.albayrak.ws.controller;
 
+import com.emir.albayrak.ws.business.abstracts.LoginService;
 import com.emir.albayrak.ws.business.abstracts.model.StudentService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
+import com.emir.albayrak.ws.model.LoginCredentials;
 import com.emir.albayrak.ws.model.Student;
 import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,19 @@ public class StudentController {
     private final StudentService studentService;
     private final UserService userService;
     private CustomLog customLog = new CustomLog(getClass());
+    private final LoginService loginService;
 
     @Autowired
-    public StudentController(UserService userService, StudentService studentService) {
+    public StudentController(UserService userService, StudentService studentService, LoginService loginService) {
         this.userService = userService;
         this.studentService = studentService;
+        this.loginService = loginService;
+    }
+
+    @PostMapping("login/")
+    public ResponseEntity<DataResult<User>> login(@RequestBody LoginCredentials loginCredentials) {
+        DataResult<User> dataResult = loginService.findUserByLoginCredentials(loginCredentials);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
     @PostMapping()
@@ -54,10 +64,10 @@ public class StudentController {
     public ResponseEntity<DataResult<Student>> findById(@PathVariable int id) {
         Student student = studentService.findById(id);
         String msg;
-        if (student != null){
+        if (student != null) {
             msg = "Student with " + id + " id is retrieved.";
-        }else{
-            msg="Student with request id is not found";
+        } else {
+            msg = "Student with request id is not found";
         }
         DataResult<Student> dataResult = new SuccessDataResult<>(student, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);

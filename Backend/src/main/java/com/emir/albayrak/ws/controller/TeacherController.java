@@ -1,7 +1,9 @@
 package com.emir.albayrak.ws.controller;
 
+import com.emir.albayrak.ws.business.abstracts.LoginService;
 import com.emir.albayrak.ws.business.abstracts.model.TeacherService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
+import com.emir.albayrak.ws.model.LoginCredentials;
 import com.emir.albayrak.ws.model.Teacher;
 import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,22 @@ public class TeacherController {
     private final UserService userService;
     private final TeacherService teacherService;
     private CustomLog customLog = new CustomLog(getClass());
+    private final LoginService loginService;
 
     @Autowired
-    public TeacherController(UserService userService, TeacherService teacherService) {
+    public TeacherController(UserService userService, TeacherService teacherService, LoginService loginService) {
         this.userService = userService;
         this.teacherService = teacherService;
+        this.loginService = loginService;
     }
+
+    @PostMapping("login/")
+    
+    public ResponseEntity<DataResult<User>> login(@RequestBody LoginCredentials loginCredentials) {
+        DataResult<User> dataResult = loginService.findUserByLoginCredentials(loginCredentials);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
 
     @PostMapping()
     public ResponseEntity<DataResult<User>> saveTeacher(@RequestBody Teacher teacher) {

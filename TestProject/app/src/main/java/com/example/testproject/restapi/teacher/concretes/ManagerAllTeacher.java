@@ -3,6 +3,8 @@ package com.example.testproject.restapi.teacher.concretes;
 
 import android.util.Log;
 
+import com.example.testproject.model.LoginCredentials;
+import com.example.testproject.model.Student;
 import com.example.testproject.model.Teacher;
 import com.example.testproject.model.response.abstracts.RestApiErrorResponse;
 import com.example.testproject.model.response.abstracts.RestApiResponse;
@@ -21,7 +23,26 @@ public class ManagerAllTeacher extends BaseManager {
     public static synchronized ManagerAllTeacher getInstance() {
         return managerAllTeacher;
     }
-
+    public Teacher login(LoginCredentials credentials) {
+        Call<RestApiResponse<Teacher>> call = getTeacherRestApiClient().login(credentials);
+        Teacher teacher = null;
+        try {
+            Response<RestApiResponse<Teacher>> response = call.execute();
+            if (response.code() == 200) {
+                teacher = response.body().getData();
+            } else {
+                Gson gson = new Gson();
+                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
+                String errMsg = errorResponse.getMessage();
+                if (errMsg != null) {
+                    Log.e("Error  ", errMsg);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return teacher;
+    }
     public List<Teacher> getAllTeacher() {
         Call<RestApiResponse<List<Teacher>>> call = getTeacherRestApiClient().getAll();
         List<Teacher> list = null;

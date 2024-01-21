@@ -1,7 +1,7 @@
 package com.example.testproject.model;
 
 
-public abstract class User {
+public /*abstract*/ class User {
     private int id;
     private String username;
     private String password;
@@ -10,7 +10,7 @@ public abstract class User {
     private String name;
     private String lastname;
 
-    abstract void setRoleId();
+//    abstract void setRoleId();
 
     public int getId() {
         return id;
