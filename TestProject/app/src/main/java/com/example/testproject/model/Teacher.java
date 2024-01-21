@@ -21,8 +21,13 @@ public class Teacher extends User {
     }
 
     @Override
+    void setRoleId() {
+        this.roleId = EnumUserRoleId.TEACHER.getId();
+    }
+
+    @Override
     public String toString() {
-        return "Teacher{" + "User : " + super.toString() +
+        return "Teacher{" + super.toString() +
                 "branch='" + branch + '\'' +
                 ", graduatedUniversity='" + graduatedUniversity + '\'' +
                 ", roleId=" + roleId +

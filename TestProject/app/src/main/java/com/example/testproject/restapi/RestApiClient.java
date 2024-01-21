@@ -42,13 +42,12 @@ public class RestApiClient {
 //        return restApiBookService;
         return (RestApiBookService) getService(url, RestApiBookService.class);
     }*/
+  public static RestApiStudentService getStudentRestApi(String url) {
+      return (RestApiStudentService) getService(url, RestApiStudentService.class);
+  }
 
     public static RestApiTeacherService getTeacherRestApi(String url) {
-//        Retrofit retrofit = getRetrofit(url);
-//        RestApiTeacherService restApiAuthorService = retrofit.create(RestApiTeacherService.class);
-//        return restApiAuthorService;
         return (RestApiTeacherService) getService(url, RestApiTeacherService.class);
-
     }
 
 }

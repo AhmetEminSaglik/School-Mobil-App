@@ -6,15 +6,19 @@ import lombok.*;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Getter
 @Setter
 public class Teacher extends User {
     private String branch;
     private String graduatedUniversity;
 
+    public Teacher() {
+        setRoleIdToUser();
+    }
+
     @Override
-    void setRoleId() {
+    public  void setRoleIdToUser() {
         roleId = EnumUserRoleId.TEACHER.getId();
     }
 

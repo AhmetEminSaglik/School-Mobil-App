@@ -1,6 +1,7 @@
 package com.example.testproject.restapi;
 
 
+import com.example.testproject.model.Student;
 import com.example.testproject.model.Teacher;
 import com.example.testproject.model.response.abstracts.RestApiResponse;
 
@@ -17,6 +18,10 @@ public class ManagerAll extends BaseManager {
 
     public Call<RestApiResponse<List<Teacher>>> getAllTeacher() {
         return getTeacherRestApiClient().getAll();
+    }
+
+    public Call<RestApiResponse<List<Student>>> getAllStudents() {
+        return getStudentRestApiClient().getAll();
     }
 
 //    public Call<List<User>> getAllUser() {

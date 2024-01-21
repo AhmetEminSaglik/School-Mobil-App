@@ -6,10 +6,11 @@ public class BaseManager {
         return RestApiClient.getUserRestApi(BaseUrl.USER_URL);
     }
 
-    protected RestApiBookService getBookRestApiClient() {
-        return RestApiClient.getBookRestApi(BaseUrl.BOOK_URL);
-    }
+
 */
+    protected RestApiStudentService getStudentRestApiClient() {
+        return RestApiClient.getStudentRestApi(BaseUrl.STUDENT_URL);
+    }
 
     protected RestApiTeacherService getTeacherRestApiClient() {
         return RestApiClient.getTeacherRestApi(BaseUrl.TEACHERS_URL);

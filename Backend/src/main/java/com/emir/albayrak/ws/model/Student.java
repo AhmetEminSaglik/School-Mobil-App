@@ -13,9 +13,10 @@ public class Student extends User {
     private String no;
     private int parentId;
 
+
     @Override
-    void setRoleId() {
-        roleId = EnumUserRoleId.TEACHER.getId();
+    public void setRoleIdToUser() {
+        roleId = EnumUserRoleId.STUDENT.getId();
     }
 
     @Override

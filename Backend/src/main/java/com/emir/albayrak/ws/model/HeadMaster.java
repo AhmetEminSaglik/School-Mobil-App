@@ -8,8 +8,8 @@ import jakarta.persistence.Table;
 @Table(name = "headmasters")
 public class HeadMaster extends User {
     @Override
-    void setRoleId() {
-        roleId = EnumUserRoleId.TEACHER.getId();
+    public void setRoleIdToUser() {
+        roleId = EnumUserRoleId.HEADMASTER.getId();
     }
 
     @Override

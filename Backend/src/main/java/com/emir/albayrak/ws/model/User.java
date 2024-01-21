@@ -15,7 +15,7 @@ import lombok.*;
 @Setter
 public abstract class User {
     public User() {
-        setRoleId();
+        setRoleIdToUser();
     }
 
     @Id
@@ -34,7 +34,7 @@ public abstract class User {
     @Column
     private String lastname;
 
-    abstract void setRoleId();
+    public abstract void setRoleIdToUser();
 
     @Override
     public String toString() {

@@ -16,7 +16,7 @@ import utility.result.SuccessDataResult;
 import java.util.List;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/students/")
 public class StudentController {
     private final StudentService studentService;
     private final UserService userService;
@@ -30,6 +30,7 @@ public class StudentController {
 
     @PostMapping()
     public ResponseEntity<DataResult<User>> saveStudent(@RequestBody Student student) {
+        student.setRoleIdToUser();
         DataResult<User> dataResult = userService.save(student);
         if (!dataResult.isSuccess()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDataResult<>(null, dataResult.getMessage()));
