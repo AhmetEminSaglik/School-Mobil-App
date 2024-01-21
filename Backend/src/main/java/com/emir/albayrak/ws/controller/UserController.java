@@ -36,7 +36,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
-    @GetMapping()
+    @GetMapping("/all")
     public ResponseEntity<DataResult<List<User>>> getUserList() {
         List<User> userList = userService.findAll();
         String msg = "user list is retrieved successfully";

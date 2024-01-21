@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public enum EnumUserRoleId {
     HEADMASTER(1, "Headmaster"),
-    TEACHER(2, "Student"),
+    TEACHER(2, "Teacher"),
     STUDENT(3, "Student");
     @Getter
     private final int id;

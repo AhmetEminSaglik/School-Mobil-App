@@ -25,6 +25,11 @@ public class StudentManager implements StudentService {
     }
 
     @Override
+    public Student findById(int id) {
+        return studentRepository.findById(id);
+    }
+
+    @Override
     public Parent findParent(int parentId) {
         return parentRepository.findById(parentId);
     }

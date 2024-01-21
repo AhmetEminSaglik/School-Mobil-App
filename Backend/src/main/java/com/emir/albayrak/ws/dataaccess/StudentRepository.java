@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Integer> {
     Parent findParentById(int studentId);
+    Student findById(int id);
 }

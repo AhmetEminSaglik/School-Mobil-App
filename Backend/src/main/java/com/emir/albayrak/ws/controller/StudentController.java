@@ -49,4 +49,17 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DataResult<Student>> findById(@PathVariable int id) {
+        Student student = studentService.findById(id);
+        String msg;
+        if (student != null){
+            msg = "Student with " + id + " id is retrieved.";
+        }else{
+            msg="Student with request id is not found";
+        }
+        DataResult<Student> dataResult = new SuccessDataResult<>(student, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
 }
