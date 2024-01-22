@@ -1,7 +1,9 @@
 package com.example.testproject.restapi.student.concretes;
 
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.testproject.model.LoginCredentials;
 import com.example.testproject.model.Student;
@@ -17,9 +19,11 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class ManagerAllStudent extends BaseManager {
+    private static Context context;
     private static ManagerAllStudent managerAll = new ManagerAllStudent();
 
-    public static synchronized ManagerAllStudent getInstance() {
+    public static synchronized ManagerAllStudent getInstance(Context newContext) {
+        context = newContext;
         return managerAll;
     }
 
@@ -31,12 +35,15 @@ public class ManagerAllStudent extends BaseManager {
 
             if (response.code() == 200) {
                 student = response.body().getData();
+                showToastMsg(response.body().getMessage());
             } else {
                 Gson gson = new Gson();
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
                 String errMsg = errorResponse.getMessage();
                 if (errMsg != null) {
                     Log.e("Error  ", errMsg);
+                    showToastMsg(errMsg);
+
                 }
             }
         } catch (IOException e) {
@@ -53,12 +60,16 @@ public class ManagerAllStudent extends BaseManager {
 
             if (response.code() == 200) {
                 student = response.body().getData();
+                showToastMsg(response.body().getMessage());
+
             } else {
                 Gson gson = new Gson();
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
                 String errMsg = errorResponse.getMessage();
                 if (errMsg != null) {
                     Log.e("Error  ", errMsg);
+                    showToastMsg(errMsg);
+
                 }
             }
         } catch (IOException e) {
@@ -75,12 +86,15 @@ public class ManagerAllStudent extends BaseManager {
             Log.e("response : ", response.toString());
             if (response.code() == 200) {
                 list = response.body().getData();
+                showToastMsg(response.body().getMessage());
+
             } else {
                 Gson gson = new Gson();
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
                 String errMsg = errorResponse.getMessage();
                 if (errMsg != null) {
                     Log.e("Error  ", errMsg);
+                    showToastMsg(errMsg);
                 }
             }
         } catch (IOException e) {
@@ -96,12 +110,15 @@ public class ManagerAllStudent extends BaseManager {
             student = null;
             if (response.code() == 200) {
                 student = response.body().getData();
+                showToastMsg(response.body().getMessage());
+
             } else {
                 Gson gson = new Gson();
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
                 String errMsg = errorResponse.getMessage();
                 if (errMsg != null) {
                     Log.e("Error  ", errMsg);
+                    showToastMsg(errMsg);
                 }
             }
         } catch (IOException e) {
@@ -110,6 +127,9 @@ public class ManagerAllStudent extends BaseManager {
         return student;
     }
 
+    private void showToastMsg(String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+    }
 //    public Call<List<User>> getAllUser() {
     //      return getUserRestApiClient().getAllUsers();
     //}

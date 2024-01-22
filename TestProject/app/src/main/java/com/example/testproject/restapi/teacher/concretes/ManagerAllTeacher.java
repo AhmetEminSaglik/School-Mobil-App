@@ -1,7 +1,9 @@
 package com.example.testproject.restapi.teacher.concretes;
 
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.testproject.model.LoginCredentials;
 import com.example.testproject.model.Student;
@@ -18,11 +20,14 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class ManagerAllTeacher extends BaseManager {
+    private static Context context;
     private static ManagerAllTeacher managerAllTeacher = new ManagerAllTeacher();
 
-    public static synchronized ManagerAllTeacher getInstance() {
+    public static synchronized ManagerAllTeacher getInstance(Context newContext) {
+        context = newContext;
         return managerAllTeacher;
     }
+
     public Teacher login(LoginCredentials credentials) {
         Call<RestApiResponse<Teacher>> call = getTeacherRestApiClient().login(credentials);
         Teacher teacher = null;
@@ -30,12 +35,16 @@ public class ManagerAllTeacher extends BaseManager {
             Response<RestApiResponse<Teacher>> response = call.execute();
             if (response.code() == 200) {
                 teacher = response.body().getData();
+                showToastMsg(response.body().getMessage());
+
             } else {
                 Gson gson = new Gson();
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
                 String errMsg = errorResponse.getMessage();
                 if (errMsg != null) {
                     Log.e("Error  ", errMsg);
+                    showToastMsg(errMsg);
+
                 }
             }
         } catch (IOException e) {
@@ -43,6 +52,7 @@ public class ManagerAllTeacher extends BaseManager {
         }
         return teacher;
     }
+
     public List<Teacher> getAllTeacher() {
         Call<RestApiResponse<List<Teacher>>> call = getTeacherRestApiClient().getAll();
         List<Teacher> list = null;
@@ -51,12 +61,15 @@ public class ManagerAllTeacher extends BaseManager {
             Log.e("response : ", response.toString());
             if (response.code() == 200) {
                 list = response.body().getData();
+                showToastMsg(response.body().getMessage());
+
             } else {
                 Gson gson = new Gson();
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
                 String errMsg = errorResponse.getMessage();
                 if (errMsg != null) {
                     Log.e("Error  ", errMsg);
+                    showToastMsg(errMsg);
                 }
             }
         } catch (IOException e) {
@@ -64,25 +77,32 @@ public class ManagerAllTeacher extends BaseManager {
         }
         return list;
     }
-    public Teacher saveTeacher(Teacher teacher) {
+
+    public Teacher saveTeacher(Teacher teacher, Context context) {
         Call<RestApiResponse<Teacher>> call = getTeacherRestApiClient().save(teacher);
         try {
             Response<RestApiResponse<Teacher>> response = call.execute();
             teacher = null;
             if (response.code() == 200) {
-                teacher= response.body().getData();
+                teacher = response.body().getData();
+                showToastMsg(response.body().getMessage());
             } else {
                 Gson gson = new Gson();
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
                 String errMsg = errorResponse.getMessage();
                 if (errMsg != null) {
                     Log.e("Error  ", errMsg);
+                    showToastMsg(errMsg);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return teacher;
+    }
+
+    private void showToastMsg(String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
 //    public Call<List<User>> getAllUser() {
     //      return getUserRestApiClient().getAllUsers();
