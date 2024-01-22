@@ -28,6 +28,29 @@ public class ManagerAllStudent extends BaseManager {
         Student student = null;
         try {
             Response<RestApiResponse<Student>> response = call.execute();
+
+            if (response.code() == 200) {
+                student = response.body().getData();
+            } else {
+                Gson gson = new Gson();
+                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
+                String errMsg = errorResponse.getMessage();
+                if (errMsg != null) {
+                    Log.e("Error  ", errMsg);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return student;
+    }
+
+    public Student getStudentById(int studentId) {
+        Call<RestApiResponse<Student>> call = getStudentRestApiClient().getById(studentId);
+        Student student = null;
+        try {
+            Response<RestApiResponse<Student>> response = call.execute();
+
             if (response.code() == 200) {
                 student = response.body().getData();
             } else {
@@ -64,6 +87,27 @@ public class ManagerAllStudent extends BaseManager {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public Student saveStudent(Student student) {
+        Call<RestApiResponse<Student>> call = getStudentRestApiClient().save(student);
+        try {
+            Response<RestApiResponse<Student>> response = call.execute();
+            student = null;
+            if (response.code() == 200) {
+                student = response.body().getData();
+            } else {
+                Gson gson = new Gson();
+                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
+                String errMsg = errorResponse.getMessage();
+                if (errMsg != null) {
+                    Log.e("Error  ", errMsg);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return student;
     }
 
 //    public Call<List<User>> getAllUser() {

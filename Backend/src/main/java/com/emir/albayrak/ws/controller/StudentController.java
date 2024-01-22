@@ -43,7 +43,8 @@ public class StudentController {
         student.setRoleIdToUser();
         DataResult<User> dataResult = userService.save(student);
         if (!dataResult.isSuccess()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDataResult<>(null, dataResult.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorDataResult<>(null, dataResult.getMessage()));
         }
         customLog.info("Student is saved successfully");
         String msg = "Öğrenci başarılı bir şekilde kaydedildi.";

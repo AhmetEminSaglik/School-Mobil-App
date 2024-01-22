@@ -12,11 +12,20 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface RestApiStudentService {
+    @POST("login/")
+    Call<RestApiResponse<Student>> login(@Body LoginCredentials credentials);
+
     @GET(".")
     Call<RestApiResponse<List<Student>>> getAll();
 
-    @POST("login/")
-    Call<RestApiResponse<Student>> login(@Body LoginCredentials credentials);
+    @GET("{id}")
+    Call<RestApiResponse<Student>> getById(@Path("id") int id);
+
+    @POST(".")
+    Call<RestApiResponse<Student>> save(@Body Student student);
+
+
 }
