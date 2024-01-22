@@ -64,7 +64,26 @@ public class ManagerAllTeacher extends BaseManager {
         }
         return list;
     }
-
+    public Teacher saveTeacher(Teacher teacher) {
+        Call<RestApiResponse<Teacher>> call = getTeacherRestApiClient().save(teacher);
+        try {
+            Response<RestApiResponse<Teacher>> response = call.execute();
+            teacher = null;
+            if (response.code() == 200) {
+                teacher= response.body().getData();
+            } else {
+                Gson gson = new Gson();
+                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
+                String errMsg = errorResponse.getMessage();
+                if (errMsg != null) {
+                    Log.e("Error  ", errMsg);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return teacher;
+    }
 //    public Call<List<User>> getAllUser() {
     //      return getUserRestApiClient().getAllUsers();
     //}

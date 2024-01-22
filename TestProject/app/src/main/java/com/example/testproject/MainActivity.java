@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.testproject.model.EnumBranch;
 import com.example.testproject.model.HeadMaster;
 import com.example.testproject.model.LoginCredentials;
 import com.example.testproject.model.Student;
@@ -42,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
         text = loginStudent();
 //      text = loginTeacher();
 //        text = findStudentById(3);
-        text = saveStudent();
+//        text = saveStudent();
+//        text = saveStudent();
+        text = saveTeacher();
 //      text = getAllTeachers();
 //      text = getAllStudents();
 
@@ -136,6 +139,27 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
             return msg;
         }
+        sb.append(teacher.toString());
+        return sb.toString();
+    }
+
+    private String saveTeacher() {
+        Teacher teacher = new Teacher();
+        teacher.setBranch(EnumBranch.MATHEMATIC.name());
+        teacher.setGraduatedUniversity("KTU");
+        teacher.setPassword("pass");
+        teacher.setUsername("Teacher Mat");
+        teacher.setName("Student name");
+        teacher.setLastname("Student lastname");
+        teacher = ManagerAllTeacher.getInstance().saveTeacher(teacher);
+//        User user = ManagerAllStudent.getInstance().login(credentials);
+        if (teacher== null) {
+            String msg = "SAVED Teacher is : " + teacher;
+            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            return msg;
+        }
+        StringBuilder sb = new StringBuilder("TEACHER IS SAVED");
+//        sb.append(user.toString()).append("\n\n");
         sb.append(teacher.toString());
         return sb.toString();
     }

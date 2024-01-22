@@ -15,6 +15,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface RestApiStudentService {
+    @POST(".")
+    Call<RestApiResponse<Student>> save(@Body Student student);
+
     @POST("login/")
     Call<RestApiResponse<Student>> login(@Body LoginCredentials credentials);
 
@@ -23,9 +26,5 @@ public interface RestApiStudentService {
 
     @GET("{id}")
     Call<RestApiResponse<Student>> getById(@Path("id") int id);
-
-    @POST(".")
-    Call<RestApiResponse<Student>> save(@Body Student student);
-
 
 }
