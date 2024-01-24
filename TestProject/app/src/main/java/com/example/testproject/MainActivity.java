@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 //        text = loginStudent();
 //      text = loginTeacher();
 //        text = findStudentById(3);
-//        text = saveStudent();
+  //      text = saveStudent();
 //        text = saveTeacher();
 //      text = getAllTeachers();
         text = getAllStudents();
@@ -80,12 +80,12 @@ public class MainActivity extends AppCompatActivity {
 
     private String saveStudent() {
         Student student = new Student();
-        student.setNo("111");
+        student.setNo("383838");
         student.setPassword("pass");
-        student.setUsername("studentUserName4");
+        student.setUsername("Mustafa123");
         student.setParentId(3);
-        student.setName("Student name");
-        student.setLastname("Student lastname");
+        student.setName("Mustafa");
+        student.setLastname("KARAMAN");
         student = managerAllStudent.saveStudent(student);
 //        User user = ManagerAllStudent.getInstance().login(credentials);
         if (student == null) {

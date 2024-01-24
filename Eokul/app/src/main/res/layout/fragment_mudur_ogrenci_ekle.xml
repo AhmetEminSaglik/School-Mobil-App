@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.mudur.MudurOgrenciEkleFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Öğrenci Ekle"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Ad Giriş Kutusu -->
+    <EditText
+        android:id="@+id/adEditText"
+        android:layout_marginTop="50dp"
+        android:layout_width="410dp"
+        android:layout_height="48dp"
+        android:hint="Ad"
+
+        android:layout_marginBottom="8dp"
+        android:autofillHints=""
+        android:inputType="text" />
+
+    <!-- Soyad Giriş Kutusu -->
+    <EditText
+        android:id="@+id/soyadEditText"
+        android:layout_width="410dp"
+        android:layout_height="48dp"
+        android:hint="Soyad"
+        android:inputType="text"
+
+        android:layout_marginBottom="8dp"
+        android:autofillHints="" />
+
+    <!-- T.C. Giriş Kutusu -->
+    <EditText
+        android:id="@+id/tcknEditText"
+        android:layout_width="410dp"
+        android:layout_height="48dp"
+        android:hint="T.C."
+        android:maxLength="11"
+
+        android:layout_marginBottom="8dp"
+        android:autofillHints=""
+        android:inputType="number" />
+
+    <!-- Veli Adı Giriş Kutusu -->
+    <EditText
+        android:id="@+id/veliAdiEditText"
+        android:layout_width="410dp"
+        android:layout_height="48dp"
+        android:hint="Veli Adı"
+
+        android:layout_marginBottom="8dp"
+        android:autofillHints=""
+        android:inputType="text" />
+
+    <!-- Okul No Giriş Kutusu -->
+    <EditText
+        android:id="@+id/noEditText"
+        android:layout_width="410dp"
+        android:layout_height="48dp"
+        android:hint="Okul No"
+
+        android:layout_marginBottom="16dp"
+        android:autofillHints=""
+        android:inputType="number" />
+
+    <!-- Ekle Butonu -->
+    <Button
+        android:id="@+id/ekleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ekle"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
