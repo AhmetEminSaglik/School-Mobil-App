@@ -30,7 +30,7 @@ public class UserController {
         this.loginService = loginService;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login/")
     public ResponseEntity<DataResult<User>> login(@RequestBody LoginCredentials loginCredentials) {
         DataResult<User> dataResult = loginService.findUserByLoginCredentials(loginCredentials);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);

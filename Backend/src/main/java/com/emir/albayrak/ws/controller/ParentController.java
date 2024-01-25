@@ -11,7 +11,7 @@ import utility.result.DataResult;
 import utility.result.SuccessDataResult;
 
 @RestController
-@RequestMapping("/parents")
+@RequestMapping("/parents/")
 public class ParentController {
     private final ParentService parentService;
     private CustomLog customLog = new CustomLog(getClass());
