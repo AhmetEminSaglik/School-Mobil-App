@@ -14,4 +14,6 @@ public interface StudentService {
     List<Student> findAll();
 
     DataResult<Student> deleteStudent(String no);
+//    DataResult<Student> updateStudent(Student student);
+
 }

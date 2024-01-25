@@ -43,7 +43,7 @@ public class StudentManager implements StudentService {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public DataResult<Student> deleteStudent(String no) {
         Student student = studentRepository.findByNo(no);
         if (student != null) {
@@ -53,4 +53,9 @@ public class StudentManager implements StudentService {
         return new SuccessDataResult<>("Öğrenci numarası zaten kayıtlı değil. ");
 
     }
+
+//    @Override
+//    public DataResult<Student> updateStudent(Student student) {
+//        return studentRepository.save(student);
+//    }
 }
