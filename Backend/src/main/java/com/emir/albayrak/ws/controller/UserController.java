@@ -40,7 +40,7 @@ public class UserController {
     public ResponseEntity<DataResult<List<User>>> getUserList() {
         List<User> userList = userService.findAll();
         String msg = "user list is retrieved successfully";
-        DataResult dataResult = new SuccessDataResult(userList, msg);
+        DataResult<List<User>> dataResult = new SuccessDataResult<>(userList, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);// ResponseEntity.status(HttpStatus.OK).body(userService.getAllUser());
     }
 

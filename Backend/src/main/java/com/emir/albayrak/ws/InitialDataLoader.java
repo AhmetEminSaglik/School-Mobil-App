@@ -42,7 +42,7 @@ public class InitialDataLoader implements CommandLineRunner {
 
         Student student = studentService.findAll().get(0);
         customLog.info("Found Student Data : " + student);
-        customLog.info("Found Parent Data Of Student ID(" + student.getId() + ") : " + studentService.findParent(student.getParentId()));
+//        customLog.info("Found Parent Data Of Student ID(" + student.getId() + ") : " + studentService.findParent(student.getParentId()));
         //        User user = new User("Emir", "ALBAYRAK");
 //        User user2 = new User("Ahmet Emin", "SAGLIK");
 //        userService.addUser(user);

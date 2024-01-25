@@ -32,10 +32,10 @@ public class StudentManager implements StudentService {
         return studentRepository.findById(id);
     }
 
-    @Override
-    public Parent findParent(int parentId) {
-        return parentRepository.findById(parentId);
-    }
+//    @Override
+//    public Parent findParent(int parentId) {
+//        return parentRepository.findById(parentId);
+//    }
 
     @Override
     public List<Student> findAll() {
