@@ -6,6 +6,7 @@ import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.LoginCredentials;
 import com.emir.albayrak.ws.model.Student;
 import com.emir.albayrak.ws.model.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,9 +52,9 @@ public class StudentController {
         dataResult = new SuccessDataResult<>(student, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
+
     @DeleteMapping("{no}/")
     public ResponseEntity<DataResult<Student>> deleteStudent(@PathVariable String no) {
-        System.out.println("gelen no : "+no);
         DataResult<Student> dataResult = studentService.deleteStudent(no);
         if (!dataResult.isSuccess()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -65,6 +66,23 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
+    @PutMapping
+    public ResponseEntity<DataResult<User>> updateStudent(@RequestBody Student newStudent) {
+        Student oldStudent=studentService.findById(newStudent.getId());
+
+        oldStudent.setNo(newStudent.getNo());
+        oldStudent.setUsername(newStudent.getUsername());
+        oldStudent.setPassword(newStudent.getPassword());
+        oldStudent.setName(newStudent.getName());
+        oldStudent.setLastname(newStudent.getLastname());
+        oldStudent.setParentId(newStudent.getParentId());
+
+        userService.save(oldStudent);
+        String msg = "Öğrenci verisi güncellendi. ";
+        DataResult<User> dataResult = new SuccessDataResult<>(oldStudent, msg);
+
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
 
     @GetMapping
     public ResponseEntity<DataResult<List<Student>>> findAll() {
