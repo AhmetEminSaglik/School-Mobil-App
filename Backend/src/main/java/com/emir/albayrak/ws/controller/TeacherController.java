@@ -35,7 +35,7 @@ public class TeacherController {
     }
 
     @PostMapping("login/")
-    
+
     public ResponseEntity<DataResult<User>> login(@RequestBody LoginCredentials loginCredentials) {
         DataResult<User> dataResult = loginService.findUserByLoginCredentials(loginCredentials);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
@@ -53,6 +53,24 @@ public class TeacherController {
         dataResult = new SuccessDataResult<>(teacher, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
+
+    @PutMapping
+    public ResponseEntity<DataResult<User>> updateTeacher(@RequestBody Teacher newTeacher) {
+        Teacher oldTeacher = teacherService.findById(newTeacher.getId());
+        oldTeacher.setUsername(newTeacher.getUsername());
+        oldTeacher.setPassword(newTeacher.getPassword());
+        oldTeacher.setName(newTeacher.getName());
+        oldTeacher.setLastname(newTeacher.getLastname());
+        oldTeacher.setBranch(newTeacher.getBranch());
+        oldTeacher.setGraduatedUniversity(newTeacher.getGraduatedUniversity());
+
+
+        userService.save(newTeacher);
+        String msg = "Öğretmen güncellendi.";
+        DataResult<User> dataResult = new SuccessDataResult<>(newTeacher, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
     @DeleteMapping("{id}/")
     public ResponseEntity<DataResult<Teacher>> deleteTeacher(@PathVariable int id) {
         DataResult<Teacher> dataResult = teacherService.deleteTeacher(id);
@@ -60,7 +78,7 @@ public class TeacherController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ErrorDataResult<>(null, dataResult.getMessage()));
         }
-        customLog.info("Student is deleted successfully");
+        customLog.info("Teacher is deleted successfully");
         String msg = dataResult.getMessage();
         dataResult = new SuccessDataResult<>(dataResult.getData(), msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
@@ -69,7 +87,7 @@ public class TeacherController {
     @GetMapping()
     public ResponseEntity<DataResult<List<Teacher>>> findAll() {
         List<Teacher> list = teacherService.findAll();
-        customLog.info("All students are retrieved");
+        customLog.info("All teachers are retrieved");
         String msg = "Bütün öğretmenler başarılı bir şekilde getirildi.";
         DataResult<List<Teacher>> dataResult = new SuccessDataResult<>(list, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);

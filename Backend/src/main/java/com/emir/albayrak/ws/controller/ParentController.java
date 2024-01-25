@@ -45,7 +45,7 @@ public class ParentController {
     @PutMapping
     public ResponseEntity<DataResult<Parent>> updateParent(@RequestBody Parent parent) {
         parentService.save(parent);
-        String msg = "Öğrenci verisi güncellendi. ";
+        String msg = "Öğrenci güncellendi.";
         DataResult<Parent> dataResult = new SuccessDataResult<>(parent, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }

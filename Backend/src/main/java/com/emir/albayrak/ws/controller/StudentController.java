@@ -78,7 +78,7 @@ public class StudentController {
         oldStudent.setParentId(newStudent.getParentId());
 
         userService.save(oldStudent);
-        String msg = "Öğrenci verisi güncellendi. ";
+        String msg = "Öğrenci güncellendi.";
         DataResult<User> dataResult = new SuccessDataResult<>(oldStudent, msg);
 
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
