@@ -6,6 +6,7 @@ import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.LoginCredentials;
 import com.emir.albayrak.ws.model.Student;
 import com.emir.albayrak.ws.model.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,37 @@ public class StudentController {
         customLog.info("Student is saved successfully");
         String msg = "Öğrenci başarılı bir şekilde kaydedildi.";
         dataResult = new SuccessDataResult<>(student, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
+    @DeleteMapping("{no}/")
+    public ResponseEntity<DataResult<Student>> deleteStudent(@PathVariable String no) {
+        DataResult<Student> dataResult = studentService.deleteStudent(no);
+        if (!dataResult.isSuccess()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorDataResult<>(null, dataResult.getMessage()));
+        }
+        customLog.info("Student is deleted successfully");
+        String msg = dataResult.getMessage();
+        dataResult = new SuccessDataResult<>(dataResult.getData(), msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
+    @PutMapping
+    public ResponseEntity<DataResult<User>> updateStudent(@RequestBody Student newStudent) {
+        Student oldStudent=studentService.findById(newStudent.getId());
+
+        oldStudent.setNo(newStudent.getNo());
+        oldStudent.setUsername(newStudent.getUsername());
+        oldStudent.setPassword(newStudent.getPassword());
+        oldStudent.setName(newStudent.getName());
+        oldStudent.setLastname(newStudent.getLastname());
+        oldStudent.setParentId(newStudent.getParentId());
+
+        userService.save(oldStudent);
+        String msg = "Öğrenci verisi güncellendi. ";
+        DataResult<User> dataResult = new SuccessDataResult<>(oldStudent, msg);
+
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
