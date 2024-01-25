@@ -4,6 +4,7 @@ import com.emir.albayrak.ws.business.abstracts.LoginService;
 import com.emir.albayrak.ws.business.abstracts.model.TeacherService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.LoginCredentials;
+import com.emir.albayrak.ws.model.Student;
 import com.emir.albayrak.ws.model.Teacher;
 import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,18 @@ public class TeacherController {
         customLog.info("Teacher is saved successfully in " + getClass().getSimpleName());
         String msg = "Öğretmen başarılı bir şekilde kaydedildi.";
         dataResult = new SuccessDataResult<>(teacher, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+    @DeleteMapping("{id}/")
+    public ResponseEntity<DataResult<Teacher>> deleteTeacher(@PathVariable int id) {
+        DataResult<Teacher> dataResult = teacherService.deleteTeacher(id);
+        if (!dataResult.isSuccess()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorDataResult<>(null, dataResult.getMessage()));
+        }
+        customLog.info("Student is deleted successfully");
+        String msg = dataResult.getMessage();
+        dataResult = new SuccessDataResult<>(dataResult.getData(), msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
