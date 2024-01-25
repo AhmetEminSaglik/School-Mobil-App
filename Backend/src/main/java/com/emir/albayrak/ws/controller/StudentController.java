@@ -67,7 +67,6 @@ public class StudentController {
     }
 
     @PutMapping
-    @Transactional
     public ResponseEntity<DataResult<User>> updateStudent(@RequestBody Student newStudent) {
         Student oldStudent=studentService.findById(newStudent.getId());
 

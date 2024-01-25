@@ -2,6 +2,8 @@ package com.emir.albayrak.ws.controller;
 
 import com.emir.albayrak.ws.business.abstracts.model.ParentService;
 import com.emir.albayrak.ws.model.Parent;
+import com.emir.albayrak.ws.model.Student;
+import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +39,13 @@ public class ParentController {
         parent = parentService.save(parent);
         customLog.info("Parent of student is saved successfully.");
         String msg = "Öğrenci velisi başarılı bir şekilde kaydedildi.";
+        DataResult<Parent> dataResult = new SuccessDataResult<>(parent, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+    @PutMapping
+    public ResponseEntity<DataResult<Parent>> updateParent(@RequestBody Parent parent) {
+        parentService.save(parent);
+        String msg = "Öğrenci verisi güncellendi. ";
         DataResult<Parent> dataResult = new SuccessDataResult<>(parent, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }

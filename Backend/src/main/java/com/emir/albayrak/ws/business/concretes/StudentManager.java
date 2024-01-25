@@ -3,9 +3,7 @@ package com.emir.albayrak.ws.business.concretes;
 import com.emir.albayrak.ws.business.abstracts.model.StudentService;
 import com.emir.albayrak.ws.dataaccess.ParentRepository;
 import com.emir.albayrak.ws.dataaccess.StudentRepository;
-import com.emir.albayrak.ws.model.Parent;
 import com.emir.albayrak.ws.model.Student;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utility.result.DataResult;
@@ -32,18 +30,12 @@ public class StudentManager implements StudentService {
         return studentRepository.findById(id);
     }
 
-//    @Override
-//    public Parent findParent(int parentId) {
-//        return parentRepository.findById(parentId);
-//    }
-
     @Override
     public List<Student> findAll() {
         return studentRepository.findAll();
     }
 
     @Override
-//    @Transactional
     public DataResult<Student> deleteStudent(String no) {
         Student student = studentRepository.findByNo(no);
         if (student != null) {
@@ -54,8 +46,4 @@ public class StudentManager implements StudentService {
 
     }
 
-//    @Override
-//    public DataResult<Student> updateStudent(Student student) {
-//        return studentRepository.save(student);
-//    }
 }
