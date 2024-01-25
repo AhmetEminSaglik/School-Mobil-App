@@ -51,6 +51,20 @@ public class StudentController {
         dataResult = new SuccessDataResult<>(student, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
+    @DeleteMapping("{no}/")
+    public ResponseEntity<DataResult<Student>> deleteStudent(@PathVariable String no) {
+        System.out.println("gelen no : "+no);
+        DataResult<Student> dataResult = studentService.deleteStudent(no);
+        if (!dataResult.isSuccess()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorDataResult<>(null, dataResult.getMessage()));
+        }
+        customLog.info("Student is deleted successfully");
+        String msg = dataResult.getMessage();
+        dataResult = new SuccessDataResult<>(dataResult.getData(), msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
 
     @GetMapping
     public ResponseEntity<DataResult<List<Student>>> findAll() {

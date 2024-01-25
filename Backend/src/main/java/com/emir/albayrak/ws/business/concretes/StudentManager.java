@@ -5,8 +5,11 @@ import com.emir.albayrak.ws.dataaccess.ParentRepository;
 import com.emir.albayrak.ws.dataaccess.StudentRepository;
 import com.emir.albayrak.ws.model.Parent;
 import com.emir.albayrak.ws.model.Student;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import utility.result.DataResult;
+import utility.result.SuccessDataResult;
 
 import java.util.List;
 
@@ -37,5 +40,17 @@ public class StudentManager implements StudentService {
     @Override
     public List<Student> findAll() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    @Transactional
+    public DataResult<Student> deleteStudent(String no) {
+        Student student = studentRepository.findByNo(no);
+        if (student != null) {
+            studentRepository.delete(student);
+            return new SuccessDataResult<>("Öğrenci başarılı bir şekilde silindi.");
+        }
+        return new SuccessDataResult<>("Öğrenci numarası zaten kayıtlı değil. ");
+
     }
 }
