@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utility.CustomLog;
+import utility.exception.InvalidStudentNoException;
 import utility.result.DataResult;
 import utility.result.ErrorDataResult;
 import utility.result.SuccessDataResult;
@@ -44,11 +45,18 @@ public class StudentController {
     @PostMapping()
     public ResponseEntity<DataResult<User>> saveStudent(@RequestBody Student student) {
         student.setRoleIdToUser();
+        Student registredStudent = studentService.findByNo(student.getNo());
+
+        if (registredStudent != null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ErrorDataResult<>(null, InvalidStudentNoException.customErrorMsg));
+        }
         DataResult<User> dataResult = userService.save(student);
         if (!dataResult.isSuccess()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ErrorDataResult<>(null, dataResult.getMessage()));
         }
+
         customLog.info("Student is saved successfully");
         String msg = "Öğrenci başarılı bir şekilde kaydedildi.";
         dataResult = new SuccessDataResult<>(student, msg);
