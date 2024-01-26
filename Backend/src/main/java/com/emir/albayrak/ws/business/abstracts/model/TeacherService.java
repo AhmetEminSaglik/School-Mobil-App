@@ -11,6 +11,7 @@ public interface TeacherService extends SearchTeacherByProperties {
     List<Teacher> findAll();
 
     Teacher findById(int id);
+
     DataResult<Teacher> deleteTeacher(int no);
 
 
