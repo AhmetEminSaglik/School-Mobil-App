@@ -5,6 +5,7 @@ import com.emir.albayrak.ws.business.abstracts.model.StudentService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.LoginCredentials;
 import com.emir.albayrak.ws.model.Student;
+import com.emir.albayrak.ws.model.Teacher;
 import com.emir.albayrak.ws.model.User;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
+
     @PostMapping()
     public ResponseEntity<DataResult<User>> saveStudent(@RequestBody Student student) {
         student.setRoleIdToUser();
@@ -66,6 +68,21 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
+
+    @GetMapping("name/{name}/")
+    public ResponseEntity<DataResult<List<Student>>> searchStudentByName(@PathVariable String name) {
+        List<Student> list = studentService.searchByName(name);
+        String msg;
+        if (!list.isEmpty()) {
+            msg = name + " ismindeki öğrenciler getirildi.";
+        } else {
+            msg = name + " isminde öğrenci bulunamadı.";
+        }
+        DataResult<List<Student>> dataResult = new SuccessDataResult<>(list, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
+  
     @PutMapping
     public ResponseEntity<DataResult<User>> updateStudent(@RequestBody Student newStudent) {
         Student oldStudent = studentService.findById(newStudent.getId());
