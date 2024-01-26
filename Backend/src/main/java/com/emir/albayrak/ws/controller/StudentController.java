@@ -68,6 +68,19 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
+    @GetMapping("no/{no}/")
+    public ResponseEntity<DataResult<Student>> searchStudentByNo(@PathVariable String no) {
+        Student student = studentService.findByNo(no);
+        String msg;
+        if (student == null) {
+            msg = no + " numaralı öğrenci getirildi.";
+        } else {
+            msg = no + " numaralı öğrenci bulunamadı.";
+        }
+        DataResult<Student> dataResult = new SuccessDataResult<>(student, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
 
     @GetMapping("name/{name}/")
     public ResponseEntity<DataResult<List<Student>>> searchStudentByName(@PathVariable String name) {
