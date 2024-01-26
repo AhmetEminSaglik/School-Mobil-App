@@ -41,6 +41,18 @@ public class TeacherController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
+    @GetMapping("name/{name}/")
+    public ResponseEntity<DataResult<List<Teacher>>> saveTeacher(@PathVariable String name) {
+        List<Teacher> list = teacherService.searchByName(name);
+        String msg = "";
+        if (!list.isEmpty()) {
+            msg = name + " ismindeki öğretmenler getirildi.";
+        } else {
+            msg = name + " isminde öğretmen bulunamadı.";
+        }
+        DataResult<List<Teacher>> dataResult = new SuccessDataResult<>(list, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
 
     @PostMapping()
     public ResponseEntity<DataResult<User>> saveTeacher(@RequestBody Teacher teacher) {

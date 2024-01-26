@@ -1,6 +1,7 @@
 package com.emir.albayrak.ws.business.concretes;
 
 import com.emir.albayrak.ws.business.abstracts.model.TeacherService;
+import com.emir.albayrak.ws.business.abstracts.model.searchuser.SearchTeacherByProperties;
 import com.emir.albayrak.ws.dataaccess.TeacherRepository;
 import com.emir.albayrak.ws.model.Student;
 import com.emir.albayrak.ws.model.Teacher;
@@ -12,7 +13,7 @@ import utility.result.SuccessDataResult;
 import java.util.List;
 
 @Service
-public class TeacherManager implements TeacherService {
+public class TeacherManager implements TeacherService/*, SearchTeacherByProperties*/ {
     private final TeacherRepository teacherRepository;
 
     @Autowired
@@ -38,5 +39,15 @@ public class TeacherManager implements TeacherService {
             return new SuccessDataResult<>("Öğretmen başarılı bir şekilde silindi.");
         }
         return new SuccessDataResult<>("Öğretmen zaten kayıtlı değil.");
+    }
+
+    @Override
+    public List<Teacher> searchByName(String name) {
+        return teacherRepository.findAllByName(name);
+    }
+
+    @Override
+    public List<Teacher> searchByLastName(String lastName) {
+        return teacherRepository.findAllByLastname(lastName);
     }
 }
