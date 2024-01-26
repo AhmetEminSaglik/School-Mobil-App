@@ -1,3 +1,4 @@
+/*
 package com.emir.albayrak.ws.model;
 
 import jakarta.persistence.*;
@@ -54,3 +55,4 @@ public class Parent {
         this.phoneNo = phoneNo;
     }
 }
+*/

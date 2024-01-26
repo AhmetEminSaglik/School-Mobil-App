@@ -1,3 +1,4 @@
+/*
 package com.emir.albayrak.ws.controller;
 
 import com.emir.albayrak.ws.business.abstracts.model.ParentService;
@@ -60,3 +61,4 @@ public class ParentController {
     }
 
 }
+*/

@@ -5,9 +5,7 @@ import com.emir.albayrak.ws.business.abstracts.model.StudentService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.LoginCredentials;
 import com.emir.albayrak.ws.model.Student;
-import com.emir.albayrak.ws.model.Teacher;
 import com.emir.albayrak.ws.model.User;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +68,7 @@ public class StudentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ErrorDataResult<>(null, dataResult.getMessage()));
         }
-        customLog.info("Student is deleted successfully");
+        customLog.info("Student is deleted successfully.");
         String msg = dataResult.getMessage();
         dataResult = new SuccessDataResult<>(dataResult.getData(), msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
@@ -79,13 +77,15 @@ public class StudentController {
     @GetMapping("no/{no}/")
     public ResponseEntity<DataResult<Student>> searchStudentByNo(@PathVariable String no) {
         Student student = studentService.findByNo(no);
+        DataResult<Student> dataResult;
         String msg;
-        if (student == null) {
+        if (student != null) {
             msg = no + " numaralı öğrenci getirildi.";
+            dataResult = new SuccessDataResult<>(student, msg);
         } else {
             msg = no + " numaralı öğrenci bulunamadı.";
+            dataResult = new ErrorDataResult<>(null, msg);
         }
-        DataResult<Student> dataResult = new SuccessDataResult<>(student, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
@@ -93,26 +93,30 @@ public class StudentController {
     @GetMapping("name/{name}/")
     public ResponseEntity<DataResult<List<Student>>> searchStudentByName(@PathVariable String name) {
         List<Student> list = studentService.searchByName(name);
+        DataResult<List<Student>> dataResult;
         String msg;
         if (!list.isEmpty()) {
             msg = name + " ismindeki öğrenciler getirildi.";
+            dataResult = new SuccessDataResult<>(list, msg);
         } else {
             msg = name + " isminde öğrenci bulunamadı.";
+            dataResult = new ErrorDataResult<>(list, msg);
         }
-        DataResult<List<Student>> dataResult = new SuccessDataResult<>(list, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
     @GetMapping("lastname/{lastname}/")
     public ResponseEntity<DataResult<List<Student>>> searchStudentByLastname(@PathVariable String lastname) {
         List<Student> list = studentService.searchByLastName(lastname);
+        DataResult<List<Student>> dataResult;
         String msg;
         if (!list.isEmpty()) {
             msg = lastname + " soyadındaki öğrenciler getirildi.";
+            dataResult = new SuccessDataResult<>(list, msg);
         } else {
             msg = lastname + " soyadındaki öğrenci bulunamadı.";
+            dataResult = new SuccessDataResult<>(null, msg);
         }
-        DataResult<List<Student>> dataResult = new SuccessDataResult<>(list, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
@@ -137,7 +141,7 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<DataResult<List<Student>>> findAll() {
         List<Student> list = studentService.findAll();
-        customLog.info("All students are retrieved");
+        customLog.info("All students are retrieved.");
         String msg = "Bütün öğrenciler başarılı bir şekilde getirildi.";
         DataResult<List<Student>> dataResult = new SuccessDataResult<>(list, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
@@ -146,13 +150,15 @@ public class StudentController {
     @GetMapping("/{id}")
     public ResponseEntity<DataResult<Student>> findById(@PathVariable int id) {
         Student student = studentService.findById(id);
+        DataResult<Student> dataResult;
         String msg;
         if (student != null) {
-            msg = "Student with " + id + " id is retrieved.";
+            msg = id + " numaralı öğrenci getirildi.";//"Student with " + id + " id is retrieved.";
+            dataResult = new SuccessDataResult<>(student, msg);
         } else {
-            msg = "Student with request id is not found";
+            msg = id + " numaralı öğrenci bulunamadı.";
+            dataResult = new ErrorDataResult<>(student, msg);
         }
-        DataResult<Student> dataResult = new SuccessDataResult<>(student, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 

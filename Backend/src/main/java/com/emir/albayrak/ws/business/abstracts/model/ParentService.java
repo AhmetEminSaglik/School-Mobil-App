@@ -1,3 +1,4 @@
+/*
 package com.emir.albayrak.ws.business.abstracts.model;
 
 import com.emir.albayrak.ws.model.Parent;
@@ -10,3 +11,4 @@ public interface ParentService {
     Parent findById(int parentId);
     List<Parent> findAll();
 }
+*/

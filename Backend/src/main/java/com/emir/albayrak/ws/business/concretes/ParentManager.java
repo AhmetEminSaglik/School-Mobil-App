@@ -1,3 +1,4 @@
+/*
 package com.emir.albayrak.ws.business.concretes;
 
 import com.emir.albayrak.ws.business.abstracts.model.ParentService;
@@ -41,3 +42,4 @@ public class ParentManager implements ParentService {
         return parentRepository.findAll();
     }
 }
+*/

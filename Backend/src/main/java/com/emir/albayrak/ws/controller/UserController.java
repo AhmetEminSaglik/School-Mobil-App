@@ -39,16 +39,8 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<DataResult<List<User>>> getUserList() {
         List<User> userList = userService.findAll();
-        String msg = "user list is retrieved successfully";
+        String msg = "Kullanıcı listesi başarılı bir şekilde getirildi.";
         DataResult<List<User>> dataResult = new SuccessDataResult<>(userList, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);// ResponseEntity.status(HttpStatus.OK).body(userService.getAllUser());
     }
-
- /*   @PostMapping
-    public ResponseEntity<String> adduser(@RequestBody User user) {
-//        userService.addUser(user);
-        String msg = "User is added : " + user;
-//        customLog.info(msg);
-        return ResponseEntity.status(HttpStatus.OK).body(msg);
-    }*/
 }

@@ -1,3 +1,4 @@
+/*
 package com.emir.albayrak.ws.dataaccess;
 
 import com.emir.albayrak.ws.model.Parent;
@@ -8,3 +9,4 @@ public interface ParentRepository extends JpaRepository<Parent, Integer> {
 
     Parent findById(int id);
 }
+*/

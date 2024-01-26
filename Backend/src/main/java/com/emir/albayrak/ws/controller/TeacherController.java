@@ -4,7 +4,6 @@ import com.emir.albayrak.ws.business.abstracts.LoginService;
 import com.emir.albayrak.ws.business.abstracts.model.TeacherService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.LoginCredentials;
-import com.emir.albayrak.ws.model.Student;
 import com.emir.albayrak.ws.model.Teacher;
 import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utility.CustomLog;
-import utility.exception.InvalidSignupUsernameException;
 import utility.result.DataResult;
 import utility.result.ErrorDataResult;
 import utility.result.SuccessDataResult;
@@ -44,26 +42,30 @@ public class TeacherController {
     @GetMapping("name/{name}/")
     public ResponseEntity<DataResult<List<Teacher>>> searchTeacherByName(@PathVariable String name) {
         List<Teacher> list = teacherService.searchByName(name);
-        String msg = "";
+        DataResult<List<Teacher>> dataResult;
+        String msg;
         if (!list.isEmpty()) {
             msg = name + " ismindeki öğretmenler getirildi.";
+            dataResult = new SuccessDataResult<>(list, msg);
         } else {
             msg = name + " isminde öğretmen bulunamadı.";
+            dataResult = new ErrorDataResult<>(list, msg);
         }
-        DataResult<List<Teacher>> dataResult = new SuccessDataResult<>(list, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
     @GetMapping("lastname/{lastname}/")
     public ResponseEntity<DataResult<List<Teacher>>> searchTeacherByLastname(@PathVariable String lastname) {
         List<Teacher> list = teacherService.searchByLastName(lastname);
-        String msg = "";
+        DataResult<List<Teacher>> dataResult;
+        String msg;
         if (!list.isEmpty()) {
             msg = lastname + " soyadındaki öğretmenler getirildi.";
+            dataResult = new SuccessDataResult<>(list, msg);
         } else {
             msg = lastname + " soyadındaki öğretmen bulunamadı.";
+            dataResult = new ErrorDataResult<>(list, msg);
         }
-        DataResult<List<Teacher>> dataResult = new SuccessDataResult<>(list, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
@@ -103,7 +105,7 @@ public class TeacherController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ErrorDataResult<>(null, dataResult.getMessage()));
         }
-        customLog.info("Teacher is deleted successfully");
+        customLog.info("Teacher is deleted successfully.");
         String msg = dataResult.getMessage();
         dataResult = new SuccessDataResult<>(dataResult.getData(), msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);

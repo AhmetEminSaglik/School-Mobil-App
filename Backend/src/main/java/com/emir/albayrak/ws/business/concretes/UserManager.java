@@ -1,7 +1,6 @@
 package com.emir.albayrak.ws.business.concretes;
 
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
-//import com.emir.albayrak.ws.dataaccess.FakeUserRepository;
 import com.emir.albayrak.ws.dataaccess.UserRepository;
 import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,7 @@ public class UserManager implements UserService {
             return new ErrorDataResult<>(null, msg);
         }
         user = userRepository.save(user);
-        msg = "Kullanıcı başarılı bir şekilde eklendi";
+        msg = "Kullanıcı başarılı bir şekilde eklendi.";
         return new SuccessDataResult<>(user, msg);
     }
 
