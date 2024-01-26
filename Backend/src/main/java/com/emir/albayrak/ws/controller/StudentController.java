@@ -82,7 +82,19 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
-  
+    @GetMapping("lastname/{lastname}/")
+    public ResponseEntity<DataResult<List<Student>>> searchStudentByLastname(@PathVariable String lastname) {
+        List<Student> list = studentService.searchByLastName(lastname);
+        String msg;
+        if (!list.isEmpty()) {
+            msg = lastname + " soyadındaki öğrenciler getirildi.";
+        } else {
+            msg = lastname + " soyadındaki öğrenci bulunamadı.";
+        }
+        DataResult<List<Student>> dataResult = new SuccessDataResult<>(list, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
     @PutMapping
     public ResponseEntity<DataResult<User>> updateStudent(@RequestBody Student newStudent) {
         Student oldStudent = studentService.findById(newStudent.getId());
