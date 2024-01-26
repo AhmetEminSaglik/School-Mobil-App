@@ -9,15 +9,16 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.e_okul.R;
 import com.example.e_okul.databinding.FragmentAnaGirisBinding;
 import com.example.e_okul.model.Student;
 import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
 
+import java.util.List;
 
-public class AnaGirisFragment extends Fragment {
+
+public class AnaGirisFragment extends Fragment{
 private FragmentAnaGirisBinding binding;
 
     @Override
@@ -26,15 +27,7 @@ private FragmentAnaGirisBinding binding;
 
         super.onCreate(savedInstanceState);
 
-        Student student = new Student();
-        student.setName("kjashf");
-        student.setLastname("skdjhgd");
-        student.setUsername("kjdsg");
-        student.setPassword("pass");
-        student.setNo("415");
-        student.setParentId(3);
-        ManagerAllStudent s = ManagerAllStudent.getInstance(getContext());
-        s.saveStudent(student);
+
 
     }
 
@@ -64,4 +57,6 @@ private FragmentAnaGirisBinding binding;
         NavController navController = Navigation.findNavController(requireView());
         navController.navigate(R.id.action_anaGirisFragment_to_ogrenciGirisFragment);
     }
+
+
 }

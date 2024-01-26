@@ -21,7 +21,7 @@ public class MudurOgrenciGuncelleFragment extends Fragment {
     private String name;
     private String surname;
     private long tc_kn;
-    private int no;
+    private String no;
     private String parentName;
      private FragmentMudurOgrenciGuncelleBinding binding;
 
@@ -33,7 +33,7 @@ public class MudurOgrenciGuncelleFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding=FragmentMudurOgrenciGuncelleBinding.inflate(getLayoutInflater(),container,false);
         return binding.getRoot();

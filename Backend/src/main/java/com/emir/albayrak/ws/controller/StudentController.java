@@ -74,4 +74,22 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<DataResult<Void>> deleteStudent(@PathVariable int id) {
+        boolean isDeleted = studentService.deleteById(id);
+
+        if (isDeleted) {
+
+            String msg = "Öğrenci başarılı bir şekilde silindi.";
+            return ResponseEntity.status(HttpStatus.OK).body(new SuccessDataResult<>(null, msg));
+        } else {
+
+            String errMsg = "Öğrenci silinemedi. Belirtilen ID ile öğrenci bulunamadı.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorDataResult<>(null, errMsg));
+        }
+    }
+
+
+
+
 }

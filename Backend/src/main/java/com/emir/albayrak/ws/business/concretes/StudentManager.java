@@ -6,6 +6,7 @@ import com.emir.albayrak.ws.dataaccess.StudentRepository;
 import com.emir.albayrak.ws.model.Parent;
 import com.emir.albayrak.ws.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,5 +38,17 @@ public class StudentManager implements StudentService {
     @Override
     public List<Student> findAll() {
         return studentRepository.findAll();
+    }
+
+    @Override
+    public boolean deleteById(int id) {
+        try {
+            // Belirli bir ID'ye sahip öğrenciyi silme
+            studentRepository.deleteById(id);
+            return true;
+        } catch (EmptyResultDataAccessException e) {
+            // Eğer belirtilen ID'ye sahip öğrenci bulunamazsa silme işlemi başarısız olacaktır.
+            return false;
+        }
     }
 }

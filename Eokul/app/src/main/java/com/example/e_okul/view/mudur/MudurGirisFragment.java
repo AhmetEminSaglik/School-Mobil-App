@@ -38,7 +38,7 @@ public class MudurGirisFragment extends Fragment {
 
     public void go(){
         NavController navController = Navigation.findNavController(requireView());
-        navController.navigate(R.id.action_mudurGirisFragment_to_mudurOgrenciEkleFragment);
+        navController.navigate(R.id.action_mudurGirisFragment_to_mudurAnaSayfaFragment);
 
     }
 }

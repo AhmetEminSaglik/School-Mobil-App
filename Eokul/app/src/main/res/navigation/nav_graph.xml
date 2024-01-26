@@ -25,9 +25,6 @@
         <action
             android:id="@+id/action_mudurGirisFragment_to_mudurAnaSayfaFragment"
             app:destination="@id/mudurAnaSayfaFragment" />
-        <action
-            android:id="@+id/action_mudurGirisFragment_to_mudurOgrenciEkleFragment"
-            app:destination="@id/mudurOgrenciEkleFragment" />
     </fragment>
     <fragment
         android:id="@+id/mudurAnaSayfaFragment"

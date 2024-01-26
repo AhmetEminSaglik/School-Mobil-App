@@ -9,6 +9,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -25,5 +26,10 @@ public interface RestApiStudentService {
 
     @GET("{id}")
     Call<RestApiResponse<Student>> getById(@Path("id") int id);
+
+    @DELETE("{id}")
+    Call<RestApiResponse<Void>> delete(@Path("id") int id);
+
+
 
 }
