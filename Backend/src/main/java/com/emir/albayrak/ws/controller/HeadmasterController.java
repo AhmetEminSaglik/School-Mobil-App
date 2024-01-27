@@ -1,7 +1,6 @@
 package com.emir.albayrak.ws.controller;
 
 import com.emir.albayrak.ws.business.abstracts.LoginService;
-import com.emir.albayrak.ws.business.abstracts.model.ParentService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.LoginCredentials;
 import com.emir.albayrak.ws.model.User;
@@ -19,14 +18,12 @@ import utility.result.DataResult;
 @RequestMapping("/headmasters/")
 public class HeadmasterController {
     private final UserService userService;
-    private final ParentService parentService;
     private CustomLog customLog = new CustomLog(getClass());
     private final LoginService loginService;
 
     @Autowired
-    public HeadmasterController(UserService userService, ParentService parentService, LoginService loginService) {
+    public HeadmasterController(UserService userService, LoginService loginService) {
         this.userService = userService;
-        this.parentService = parentService;
         this.loginService = loginService;
     }
 

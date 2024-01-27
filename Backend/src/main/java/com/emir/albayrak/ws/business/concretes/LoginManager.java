@@ -17,12 +17,10 @@ public class LoginManager implements LoginService {
     private UserRepository userRepository;
     private CustomLog customLog = new CustomLog(getClass());
 
-
     @Autowired
     public LoginManager(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
 
     @Override
     public DataResult<User> findUserByLoginCredentials(LoginCredentials loginCredentials) {
@@ -30,13 +28,12 @@ public class LoginManager implements LoginService {
                 (loginCredentials.getUsername(), loginCredentials.getPassword());
         String msg;
         if (user == null) {
-            customLog.error("Login Credentials is wrong");
-            msg = "Kullanıcı adı veya parola hatalı. Lütfen tekrar deneyiniz";
+            customLog.error("Login Credentials is wrong.");
+            msg = "Kullanıcı adı veya parola hatalı. Lütfen tekrar deneyiniz.";
             return new ErrorDataResult<>(user, msg);
         }
-        customLog.error("Login is successfully");
-        msg = "Giriş Başarılı";
-
+        customLog.error("Login is successfully.");
+        msg = "Giriş Başarılı.";
         return new SuccessDataResult<>(user, msg);
     }
 }

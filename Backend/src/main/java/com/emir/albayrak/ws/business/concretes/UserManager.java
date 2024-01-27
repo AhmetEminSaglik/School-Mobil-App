@@ -1,7 +1,6 @@
 package com.emir.albayrak.ws.business.concretes;
 
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
-//import com.emir.albayrak.ws.dataaccess.FakeUserRepository;
 import com.emir.albayrak.ws.dataaccess.UserRepository;
 import com.emir.albayrak.ws.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +34,12 @@ public class UserManager implements UserService {
     public DataResult<User> save(User user) {
         String msg;
         if (findByUsername(user.getUsername()) != null) {
-            customLog.info("BURADA THROW YAPILLIYOR ");
             msg = InvalidSignupUsernameException.customErrorMsg;
 //            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDataResult<>(null, msg));
             return new ErrorDataResult<>(null, msg);
         }
-        msg = "Kullanıcı başarılı bir şekilde eklendi";
         user = userRepository.save(user);
+        msg = "Kullanıcı başarılı bir şekilde eklendi.";
         return new SuccessDataResult<>(user, msg);
     }
 

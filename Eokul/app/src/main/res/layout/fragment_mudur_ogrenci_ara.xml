@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.mudur.MudurOgrenciAraFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Öğrenci Ara"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Öğrenci Adı Giriş Kutusu -->
+    <EditText
+        android:layout_marginTop="40dp"
+        android:id="@+id/noEditText"
+        android:layout_width="412dp"
+        android:layout_height="48dp"
+        android:hint="Öğrenci No"
+        android:padding="8dp"
+        android:layout_marginBottom="16dp"
+        android:autofillHints=""
+        android:inputType="text" />
+
+    <!-- Ara Butonu -->
+
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            android:layout_width="75dp"
+            android:layout_height="48dp"
+            android:src="@android:drawable/ic_menu_search"
+            android:contentDescription="Ara"
+            android:background="#062AF1"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:layout_gravity="end"/>
+
+
+    <!-- Arama Sonuçları Görüntüleme Alanı -->
+    <EditText
+        android:id="@+id/editTextSearchResult"
+        android:layout_width="412dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="15dp"
+
+        android:autofillHints=""
+        android:background="@android:color/darker_gray"
+        android:gravity="top"
+        android:hint="Arama Sonuçları"
+        android:inputType="textMultiLine"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

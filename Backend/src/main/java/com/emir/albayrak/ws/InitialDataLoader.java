@@ -1,10 +1,8 @@
 package com.emir.albayrak.ws;
 
-import com.emir.albayrak.ws.business.abstracts.model.ParentService;
 import com.emir.albayrak.ws.business.abstracts.model.StudentService;
 import com.emir.albayrak.ws.business.abstracts.model.UserService;
 import com.emir.albayrak.ws.model.HeadMaster;
-import com.emir.albayrak.ws.model.Parent;
 import com.emir.albayrak.ws.model.Student;
 import com.emir.albayrak.ws.model.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +13,16 @@ import utility.CustomLog;
 @Component
 public class InitialDataLoader implements CommandLineRunner {
     private UserService userService;
-    private ParentService parentService;
     private StudentService studentService;
     private CustomLog customLog = new CustomLog(getClass());
 
 
     @Autowired
     public InitialDataLoader(UserService userService,
-                             StudentService studentService,
-                             ParentService parentService
+                             StudentService studentService
     ) {
         this.userService = userService;
         this.studentService = studentService;
-        this.parentService = parentService;
     }
 
     @Override
@@ -72,32 +67,21 @@ public class InitialDataLoader implements CommandLineRunner {
         teacher.setPassword("pass");
         teacher.setBranch("Mobil Uygulama");
         teacher.setGraduatedUniversity("KTU");
-        teacher= (Teacher) userService.save(teacher).getData();
-        customLog.info("teacher is registered : "+teacher);
+        teacher = (Teacher) userService.save(teacher).getData();
+        customLog.info("teacher is registered : " + teacher);
 
     }
 
     private void saveStudent() {
-        Parent parent = saveParent();
         Student student = new Student();
         student.setNo("1100");
         student.setName("Ahmet Emin");
         student.setLastname("Saglik");
         student.setUsername("385931");
         student.setPassword("pass");
-        student.setParentId(parent.getId());
         student = (Student) userService.save(student).getData();
         customLog.info("Student is saved. Now find all User in db : " + student);
         userService.findAll().forEach(System.out::println);
     }
 
-    private Parent saveParent() {
-        Parent parent = new Parent();
-        parent.setName("Veli Hasan");
-        parent.setLastname("Can");
-        parent.setPhoneNo("505 505 55 00");
-        parent = parentService.save(parent);
-        customLog.info("Parent is saved. Now find all Parent in db : " + parent);
-        return parent;
-    }
 }

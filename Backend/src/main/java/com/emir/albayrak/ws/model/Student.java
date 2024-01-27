@@ -1,7 +1,10 @@
 package com.emir.albayrak.ws.model;
 
 import com.emir.albayrak.ws.model.enums.EnumUserRoleId;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.*;
 
 @Entity
@@ -9,8 +12,11 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "Student", uniqueConstraints = @UniqueConstraint(columnNames = "no"))
 public class Student extends User {
+    @Column
     private String no;
+    @Column
     private int parentId;
 
 
@@ -22,8 +28,8 @@ public class Student extends User {
     @Override
     public String toString() {
         return "Student{" + super.toString() +
-                ", no='" + no +'\'' +
-                ", parentId='" + parentId +'\'' +
+                ", no='" + no + '\'' +
+                ", parentId='" + parentId + '\'' +
                 "}";
     }
 
