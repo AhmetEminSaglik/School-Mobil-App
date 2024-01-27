@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.mudur.MudurOgretmenIslemleriFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:text="Müdür Ana Sayfası"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <Button
+
+        android:id="@+id/ogretmenEkleButton"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:text="Öğretmen Ekle"
+        android:textSize="25sp"/>
+
+    <Button
+        android:id="@+id/ogretmenListesiButton"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:text="Öğretmen Listesi"
+        android:textSize="25sp" />
+
+
+
+</LinearLayout>

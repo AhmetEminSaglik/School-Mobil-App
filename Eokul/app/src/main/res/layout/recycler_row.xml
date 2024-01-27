@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+        <TextView
+            android:id="@+id/textViewName"
+            android:maxLength="25"
+            android:layout_width="150dp"
+            android:layout_height="35dp"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/textViewSchoolNumber"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"/>
+
+        <ImageButton
+            android:layout_marginStart="50dp"
+            android:id="@+id/editButton"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_menu_edit"
+            android:background="#06EC10"
+            android:contentDescription="Güncelleme Butonu"
+            />
+
+        <ImageButton
+            android:layout_marginStart="5dp"
+            android:id="@+id/deleteButton"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_menu_delete"
+            android:background="#FA0303"
+            android:contentDescription="Silme Butonu"
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
