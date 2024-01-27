@@ -43,13 +43,13 @@ public class MudurOgrenciEkleFragment extends Fragment implements ManagerAllStud
 
         Button ekleButton = binding.ekleButton;
         Student student = new Student();
-        String name=binding.adEditText.getText().toString();
 
-        student.setName("Ali");
-        student.setLastname("Veli");
-        student.setUsername("fgjjgfj");
+
+        student.setName("Emir");
+        student.setLastname("Albayrak");
+        student.setUsername("Emir");
         student.setPassword("pass");
-        student.setNo("651");
+        student.setNo("57");
         student.setParentId(3);
 
 

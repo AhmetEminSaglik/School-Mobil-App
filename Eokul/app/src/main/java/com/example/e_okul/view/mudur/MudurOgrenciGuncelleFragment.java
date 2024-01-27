@@ -12,17 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.e_okul.databinding.FragmentMudurOgrenciGuncelleBinding;
+import com.example.e_okul.model.Student;
+import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
 import com.example.e_okul.viewmodel.OgrenciViewModel;
 
 
-public class MudurOgrenciGuncelleFragment extends Fragment {
+public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAllStudent.OnUpdateStudentListener{
     private String name;
-    private String surname;
-    private long tc_kn;
+    private String lastname;
     private String no;
-    private String parentName;
+
      private FragmentMudurOgrenciGuncelleBinding binding;
 
 
@@ -43,46 +45,56 @@ public class MudurOgrenciGuncelleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        EditText nameEditText = binding.adEditText;
-        EditText surnameEditText= binding.soyadEditText;
-        EditText tcknEditText=binding.tcknEditText;
-        EditText parentNameEditText=binding.veliAdiEditText;
-        EditText noEditText=binding.noEditText;
-
-        Button ekleButton = binding.ekleButton;
 
         OgrenciViewModel ogrenciViewModel = new ViewModelProvider(requireActivity()).get(OgrenciViewModel.class);
         ogrenciViewModel.getStudentName().observe(getViewLifecycleOwner(), studentName -> {
             this.name = studentName;
 
         });
-        ogrenciViewModel.getStudentSurname().observe(getViewLifecycleOwner(), studentSurname -> {
-            this.surname = studentSurname;
+        ogrenciViewModel.getStudentLastname().observe(getViewLifecycleOwner(), studentLastname -> {
+            this.lastname = studentLastname;
 
         });
-        ogrenciViewModel.getStudenTc_kn().observe(getViewLifecycleOwner(), studentTc_kn -> {
-            this.tc_kn =studentTc_kn;
 
-        });
         ogrenciViewModel.getStudentNo().observe(getViewLifecycleOwner(), studentNo -> {
             this.no = studentNo;
 
 
-        });
-        ogrenciViewModel.getStudentParentName().observe(getViewLifecycleOwner(), studentParentName -> {
-            this.parentName = studentParentName;
-
             updateUI();
         });
 
-        //ekleButton.setOnClickListener(it -> new OgrenciGuncelle(nameEditText,surnameEditText,tcknEditText,parentNameEditText,noEditText).updateData());
+        Student student = new Student();
+
+        student.setName("Mustafa");
+        student.setLastname("Karaman");
+        student.setParentId(3);
+        student.setId(8);
+        student.setNo("153");
+        student.setUsername("mstf");
+
+
+        ManagerAllStudent s= ManagerAllStudent.getInstance(getContext());
+        binding.ekleButton.setOnClickListener(view1 -> s.updateStudent(student,this));
+
+
+
     }
     private void updateUI() {
         binding.adEditText.setText(name);
-        binding.soyadEditText.setText(surname);
+        binding.soyadEditText.setText(lastname);
         binding.noEditText.setText(String.valueOf(no));
-        binding.tcknEditText.setText(String.valueOf(tc_kn));
-        binding.veliAdiEditText.setText(parentName);
+
     }
+
+    @Override
+    public void onUpdateSucccess() {
+        Toast.makeText(getContext(),"Öğrenci başarılı bir şekilde güncellendi" ,Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onUpdateFailed() {
+        Toast.makeText(getContext(),"Öğrenci güncelleme başarısız oldu",Toast.LENGTH_LONG).show();
+
+    }
+}
 

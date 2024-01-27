@@ -3,6 +3,7 @@ package com.example.e_okul.adapters;
 import static java.security.AccessController.getContext;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -34,6 +35,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,16 +56,19 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> implements ManagerAllStudent.OnDeleteStudentListener {
 
     private List<Student> studentList;
-    private Context StudentAdapter;
+    private Context context;
 
 
-    public StudentAdapter() {
+
+    public StudentAdapter(Context context) {
+        this.context = context;
         this.studentList = new ArrayList<>(); // Boş bir liste ile başlayabilirsiniz.
     }
 
@@ -99,16 +104,19 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         holder.deleteButton.setOnClickListener(s -> {
                     deleteStudent(student);
 
+
                 }
 
         );
     }
 
-    private void deleteStudent(Student student) {
-        ManagerAllStudent s = ManagerAllStudent.getInstance(StudentAdapter);
-        int studentId = student.getId();
 
-        s.deleteStudent(studentId, (ManagerAllStudent.OnDeleteStudentListener) this);
+    private void deleteStudent(Student student) {
+        ManagerAllStudent s = ManagerAllStudent.getInstance(context);
+        String studentNo = String.valueOf(student.getNo());
+
+
+        s.deleteStudent(studentNo, (ManagerAllStudent.OnDeleteStudentListener) this);
     }
 
     @Override
@@ -118,12 +126,23 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
     @Override
     public void onDeleteSuccess() {
+        Toast.makeText(context, "Öğrenci başarılı bir şekilde silindi", Toast.LENGTH_LONG).show();
+
+        if (context != null) {
+            NavController navController = Navigation.findNavController((Activity) context, R.id.fragmentContainerView2);
+            navController.navigate(R.id.action_mudurOgrenciListesiFragment_to_mudurOgrenciIslemleriFragment);
+        } else {
+            Log.e("StudentAdapter", "Context is null, unable to navigate.");
+        }
+
+
 
 
     }
 
     @Override
     public void onDeleteFailed() {
+        Toast.makeText(context,"Öğrenci silinemedi",Toast.LENGTH_LONG).show();
 
     }
 
@@ -154,7 +173,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
                 new ViewModelProvider.AndroidViewModelFactory((Application) v.getContext().getApplicationContext())
         ).get(OgrenciViewModel.class);
         ogrenciViewModel.setStudentName(student.getName());
-        ogrenciViewModel.setStudentSurname(student.getLastname());
+        ogrenciViewModel.setStudentLastname(student.getLastname());
         ogrenciViewModel.setStudentNo(student.getNo());
     }
 

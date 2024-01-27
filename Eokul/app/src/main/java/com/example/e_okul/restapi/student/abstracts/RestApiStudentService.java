@@ -12,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface RestApiStudentService {
@@ -24,11 +25,14 @@ public interface RestApiStudentService {
     @GET(".")
     Call<RestApiResponse<List<Student>>> getAll();
 
-    @GET("{id}")
-    Call<RestApiResponse<Student>> getById(@Path("id") int id);
+    @GET("no/{no}/")
+    Call<RestApiResponse<Student>> getByNo(@Path("no") int no);
 
-    @DELETE("{id}")
-    Call<RestApiResponse<Void>> delete(@Path("id") int id);
+    @DELETE("{no}/")
+    Call<RestApiResponse<Void>> delete(@Path("no") String no);
+
+    @PUT(".")
+    Call<RestApiResponse<Student>> update(@Body Student student);
 
 
 

@@ -14,7 +14,7 @@ import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
 
 import java.util.List;
 
-public class MudurOgrenciAraFragment extends Fragment implements ManagerAllStudent.OnSaveStudentListener {
+public class MudurOgrenciAraFragment extends Fragment implements  ManagerAllStudent.OnGetStudentsListener {
 
     private FragmentMudurOgrenciAraBinding binding;
 
@@ -33,25 +33,19 @@ public class MudurOgrenciAraFragment extends Fragment implements ManagerAllStude
 
 
 
-      binding.searchButton.setOnClickListener(it -> SerachStudent());
+      binding.searchButton.setOnClickListener(it -> SearchStudent());
     }
 
-void SerachStudent(){
-    int studenId= Integer.parseInt(binding.noEditText.getText().toString());
+void SearchStudent(){
+    int studentId= Integer.parseInt(binding.noEditText.getText().toString());
     ManagerAllStudent s = ManagerAllStudent.getInstance(getContext());
-    s.getStudentById(studenId,(ManagerAllStudent.OnGetStudentsListener) this);
+    s.getStudentByNo(studentId, this);
 
 }
 
 
     @Override
     public void onSaveSuccess(Student student) {
-
-
-    }
-
-    @Override
-    public void onSaveSuccess(List<Student> studentList) {
 
     }
 
@@ -61,7 +55,24 @@ void SerachStudent(){
     }
 
     @Override
+    public void onGetStudentsSuccess(List<Student> studentList) {
+
+    }
+
+    @Override
+    public void onGetStudentsFailed() {
+        binding.editTextSearchResult.setText("Öğrenci Bulunamadı");
+
+    }
+
+    @Override
+    public void onDeleteSuccess() {
+
+    }
+
+    @Override
     public void onGetStudentByIdSucces(Student student) {
+
         binding.editTextSearchResult.setText(student.getName());
 
     }

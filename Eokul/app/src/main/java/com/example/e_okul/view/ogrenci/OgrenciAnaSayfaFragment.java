@@ -39,10 +39,11 @@ public class OgrenciAnaSayfaFragment extends Fragment {
             updateUI();
         });
 
-        ogrenciViewModel.getStudentSurname().observe(getViewLifecycleOwner(), studentSurname -> {
+        ogrenciViewModel.getStudentLastname().observe(getViewLifecycleOwner(), studentSurname -> {
             this.surname = studentSurname;
             updateUI();
         });
+
     }
 
     @SuppressLint("SetTextI18n")

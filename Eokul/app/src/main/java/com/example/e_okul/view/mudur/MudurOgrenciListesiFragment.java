@@ -36,7 +36,7 @@ public class MudurOgrenciListesiFragment extends Fragment implements ManagerAllS
         super.onViewCreated(view, savedInstanceState);
 
 
-        studentAdapter = new StudentAdapter();
+        studentAdapter = new StudentAdapter(getContext());
         ManagerAllStudent s = ManagerAllStudent.getInstance(getContext());
         s.getAllStudents(this);
 
@@ -45,6 +45,7 @@ public class MudurOgrenciListesiFragment extends Fragment implements ManagerAllS
         binding.recyclerView.setLayoutManager(layoutManager);
 
       //  int studentId=13;
+
 
       //  s.deleteStudent(studentId, (ManagerAllStudent.OnDeleteStudentListener) this);
 

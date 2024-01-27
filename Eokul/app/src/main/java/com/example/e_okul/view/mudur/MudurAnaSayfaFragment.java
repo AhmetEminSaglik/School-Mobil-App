@@ -37,12 +37,18 @@ public class MudurAnaSayfaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.ogrenciIslemleriButton.setOnClickListener (view1 -> goToOgrenciIslemleri());
+        binding.OgretmenIslemleriButton.setOnClickListener(view1 -> goToOgretmenIslemleri());
 
 
     }
     private void goToOgrenciIslemleri(){
         NavController navController = Navigation.findNavController(requireView());
         navController.navigate(R.id.action_mudurAnaSayfaFragment_to_mudurOgrenciIslemleriFragment);
+    }
+    private void goToOgretmenIslemleri(){
+        NavController navController = Navigation.findNavController(requireView());
+        navController.navigate(R.id.action_mudurAnaSayfaFragment_to_mudurOgretmenIslemleriFragment);
+
     }
 
 }

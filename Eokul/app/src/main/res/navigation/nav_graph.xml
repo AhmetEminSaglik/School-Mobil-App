@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_mudurAnaSayfaFragment_to_mudurOgrenciIslemleriFragment"
             app:destination="@id/mudurOgrenciIslemleriFragment" />
+        <action
+            android:id="@+id/action_mudurAnaSayfaFragment_to_mudurOgretmenIslemleriFragment"
+            app:destination="@id/mudurOgretmenIslemleriFragment" />
     </fragment>
     <fragment
         android:id="@+id/mudurOgrenciIslemleriFragment"
@@ -68,6 +71,9 @@
         <action
             android:id="@+id/action_mudurOgrenciListesiFragment_to_mudurOgrenciGuncelleFragment"
             app:destination="@id/mudurOgrenciGuncelleFragment" />
+        <action
+            android:id="@+id/action_mudurOgrenciListesiFragment_to_mudurOgrenciIslemleriFragment"
+            app:destination="@id/mudurOgrenciIslemleriFragment" />
     </fragment>
     <fragment
         android:id="@+id/mudurOgrenciGuncelleFragment"
@@ -88,4 +94,26 @@
         android:name="com.example.e_okul.view.ogrenci.OgrenciAnaSayfaFragment"
         android:label="fragment_ogrenci_ana_sayfa"
         tools:layout="@layout/fragment_ogrenci_ana_sayfa" />
+    <fragment
+        android:id="@+id/mudurOgretmenIslemleriFragment"
+        android:name="com.example.e_okul.view.mudur.MudurOgretmenIslemleriFragment"
+        android:label="fragment_mudur_ogretmen_islemleri"
+        tools:layout="@layout/fragment_mudur_ogretmen_islemleri" >
+        <action
+            android:id="@+id/action_mudurOgretmenIslemleriFragment_to_mudurOgretmenEkleFragment"
+            app:destination="@id/mudurOgretmenEkleFragment" />
+        <action
+            android:id="@+id/action_mudurOgretmenIslemleriFragment_to_mudurOgretmenListesiFragment"
+            app:destination="@id/mudurOgretmenListesiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mudurOgretmenEkleFragment"
+        android:name="com.example.e_okul.view.mudur.MudurOgretmenEkleFragment"
+        android:label="fragment_mudur_ogretmen_ekle"
+        tools:layout="@layout/fragment_mudur_ogretmen_ekle" />
+    <fragment
+        android:id="@+id/mudurOgretmenListesiFragment"
+        android:name="com.example.e_okul.view.mudur.MudurOgretmenListesiFragment"
+        android:label="fragment_mudur_ogretmen_listesi"
+        tools:layout="@layout/fragment_mudur_ogretmen_listesi" />
 </navigation>
