@@ -10,8 +10,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.e_okul.databinding.FragmentMudurOgrenciGuncelleBinding;
@@ -20,12 +18,12 @@ import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
 import com.example.e_okul.viewmodel.OgrenciViewModel;
 
 
-public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAllStudent.OnUpdateStudentListener{
+public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAllStudent.OnUpdateStudentListener {
     private String name;
     private String lastname;
     private String no;
 
-     private FragmentMudurOgrenciGuncelleBinding binding;
+    private FragmentMudurOgrenciGuncelleBinding binding;
 
 
     @Override
@@ -37,7 +35,7 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAll
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding=FragmentMudurOgrenciGuncelleBinding.inflate(getLayoutInflater(),container,false);
+        binding = FragmentMudurOgrenciGuncelleBinding.inflate(getLayoutInflater(), container, false);
         return binding.getRoot();
     }
 
@@ -47,14 +45,13 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAll
 
 
         OgrenciViewModel ogrenciViewModel = new ViewModelProvider(requireActivity()).get(OgrenciViewModel.class);
-        ogrenciViewModel.getStudentName().observe(getViewLifecycleOwner(), studentName -> {
-            this.name = studentName;
+        ogrenciViewModel.getStudentName().observe(getViewLifecycleOwner(), studentName ->
+                this.name = studentName
 
-        });
-        ogrenciViewModel.getStudentLastname().observe(getViewLifecycleOwner(), studentLastname -> {
-            this.lastname = studentLastname;
-
-        });
+        );
+        ogrenciViewModel.getStudentLastname().observe(getViewLifecycleOwner(), studentLastname ->
+                this.lastname = studentLastname
+        );
 
         ogrenciViewModel.getStudentNo().observe(getViewLifecycleOwner(), studentNo -> {
             this.no = studentNo;
@@ -66,19 +63,19 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAll
         Student student = new Student();
 
         student.setName("Mustafa");
-        student.setLastname("Karaman");
+        student.setLastname("Karamano");
         student.setParentId(3);
         student.setId(8);
         student.setNo("153");
-        student.setUsername("mstf");
+        student.setUsername("mstfı");
 
 
-        ManagerAllStudent s= ManagerAllStudent.getInstance(getContext());
-        binding.ekleButton.setOnClickListener(view1 -> s.updateStudent(student,this));
-
+        ManagerAllStudent s = ManagerAllStudent.getInstance(getContext());
+        binding.ekleButton.setOnClickListener(view1 -> s.updateStudent(student, this));
 
 
     }
+
     private void updateUI() {
         binding.adEditText.setText(name);
         binding.soyadEditText.setText(lastname);
@@ -88,12 +85,12 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAll
 
     @Override
     public void onUpdateSucccess() {
-        Toast.makeText(getContext(),"Öğrenci başarılı bir şekilde güncellendi" ,Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Öğrenci başarılı bir şekilde güncellendi", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onUpdateFailed() {
-        Toast.makeText(getContext(),"Öğrenci güncelleme başarısız oldu",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Öğrenci güncelleme başarısız oldu", Toast.LENGTH_LONG).show();
 
     }
 }

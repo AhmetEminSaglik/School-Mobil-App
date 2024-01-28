@@ -26,7 +26,6 @@ public class MudurOgrenciEkleFragment extends Fragment implements ManagerAllStud
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -40,10 +39,8 @@ public class MudurOgrenciEkleFragment extends Fragment implements ManagerAllStud
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         Button ekleButton = binding.ekleButton;
         Student student = new Student();
-
 
         student.setName("Emir");
         student.setLastname("Albayrak");
@@ -52,43 +49,23 @@ public class MudurOgrenciEkleFragment extends Fragment implements ManagerAllStud
         student.setNo("57");
         student.setParentId(3);
 
-
-
         ManagerAllStudent managerAllStudent = ManagerAllStudent.getInstance(getContext());
-
 
         ekleButton.setOnClickListener(it ->
                   managerAllStudent.saveStudent(student,this)
-
-
-      /*  student.setLastname(surnameEditText.getText().toString()),
-        student.setUsername("jasfn"),
-        student.setPassword("pass"),
-        student.setNo(noEditText.getText().toString()),
-        student.setParentId(3)
-        */
         );
-
     }
 
 
     @Override
-    public void onSaveSuccess(Student student) {
-
-    }
+    public void onSaveSuccess(Student student) {}
 
     @Override
-    public void onSaveSuccess(List<Student> studentList) {
-
-    }
+    public void onSaveSuccess(List<Student> studentList) {}
 
     @Override
-    public void onSaveFailed() {
-
-    }
+    public void onSaveFailed() {}
 
     @Override
-    public void onGetStudentByIdSucces(Student student) {
-
-    }
+    public void onGetStudentByIdSucces(Student student) {}
 }

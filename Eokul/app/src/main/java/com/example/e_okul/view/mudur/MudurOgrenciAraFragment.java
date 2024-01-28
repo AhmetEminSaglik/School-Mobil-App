@@ -1,6 +1,7 @@
 package com.example.e_okul.view.mudur;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,6 @@ public class MudurOgrenciAraFragment extends Fragment implements  ManagerAllStud
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentMudurOgrenciAraBinding.inflate(getLayoutInflater(), container, false);
-        //EditText editTextSearchResult = binding.editTextSearchResult; // editTextSearchResult'a erişim
         return binding.getRoot();
     }
 
@@ -45,30 +45,22 @@ void SearchStudent(){
 
 
     @Override
-    public void onSaveSuccess(Student student) {
-
-    }
+    public void onSaveSuccess(Student student) {}
 
     @Override
-    public void onSaveFailed() {
-
-    }
+    public void onSaveFailed() {}
 
     @Override
-    public void onGetStudentsSuccess(List<Student> studentList) {
+    public void onGetStudentsSuccess(List<Student> studentList) {}
 
-    }
-
+    @SuppressLint("SetTextI18n")
     @Override
     public void onGetStudentsFailed() {
         binding.editTextSearchResult.setText("Öğrenci Bulunamadı");
-
     }
 
     @Override
-    public void onDeleteSuccess() {
-
-    }
+    public void onDeleteSuccess() {}
 
     @Override
     public void onGetStudentByIdSucces(Student student) {
@@ -76,9 +68,6 @@ void SearchStudent(){
         binding.editTextSearchResult.setText(student.getName());
 
     }
-
-
-
 
 
 }

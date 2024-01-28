@@ -1,35 +1,10 @@
 package com.example.e_okul.adapters;
 
-import static java.security.AccessController.getContext;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.IntentSender;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.database.DatabaseErrorHandler;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.UserHandle;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
@@ -50,32 +24,23 @@ import com.example.e_okul.model.Student;
 import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
 import com.example.e_okul.viewmodel.OgrenciViewModel;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> implements ManagerAllStudent.OnDeleteStudentListener {
 
     private List<Student> studentList;
-    private Context context;
-
-
+    private final Context context;
 
     public StudentAdapter(Context context) {
         this.context = context;
-        this.studentList = new ArrayList<>(); // Boş bir liste ile başlayabilirsiniz.
+        this.studentList = new ArrayList<>();
     }
 
     @SuppressLint("NotifyDataSetChanged")
     public void setStudentList(List<Student> studentList) {
         this.studentList = studentList;
-        notifyDataSetChanged(); // Değişiklikleri RecyclerView'e bildir
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -95,28 +60,23 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         holder.textViewSchoolNumber.setText(String.valueOf(student.getNo()));
 
         holder.editButton.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(v);
 
-            goToOgrenciGuncelle(v);
+            navController.navigate(R.id.action_mudurOgrenciListesiFragment_to_mudurOgrenciGuncelleFragment);
             initSharedViewModel(student, v);
 
         });
 
-        holder.deleteButton.setOnClickListener(s -> {
-                    deleteStudent(student);
-
-
-                }
+        holder.deleteButton.setOnClickListener(s -> deleteStudent(student)
 
         );
     }
-
 
     private void deleteStudent(Student student) {
         ManagerAllStudent s = ManagerAllStudent.getInstance(context);
         String studentNo = String.valueOf(student.getNo());
 
-
-        s.deleteStudent(studentNo, (ManagerAllStudent.OnDeleteStudentListener) this);
+        s.deleteStudent(studentNo, this);
     }
 
     @Override
@@ -133,21 +93,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             navController.navigate(R.id.action_mudurOgrenciListesiFragment_to_mudurOgrenciIslemleriFragment);
         } else {
             Log.e("StudentAdapter", "Context is null, unable to navigate.");
-        }
-
-
-
-
-    }
+        }}
 
     @Override
     public void onDeleteFailed() {
-        Toast.makeText(context,"Öğrenci silinemedi",Toast.LENGTH_LONG).show();
-
-    }
+        Toast.makeText(context,"Öğrenci silinemedi",Toast.LENGTH_LONG).show();}
 
     public static class StudentViewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewName;
         TextView textViewSchoolNumber;
         ImageButton editButton;
@@ -162,10 +114,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         }
     }
 
-    private void goToOgrenciGuncelle(View view) {
-        NavController navController = Navigation.findNavController(view);
-        navController.navigate(R.id.action_mudurOgrenciListesiFragment_to_mudurOgrenciGuncelleFragment);
-    }
+
 
     private void initSharedViewModel(Student student, View v) {
         OgrenciViewModel ogrenciViewModel = new ViewModelProvider(

@@ -115,5 +115,17 @@
         android:id="@+id/mudurOgretmenListesiFragment"
         android:name="com.example.e_okul.view.mudur.MudurOgretmenListesiFragment"
         android:label="fragment_mudur_ogretmen_listesi"
-        tools:layout="@layout/fragment_mudur_ogretmen_listesi" />
+        tools:layout="@layout/fragment_mudur_ogretmen_listesi" >
+        <action
+            android:id="@+id/action_mudurOgretmenListesiFragment_to_mudurOgretmenGuncelleFragment"
+            app:destination="@id/mudurOgretmenGuncelleFragment" />
+        <action
+            android:id="@+id/action_mudurOgretmenListesiFragment_to_mudurOgretmenIslemleriFragment"
+            app:destination="@id/mudurOgretmenIslemleriFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mudurOgretmenGuncelleFragment"
+        android:name="com.example.e_okul.view.mudur.MudurOgretmenGuncelleFragment"
+        android:label="fragment_mudur_ogretmen_guncelle"
+        tools:layout="@layout/fragment_mudur_ogretmen_guncelle" />
 </navigation>

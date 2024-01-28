@@ -18,28 +18,18 @@ import com.example.e_okul.databinding.FragmentMudurOgretmenIslemleriBinding;
 
 public class MudurOgretmenIslemleriFragment extends Fragment {
     private FragmentMudurOgretmenIslemleriBinding binding;
-;
-
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding=FragmentMudurOgretmenIslemleriBinding.inflate(getLayoutInflater(),container,false);
-        // Inflate the layout for this fragment
         return binding.getRoot();
-
-
     }
 
     @Override

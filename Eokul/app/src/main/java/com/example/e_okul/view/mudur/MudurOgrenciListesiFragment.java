@@ -28,7 +28,6 @@ public class MudurOgrenciListesiFragment extends Fragment implements ManagerAllS
                              Bundle savedInstanceState) {
         binding = FragmentMudurOgrenciListesiBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     @Override
@@ -43,45 +42,26 @@ public class MudurOgrenciListesiFragment extends Fragment implements ManagerAllS
         binding.recyclerView.setAdapter(studentAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.recyclerView.setLayoutManager(layoutManager);
-
-      //  int studentId=13;
-
-
-      //  s.deleteStudent(studentId, (ManagerAllStudent.OnDeleteStudentListener) this);
-
-    }
-
-
-    @Override
-    public void onSaveSuccess(Student student) {
-
     }
 
     @Override
-    public void onSaveFailed() {
+    public void onSaveSuccess(Student student) {}
 
-    }
+    @Override
+    public void onSaveFailed() {}
 
     @Override
     public void onGetStudentsSuccess(List<Student> studentList) {
         Log.d("StudentAdapter", "onGetStudentsSuccess - itemCount: " + studentAdapter.getItemCount());
         studentAdapter.setStudentList(studentList);
-
     }
 
     @Override
-    public void onGetStudentsFailed() {
-
-    }
+    public void onGetStudentsFailed() {}
     @SuppressLint("NotifyDataSetChanged")
     @Override
-    public void onDeleteSuccess() {
-
-
-    }
+    public void onDeleteSuccess() {}
 
     @Override
-    public void onGetStudentByIdSucces(Student student) {
-
-    }
+    public void onGetStudentByIdSucces(Student student) {}
 }
