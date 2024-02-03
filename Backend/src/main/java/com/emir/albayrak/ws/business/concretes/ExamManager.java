@@ -4,6 +4,9 @@ import com.emir.albayrak.ws.business.abstracts.model.ExamService;
 import com.emir.albayrak.ws.dataaccess.ExamRepository;
 import com.emir.albayrak.ws.model.Exam;
 import org.springframework.stereotype.Service;
+import utility.result.DataResult;
+import utility.result.ErrorDataResult;
+import utility.result.SuccessDataResult;
 
 import java.util.List;
 
@@ -26,13 +29,24 @@ public class ExamManager implements ExamService {
     }
 
     @Override
-    public Exam update(Exam exam) {
-        Exam existingExam = findById(exam.getId());
-        existingExam.setStudent(exam.getStudent());
-        existingExam.setTeacher(exam.getTeacher());
-        existingExam.setFinalResult(exam.getFinalResult());
-        existingExam.setVizeResult(exam.getVizeResult());
-        return save(existingExam);
+    public DataResult<Exam> update(Exam exam) {
+        DataResult<Exam> dataResult;
+        String msg;
+        if (exam.getId() == 0) {
+            msg = "Sınavı güncelleyebilmek için lütfen kayıtlı sınav id'sini giriniz";
+            dataResult = new ErrorDataResult<>(null, "");
+
+        } else {
+            msg = "Sınav güncellenmiştir";
+            Exam existingExam = findById(exam.getId());
+            existingExam.setStudent(exam.getStudent());
+            existingExam.setTeacher(exam.getTeacher());
+            existingExam.setFinalResult(exam.getFinalResult());
+            existingExam.setVizeResult(exam.getVizeResult());
+            existingExam = save(existingExam);
+            dataResult = new SuccessDataResult<>(existingExam, msg);
+        }
+        return dataResult;
     }
 
     @Override

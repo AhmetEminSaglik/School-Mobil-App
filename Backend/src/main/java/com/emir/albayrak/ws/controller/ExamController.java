@@ -80,9 +80,7 @@ public class ExamController {
 
     @PutMapping
     public ResponseEntity<DataResult<Exam>> update(@RequestBody Exam exam) {
-        exam = service.update(exam);
-        String msg = "Sınav Güncellendi.";
-        DataResult<Exam> dataResult = new SuccessDataResult<>(exam, msg);
+        DataResult<Exam> dataResult = service.update(exam);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 }
