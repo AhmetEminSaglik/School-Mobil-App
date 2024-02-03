@@ -32,7 +32,7 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:src="@android:drawable/ic_menu_edit"
-            android:background="#06EC10"
+            android:background="#025406"
             android:contentDescription="Güncelleme Butonu"
             />
 
@@ -42,11 +42,14 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             android:src="@android:drawable/ic_menu_delete"
-            android:background="#FA0303"
+            android:background="#960202"
             android:contentDescription="Silme Butonu"
             />
 
     </LinearLayout>
+    <Space
+        android:layout_width="5dp"
+        android:layout_height="5dp"></Space>
 
 
 

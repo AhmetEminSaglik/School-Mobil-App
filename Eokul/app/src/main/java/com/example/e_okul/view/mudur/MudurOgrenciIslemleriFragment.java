@@ -36,7 +36,7 @@ public class MudurOgrenciIslemleriFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.ogrenciEkleButton.setOnClickListener (view1 -> goToOgrenciEkle());
+        binding.ogrenciEklebutton.setOnClickListener (view1 -> goToOgrenciEkle());
         binding.ogrenciListesiButton.setOnClickListener (view2 -> goToOgrenciListesi());
         binding.ogrenciAraButton.setOnClickListener (view3 -> goToOgrenciAra());
 

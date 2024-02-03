@@ -35,7 +35,7 @@ public class MudurOgretmenIslemleriFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.ogretmenEkleButton.setOnClickListener(view1 -> goToOgretmenEkle());
+        binding.ogretmenEklebutton.setOnClickListener(view1 -> goToOgretmenEkle());
         binding.ogretmenListesiButton.setOnClickListener(view1 -> goToOgretmenListesi());
     }
 

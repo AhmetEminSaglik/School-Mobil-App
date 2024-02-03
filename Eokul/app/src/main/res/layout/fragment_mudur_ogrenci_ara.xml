@@ -4,14 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_background"
     tools:context=".view.mudur.MudurOgrenciAraFragment">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Öğrenci Ara"
-        android:textSize="24sp"
+        android:textSize="40sp"
         android:textStyle="bold"
+        android:textColor="#F4F0F0"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"/>
 
@@ -19,9 +21,11 @@
     <EditText
         android:layout_marginTop="40dp"
         android:id="@+id/noEditText"
-        android:layout_width="412dp"
+        android:layout_width="350dp"
         android:layout_height="48dp"
+        android:layout_gravity="center"
         android:hint="Öğrenci No"
+        android:background="@drawable/edit_text_style"
         android:padding="8dp"
         android:layout_marginBottom="16dp"
         android:autofillHints=""
@@ -39,26 +43,24 @@
             android:background="#062AF1"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:layout_gravity="end"/>
+            android:layout_marginLeft="305dp"
+           />
 
 
     <!-- Arama Sonuçları Görüntüleme Alanı -->
     <EditText
         android:id="@+id/editTextSearchResult"
-        android:layout_width="412dp"
-        android:layout_height="57dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="15dp"
-
+        android:textAlignment="center"
         android:autofillHints=""
-        android:background="@android:color/darker_gray"
+        android:background="#8F8E8E"
         android:gravity="top"
         android:hint="Arama Sonuçları"
         android:inputType="textMultiLine"
-        android:padding="8dp" />
+        android:padding="8dp"
+        tools:ignore="RtlCompat" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

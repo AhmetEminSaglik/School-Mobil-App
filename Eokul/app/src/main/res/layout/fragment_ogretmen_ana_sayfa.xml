@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ogretmen.OgretmenAnaSayfaFragment"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/gradient_background">
+
+    <TextView
+        android:id="@+id/ogretmen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:textSize="32sp"
+        android:text="Öğretmen Adı"
+        android:textColor="#F4F0F0"
+        android:textStyle="bold" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+
+        android:background="@drawable/linear_layout_style"
+        android:gravity="center">
+
+
+        <Button
+            android:id="@+id/ogrenciListesiButton"
+            android:layout_width="280dp"
+            android:layout_height="100dp"
+            android:text="Öğrenci Listesi"
+            android:layout_gravity="center_horizontal"
+            android:textSize="24sp"
+            android:background="@drawable/button_custom"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+
+        <Button
+            android:id="@+id/duyurularButton"
+            android:layout_width="280dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Duyurular"
+            android:textSize="24sp"
+            android:background="@drawable/button_custom"
+            />
+    </LinearLayout>
+
+</LinearLayout>

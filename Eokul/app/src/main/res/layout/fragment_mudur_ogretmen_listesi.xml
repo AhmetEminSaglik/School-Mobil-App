@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.mudur.MudurOgretmenListesiFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradient_background">
 
     <!-- Başlık -->
     <TextView
@@ -12,42 +13,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Öğretmen Listesi"
-        android:textSize="24sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_marginBottom="16dp"/>
-
-    <!-- Tablo Başlık -->
+        android:layout_marginBottom="16dp"
+        android:textColor="#F4F0F0"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/linear_layout_style">
+        <!-- Tablo Başlık -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:textColor="@color/black"
 
-            android:text="Öğretmen Adı"
-            android:textStyle="bold"
-            android:padding="8dp"/>
+                android:text="Öğretmen Adı"
+                android:textStyle="bold"
+                android:padding="8dp"/>
 
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="40dp"
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@color/black"
 
-            android:text="Branş"
-            android:textStyle="bold"
-            android:padding="8dp"/>
+                android:text="Branş"
+                android:textStyle="bold"
+                android:padding="8dp"/>
 
+
+        </LinearLayout>
+
+        <!-- Tablo İçeriği -->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
-
-    <!-- Tablo İçeriği -->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

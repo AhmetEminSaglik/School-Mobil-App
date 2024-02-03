@@ -16,11 +16,9 @@ import android.widget.Button;
 import com.example.e_okul.databinding.FragmentMudurOgrenciEkleBinding;
 import com.example.e_okul.model.Student;
 import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
+import com.example.e_okul.restapi.student.concretes.OnSaveStudentListener;
 
-import java.util.List;
-
-
-public class MudurOgrenciEkleFragment extends Fragment implements ManagerAllStudent.OnSaveStudentListener {
+public class MudurOgrenciEkleFragment extends Fragment implements OnSaveStudentListener {
     private FragmentMudurOgrenciEkleBinding binding;
 
     @Override
@@ -42,17 +40,20 @@ public class MudurOgrenciEkleFragment extends Fragment implements ManagerAllStud
         Button ekleButton = binding.ekleButton;
         Student student = new Student();
 
-        student.setName("Emir");
-        student.setLastname("Albayrak");
-        student.setUsername("Emir");
-        student.setPassword("pass");
-        student.setNo("57");
-        student.setParentId(3);
+
 
         ManagerAllStudent managerAllStudent = ManagerAllStudent.getInstance(getContext());
 
-        ekleButton.setOnClickListener(it ->
-                  managerAllStudent.saveStudent(student,this)
+        ekleButton.setOnClickListener(it ->{
+            student.setName(binding.adEditText.getText().toString());
+            student.setLastname(binding.soyadEditText.getText().toString());
+            student.setUsername(binding.kullaniciAdiEditText.getText().toString());
+            student.setPassword(binding.sifreEditText.getText().toString());
+            student.setNo(binding.noEditText.getText().toString());
+            student.setParentId(3);
+            managerAllStudent.saveStudent(student,this);
+                }
+
         );
     }
 
@@ -61,11 +62,7 @@ public class MudurOgrenciEkleFragment extends Fragment implements ManagerAllStud
     public void onSaveSuccess(Student student) {}
 
     @Override
-    public void onSaveSuccess(List<Student> studentList) {}
-
-    @Override
     public void onSaveFailed() {}
 
-    @Override
-    public void onGetStudentByIdSucces(Student student) {}
+
 }

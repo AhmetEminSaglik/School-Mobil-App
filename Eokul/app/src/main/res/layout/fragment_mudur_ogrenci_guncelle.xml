@@ -3,81 +3,105 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.mudur.MudurOgrenciEkleFragment"
+    android:background="@drawable/gradient_background"
+    tools:context=".view.mudur.MudurOgrenciGuncelleFragment"
     android:orientation="vertical">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Öğrenci Güncelle"
-        android:textSize="24sp"
+        android:textSize="40sp"
         android:textStyle="bold"
+        android:textColor="@color/white"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Ad Giriş Kutusu -->
-    <EditText
-        android:id="@+id/adEditText"
-        android:layout_marginTop="50dp"
-        android:layout_width="410dp"
-        android:layout_height="48dp"
-        android:hint="Ad"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/linear_layout_style"
+        >
+        <!-- Ad Giriş Kutusu -->
+        <EditText
+            android:id="@+id/adEditText"
+            android:layout_marginTop="100dp"
+            android:layout_width="410dp"
+            android:layout_height="48dp"
+            android:hint="Ad"
+            android:background="@drawable/edit_text_style"
+            android:layout_marginBottom="8dp"
+            android:autofillHints=""
+            android:textAlignment="center"
+            android:inputType="text"
+            android:layout_gravity="center" />
 
-        android:layout_marginBottom="8dp"
-        android:autofillHints=""
-        android:inputType="text" />
+        <!-- Soyad Giriş Kutusu -->
+        <EditText
+            android:id="@+id/soyadEditText"
+            android:layout_width="410dp"
+            android:layout_height="48dp"
+            android:hint="Soyad"
+            android:textAlignment="center"
+            android:inputType="text"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_text_style"
+            android:layout_marginBottom="8dp"
+            android:autofillHints="" />
 
-    <!-- Soyad Giriş Kutusu -->
-    <EditText
-        android:id="@+id/soyadEditText"
-        android:layout_width="410dp"
-        android:layout_height="48dp"
-        android:hint="Soyad"
-        android:inputType="text"
+        <!-- T.C. Giriş Kutusu -->
+        <EditText
+            android:id="@+id/kullaniciAdiEditText"
+            android:layout_width="410dp"
+            android:layout_height="48dp"
+            android:hint="Kullanıcı Adı"
+            android:maxLength="11"
+            android:background="@drawable/edit_text_style"
+            android:layout_marginBottom="8dp"
+            android:autofillHints=""
+            android:textAlignment="center"
+            android:inputType="text"
+            android:layout_gravity="center"/>
 
-        android:layout_marginBottom="8dp"
-        android:autofillHints="" />
+        <!-- Veli Adı Giriş Kutusu -->
+        <EditText
+            android:id="@+id/sifreEditText"
+            android:layout_width="410dp"
+            android:layout_height="48dp"
+            android:hint="Şifre"
+            android:background="@drawable/edit_text_style"
+            android:layout_marginBottom="8dp"
+            android:autofillHints=""
+            android:textAlignment="center"
+            android:inputType="text"
+            android:layout_gravity="center" />
 
-    <!-- T.C. Giriş Kutusu -->
-    <EditText
-        android:id="@+id/tcknEditText"
-        android:layout_width="410dp"
-        android:layout_height="48dp"
-        android:hint="T.C."
-        android:maxLength="11"
+        <!-- Okul No Giriş Kutusu -->
+        <EditText
+            android:id="@+id/noEditText"
+            android:layout_width="410dp"
+            android:layout_height="48dp"
+            android:hint="Okul No"
+            android:background="@drawable/edit_text_style"
+            android:layout_marginBottom="16dp"
+            android:autofillHints=""
+            android:textAlignment="center"
+            android:inputType="text"
+            android:layout_gravity="center" />
 
-        android:layout_marginBottom="8dp"
-        android:autofillHints=""
-        android:inputType="number" />
+        <!-- Ekle Butonu -->
+        <Button
+            android:id="@+id/guncelleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Güncelle"
+            android:background="@drawable/sign_up_button"
+            android:layout_gravity="center"
+            android:textColor="@color/white"/>
 
-    <!-- Veli Adı Giriş Kutusu -->
-    <EditText
-        android:id="@+id/veliAdiEditText"
-        android:layout_width="410dp"
-        android:layout_height="48dp"
-        android:hint="Veli Adı"
-
-        android:layout_marginBottom="8dp"
-        android:autofillHints=""
-        android:inputType="text" />
-
-    <!-- Okul No Giriş Kutusu -->
-    <EditText
-        android:id="@+id/noEditText"
-        android:layout_width="410dp"
-        android:layout_height="48dp"
-        android:hint="Okul No"
-
-        android:layout_marginBottom="16dp"
-        android:autofillHints=""
-        android:inputType="number" />
-
-    <!-- Ekle Butonu -->
-    <Button
-        android:id="@+id/ekleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Güncelle"
-        android:layout_gravity="center"/>
+    </LinearLayout>
 
 </LinearLayout>

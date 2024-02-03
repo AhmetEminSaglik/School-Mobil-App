@@ -5,15 +5,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Toast;
 import com.example.e_okul.R;
 import com.example.e_okul.databinding.FragmentMudurGirisBinding;
+import com.example.e_okul.model.HeadMaster;
+import com.example.e_okul.model.LoginCredentials;
+import com.example.e_okul.restapi.headmaster.concretes.ManagerAllHeadMaster;
+import com.example.e_okul.restapi.headmaster.concretes.OnGetHeadmasterByUsernameListener;
+import com.example.e_okul.restapi.headmaster.concretes.OnHeadmasterLoginListener;
 
-public class MudurGirisFragment extends Fragment {
+
+public class MudurGirisFragment extends Fragment implements OnGetHeadmasterByUsernameListener, OnHeadmasterLoginListener {
 
     private FragmentMudurGirisBinding binding;
 
@@ -31,14 +36,42 @@ public class MudurGirisFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        LoginCredentials loginCredentials = new LoginCredentials();
+        ManagerAllHeadMaster managerAllHeadMaster = ManagerAllHeadMaster.getInstance(getContext());
 
-       binding.buttonLogin.setOnClickListener(view1 -> go());
+
+        binding.buttonLogin.setOnClickListener(view1 -> {
+           /* loginCredentials.setUsername(binding.editTextUsername.getText().toString());
+            loginCredentials.setPassword(binding.editTextPassword.getText().toString());
+
+            managerAllHeadMaster.getHeadmasterByUsername(loginCredentials.getUsername(), loginCredentials, this);
+            managerAllHeadMaster.login(this, loginCredentials);*/
+            NavController navController = Navigation.findNavController(requireView());
+            navController.navigate(R.id.action_mudurGirisFragment_to_mudurAnaSayfaFragment);
+        });
 
     }
 
-    public void go(){
-        NavController navController = Navigation.findNavController(requireView());
-        navController.navigate(R.id.action_mudurGirisFragment_to_mudurAnaSayfaFragment);
+
+    @Override
+    public void success() {}
+
+    @Override
+    public void failed() {}
+
+    @Override
+    public void loginSuccess(HeadMaster headMaster) {
+        if (binding.editTextUsername.getText().toString().equals(headMaster.getUsername()) &&
+                binding.editTextPassword.getText().toString().equals(headMaster.getPassword())) {
+                Toast.makeText(this.getContext(), "Giriş Başarılı", Toast.LENGTH_SHORT).show();
+
+             NavController navController = Navigation.findNavController(requireView());
+             navController.navigate(R.id.action_mudurGirisFragment_to_mudurAnaSayfaFragment);
+
+        }
+    }
+    @Override
+    public void loginFailed() {
 
     }
 }

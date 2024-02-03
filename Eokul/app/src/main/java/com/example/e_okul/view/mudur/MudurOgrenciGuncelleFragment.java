@@ -15,13 +15,17 @@ import android.widget.Toast;
 import com.example.e_okul.databinding.FragmentMudurOgrenciGuncelleBinding;
 import com.example.e_okul.model.Student;
 import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
+import com.example.e_okul.restapi.student.concretes.OnUpdateStudentListener;
 import com.example.e_okul.viewmodel.OgrenciViewModel;
 
 
-public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAllStudent.OnUpdateStudentListener {
+public class MudurOgrenciGuncelleFragment extends Fragment implements OnUpdateStudentListener {
     private String name;
     private String lastname;
     private String no;
+    private String username;
+    private String password;
+    private String id;
 
     private FragmentMudurOgrenciGuncelleBinding binding;
 
@@ -52,6 +56,15 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAll
         ogrenciViewModel.getStudentLastname().observe(getViewLifecycleOwner(), studentLastname ->
                 this.lastname = studentLastname
         );
+        ogrenciViewModel.getStudentUserName().observe(getViewLifecycleOwner(),studentUserName ->
+                this.username=studentUserName
+        );
+        ogrenciViewModel.getStudentPassword().observe(getViewLifecycleOwner(),studentPassword ->
+                this.password=studentPassword
+        );
+        ogrenciViewModel.getStudentId().observe(getViewLifecycleOwner(),studentId ->
+                this.id=String.valueOf(studentId)
+        );
 
         ogrenciViewModel.getStudentNo().observe(getViewLifecycleOwner(), studentNo -> {
             this.no = studentNo;
@@ -62,16 +75,18 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAll
 
         Student student = new Student();
 
-        student.setName("Mustafa");
-        student.setLastname("Karamano");
-        student.setParentId(3);
-        student.setId(8);
-        student.setNo("153");
-        student.setUsername("mstfı");
-
-
         ManagerAllStudent s = ManagerAllStudent.getInstance(getContext());
-        binding.ekleButton.setOnClickListener(view1 -> s.updateStudent(student, this));
+        binding.guncelleButton.setOnClickListener(view1 -> {
+            student.setName(binding.adEditText.getText().toString());
+            student.setLastname(binding.soyadEditText.getText().toString());
+            student.setParentId(3);
+            student.setId(Integer.parseInt(id));// id alınacak
+            student.setNo(binding.noEditText.getText().toString());
+            student.setUsername(binding.kullaniciAdiEditText.getText().toString());
+            student.setRoleId(3);
+            student.setPassword(binding.sifreEditText.getText().toString());
+
+            s.updateStudent(student, this);});
 
 
     }
@@ -80,6 +95,9 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements ManagerAll
         binding.adEditText.setText(name);
         binding.soyadEditText.setText(lastname);
         binding.noEditText.setText(String.valueOf(no));
+        binding.kullaniciAdiEditText.setText(username);
+        binding.sifreEditText.setText(password);
+
 
     }
 

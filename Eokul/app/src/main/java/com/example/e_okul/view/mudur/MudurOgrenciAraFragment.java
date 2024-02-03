@@ -10,12 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.e_okul.databinding.FragmentMudurOgrenciAraBinding;
+import com.example.e_okul.model.LoginCredentials;
 import com.example.e_okul.model.Student;
 import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
+import com.example.e_okul.restapi.student.concretes.OnGetStudentsListener;
 
 import java.util.List;
 
-public class MudurOgrenciAraFragment extends Fragment implements  ManagerAllStudent.OnGetStudentsListener {
+public class MudurOgrenciAraFragment extends Fragment implements OnGetStudentsListener {
 
     private FragmentMudurOgrenciAraBinding binding;
 
@@ -44,11 +46,7 @@ void SearchStudent(){
 }
 
 
-    @Override
-    public void onSaveSuccess(Student student) {}
 
-    @Override
-    public void onSaveFailed() {}
 
     @Override
     public void onGetStudentsSuccess(List<Student> studentList) {}
@@ -59,13 +57,17 @@ void SearchStudent(){
         binding.editTextSearchResult.setText("Öğrenci Bulunamadı");
     }
 
-    @Override
-    public void onDeleteSuccess() {}
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onGetStudentByIdSucces(Student student) {
 
-        binding.editTextSearchResult.setText(student.getName());
+        binding.editTextSearchResult.setText(student.getName()+" "+ student.getLastname());
+
+    }
+
+    @Override
+    public void onGetStudentByUsernameSuccess(Student student , LoginCredentials loginCredentials) {
 
     }
 

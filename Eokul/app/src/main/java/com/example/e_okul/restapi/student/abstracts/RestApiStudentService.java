@@ -22,6 +22,9 @@ public interface RestApiStudentService {
     @POST("login/")
     Call<RestApiResponse<Student>> login(@Body LoginCredentials credentials);
 
+    @GET("username/{username}/")
+    Call<RestApiResponse<Student>> getStudentByUsername(@Path("username") String username);
+
     @GET(".")
     Call<RestApiResponse<List<Student>>> getAll();
 

@@ -22,12 +22,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.e_okul.R;
 import com.example.e_okul.model.Student;
 import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
+import com.example.e_okul.restapi.student.concretes.OnDeleteStudentListener;
 import com.example.e_okul.viewmodel.OgrenciViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> implements ManagerAllStudent.OnDeleteStudentListener {
+public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> implements OnDeleteStudentListener {
 
     private List<Student> studentList;
     private final Context context;
@@ -124,6 +125,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         ogrenciViewModel.setStudentName(student.getName());
         ogrenciViewModel.setStudentLastname(student.getLastname());
         ogrenciViewModel.setStudentNo(student.getNo());
+        ogrenciViewModel.setStudentUserName(student.getUsername());
+        ogrenciViewModel.setStudentPassword(student.getPassword());
+        ogrenciViewModel.setStudentId(student.getId());
+
     }
 
     // ViewModel işlemleri burada

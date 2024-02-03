@@ -16,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class ManagerAllUser extends BaseManager {
-    private static ManagerAllUser managerAll = new ManagerAllUser();
+    private static final ManagerAllUser managerAll = new ManagerAllUser();
 
     public static synchronized ManagerAllUser getInstance() {
         return managerAll;
@@ -29,11 +29,13 @@ public class ManagerAllUser extends BaseManager {
             Response<LoginResponse> response = call.execute();
             if (response.code() == 200) {
 //                Gson gson = new Gson();
+                assert response.body() != null;
                 user = response.body().getData();
                 Log.e("User res: ", user.toString());
 //                Student student = (Student) UserFactory.getUserByRoleId(user);
             } else {
                 Gson gson = new Gson();
+                assert response.errorBody() != null;
                 RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
                 String errMsg = errorResponse.getMessage();
                 if (errMsg != null) {
