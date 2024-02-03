@@ -192,7 +192,7 @@ public class ManagerAllTeacher extends BaseManager {
     }
 
     private void showToastMsg(String msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 //    public Call<List<User>> getAllUser() {
     //      return getUserRestApiClient().getAllUsers();
