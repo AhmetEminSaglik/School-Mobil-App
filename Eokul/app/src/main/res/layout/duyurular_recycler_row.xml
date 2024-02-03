@@ -13,8 +13,8 @@
         android:layout_height="80dp"
         android:orientation="horizontal"
         tools:ignore="UselessParent">
-        <TextView
-            android:id="@+id/textViewName"
+        <Button
+            android:id="@+id/duyuruBaslik"
             android:layout_width="match_parent"
             android:text="Vize ve Final Tarihleri Hakkında Önemli Duyuru"
             android:textAlignment="center"

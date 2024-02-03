@@ -58,7 +58,7 @@ public class OgrenciGirisFragment extends Fragment implements OnStudentLoginList
     public void onLoginSuccess(Student student) {
         if(binding.editTextUsername.getText().toString().equals(student.getUsername())&&
                 binding.editTextPassword.getText().toString().equals(student.getPassword())){
-            Toast.makeText(this.getContext(),"Giriş Başarılı",Toast.LENGTH_SHORT).show();
+
 
             OgrenciViewModel ogrenciViewModel = new ViewModelProvider(requireActivity()).get(OgrenciViewModel.class);
             ogrenciViewModel.setStudentName(student.getName());
@@ -68,7 +68,7 @@ public class OgrenciGirisFragment extends Fragment implements OnStudentLoginList
             navController.navigate(R.id.action_ogrenciGirisFragment_to_ogrenciAnaSayfaFragment);
         }
         else {
-            Toast.makeText(this.getContext(),"Giriş Başarısız",Toast.LENGTH_SHORT).show();
+
         }
 
     }
