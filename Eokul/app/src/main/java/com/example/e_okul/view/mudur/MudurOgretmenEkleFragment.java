@@ -49,6 +49,7 @@ public class MudurOgretmenEkleFragment extends Fragment implements OnSaveTeacher
             teacher.setName(binding.adEditText.getText().toString());
             teacher.setLastname(binding.soyadEditText.getText().toString());
             teacher.setBranch(binding.bransEditText.getText().toString());
+            teacher.setUsername(binding.kullaniciAdiEditText.getText().toString());
             t.saveTeacher(teacher,this);
 
 
