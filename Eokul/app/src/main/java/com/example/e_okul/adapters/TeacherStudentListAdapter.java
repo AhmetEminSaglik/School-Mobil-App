@@ -53,18 +53,29 @@ public class TeacherStudentListAdapter extends RecyclerView.Adapter<TeacherStude
 
 
         holder.saveButton.setOnClickListener(v -> {
-            String vizeStr= holder.editTextVize.getText().toString();
-            int vizeNotu=Integer.parseInt(vizeStr);
-            String finalStr= holder.editTextFinal.getText().toString();
-            int finalNotu =Integer.parseInt(finalStr);
+            String vizeStr = holder.editTextVize.getText().toString().trim();
+            String finalStr = holder.editTextFinal.getText().toString().trim();
 
+            if (!vizeStr.isEmpty() && !finalStr.isEmpty()) {
+                try {
+                    int vizeNotu = Integer.parseInt(vizeStr);
+                    int finalNotu = Integer.parseInt(finalStr);
 
-            if(vizeNotu<=100 && finalNotu <=100) {
-                Toast.makeText(v.getContext(), "Öğrenci Notu Başarılı Bir Şekilde Girildi", Toast.LENGTH_SHORT).show();
-            }else {
-                Toast.makeText(v.getContext(), "Vize ve Final Notları 100 den büyük olamaz!", Toast.LENGTH_SHORT).show();
+                    if (vizeNotu >= 0 && vizeNotu <= 100 && finalNotu >= 0 && finalNotu <= 100) {
+                        Toast.makeText(v.getContext(), "Öğrenci Notu Başarılı Bir Şekilde Girildi", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(v.getContext(), "Vize ve Final Notları 0 ile 100 arasında olmalıdır!", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (NumberFormatException e) {
+                    // Kullanıcı sayısal bir değer girmemişse buraya düşer
+                    Toast.makeText(v.getContext(), "Lütfen geçerli bir sayı girin!", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(v.getContext(), "Lütfen Notları Giriniz", Toast.LENGTH_SHORT).show();
             }
         });
+
 
     }
 

@@ -6,9 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.e_okul.R;
 import com.example.e_okul.databinding.FragmentOgrenciAnaSayfaBinding;
 import com.example.e_okul.viewmodel.OgrenciViewModel;
 
@@ -39,6 +44,15 @@ public class OgrenciAnaSayfaFragment extends Fragment {
         ogrenciViewModel.getStudentLastname().observe(getViewLifecycleOwner(), studentSurname -> {
             this.surname = studentSurname;
             updateUI();
+        });
+        binding.notlarButton.setOnClickListener(view1 -> {
+            NavController navController = Navigation.findNavController(requireView());
+            navController.navigate(R.id.action_ogrenciAnaSayfaFragment_to_ogrenciNotlarFragment);
+        });
+        binding.duyurularButton.setOnClickListener(view1 -> {
+            NavController navController = Navigation.findNavController(requireView());
+            navController.navigate(R.id.action_ogrenciAnaSayfaFragment_to_ogrenciDuyurularFragment);
+
         });
 
 

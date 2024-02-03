@@ -213,7 +213,7 @@ public class ManagerAllStudent extends BaseManager {
               listener.onSaveFailed();
           }});}
     private void showToastMsg(String msg) {
-        Toast.makeText(contextRef.get(), msg, Toast.LENGTH_LONG).show();}
+        Toast.makeText(contextRef.get(), msg, Toast.LENGTH_SHORT).show();}
 
 /*
     public Call<RestApiResponse<Object>> removeUserReadBookConection(long userId, long bookId) {

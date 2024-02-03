@@ -156,7 +156,11 @@
         android:id="@+id/ogrenciDuyurularFragment"
         android:name="com.example.e_okul.view.ogrenci.OgrenciDuyurularFragment"
         android:label="fragment_ogrenci_duyurular"
-        tools:layout="@layout/fragment_ogrenci_duyurular" />
+        tools:layout="@layout/fragment_ogrenci_duyurular" >
+        <action
+            android:id="@+id/action_ogrenciDuyurularFragment_to_ogrenciSecilenDuyuruFragment"
+            app:destination="@id/ogrenciSecilenDuyuruFragment" />
+    </fragment>
     <fragment
         android:id="@+id/ogretmenAnaSayfaFragment"
         android:name="com.example.e_okul.view.ogretmen.OgretmenAnaSayfaFragment"
@@ -188,4 +192,9 @@
             android:id="@+id/action_ogretmenOgrenciListesiFragment_to_ogretmenNotGirFragment"
             app:destination="@id/ogretmenNotGirFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ogrenciSecilenDuyuruFragment"
+        android:name="com.example.e_okul.view.ogrenci.OgrenciSecilenDuyuruFragment"
+        android:label="fragment_ogrenci_secilen_duyuru"
+        tools:layout="@layout/fragment_ogrenci_secilen_duyuru" />
 </navigation>

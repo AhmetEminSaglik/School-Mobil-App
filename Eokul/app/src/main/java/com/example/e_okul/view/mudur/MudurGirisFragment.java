@@ -41,13 +41,12 @@ public class MudurGirisFragment extends Fragment implements OnGetHeadmasterByUse
 
 
         binding.buttonLogin.setOnClickListener(view1 -> {
-           /* loginCredentials.setUsername(binding.editTextUsername.getText().toString());
+            loginCredentials.setUsername(binding.editTextUsername.getText().toString());
             loginCredentials.setPassword(binding.editTextPassword.getText().toString());
 
             managerAllHeadMaster.getHeadmasterByUsername(loginCredentials.getUsername(), loginCredentials, this);
-            managerAllHeadMaster.login(this, loginCredentials);*/
-            NavController navController = Navigation.findNavController(requireView());
-            navController.navigate(R.id.action_mudurGirisFragment_to_mudurAnaSayfaFragment);
+            managerAllHeadMaster.login(this, loginCredentials);
+
         });
 
     }
@@ -63,7 +62,6 @@ public class MudurGirisFragment extends Fragment implements OnGetHeadmasterByUse
     public void loginSuccess(HeadMaster headMaster) {
         if (binding.editTextUsername.getText().toString().equals(headMaster.getUsername()) &&
                 binding.editTextPassword.getText().toString().equals(headMaster.getPassword())) {
-                Toast.makeText(this.getContext(), "Giriş Başarılı", Toast.LENGTH_SHORT).show();
 
              NavController navController = Navigation.findNavController(requireView());
              navController.navigate(R.id.action_mudurGirisFragment_to_mudurAnaSayfaFragment);

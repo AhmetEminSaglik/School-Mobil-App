@@ -71,7 +71,6 @@ public class OgretmenGirisFragment extends Fragment implements OnGetTeacherByUse
     public void loginSuccess(Teacher teacher) {
         if(binding.editTextUsername.getText().toString().equals(teacher.getUsername())&&
                 binding.editTextPassword.getText().toString().equals(teacher.getPassword())) {
-            Toast.makeText(this.getContext(), "Giriş Başarılı", Toast.LENGTH_SHORT).show();
 
             OgretmenViewModel ogretmenViewModel =new ViewModelProvider(requireActivity()).get(OgretmenViewModel.class);
             ogretmenViewModel.setTeacherName(teacher.getName());
@@ -79,7 +78,7 @@ public class OgretmenGirisFragment extends Fragment implements OnGetTeacherByUse
             goToTeacherMain();
         }
         else {
-            Toast.makeText(this.getContext(),"Giriş Başarısız",Toast.LENGTH_SHORT).show();
+
         }
 
     }
