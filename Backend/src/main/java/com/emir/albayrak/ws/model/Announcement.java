@@ -23,7 +23,7 @@ public class Announcement {
     @Column
     private int id;
     @Column
-    private String header;`
+    private String header;
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "teacher_id")

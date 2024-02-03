@@ -26,13 +26,13 @@ public class AnnouncementController {
         List<Announcement> list = service.findAll();
         String msg;
         if (!list.isEmpty()) {
-            msg = "Bütün duyurular getirildi";
+            msg = "Bütün duyurular getirildi. ("+list.size()+" adet)";
         } else {
             msg = "Kayıtlı bir duyuru bulunamadı";
         }
-        DataResult<List<Announcement>> dataResult = new SuccessDataResult(list, msg);
-        System.out.println("DataResult " +dataResult);
-        System.out.println("list  size :"+list.size());
+        DataResult<List<Announcement>> dataResult = new SuccessDataResult<>(list, msg);
+        System.out.println("DataResult " + dataResult);
+        System.out.println("list  size :" + list.size());
         list.forEach(System.out::println);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
@@ -40,7 +40,8 @@ public class AnnouncementController {
     @PostMapping
     public ResponseEntity<DataResult<Announcement>> save(@RequestBody Announcement announcement) {
         announcement = service.save(announcement);
-        DataResult<Announcement> dataResult = new SuccessDataResult<>(announcement);
+        String msg = "Duyuru kaydedildi.";
+        DataResult<Announcement> dataResult = new SuccessDataResult<>(announcement, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 }
