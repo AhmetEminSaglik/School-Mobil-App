@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utility.CustomLog;
 import utility.result.DataResult;
+import utility.result.ErrorDataResult;
 import utility.result.SuccessDataResult;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @RestController
@@ -51,13 +53,28 @@ public class ExamController {
     public ResponseEntity<DataResult<Exam>> save(@RequestBody Exam exam) {
         Teacher teacher = teacherService.findById(exam.getTeacher().getId());
         Student student = studentService.findById(exam.getStudent().getId());
+        DataResult<Exam> dataResult;
+        if (teacher == null || student == null) {
+            String msg = "Hatalı öğretmen veya öğrenci verisi girildi.";
+            exam.setTeacher(teacher);
+            exam.setStudent(student);
+            dataResult = new ErrorDataResult<>(exam, msg);
+            return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+        }
         exam.setCourseName(teacher.getBranch());
         exam.setTeacher(teacher);
         exam.setStudent(student);
         customLog.info("exam : " + exam);
-        exam = service.save(exam);
+        try {
+            exam = service.save(exam);
+
+        } catch (Exception ex) {
+            dataResult = new ErrorDataResult<>(null, "Öğretmen öğrenciye daha önce not girmiş lütfen güncelleme işlemini gerçekleştirin.");
+            return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+        }
+
         String msg = "Sınav kaydedildi.";
-        DataResult<Exam> dataResult = new SuccessDataResult<>(exam, msg);
+        dataResult = new SuccessDataResult<>(exam, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 

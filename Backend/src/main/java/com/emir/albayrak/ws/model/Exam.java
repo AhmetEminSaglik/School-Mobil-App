@@ -6,20 +6,23 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "exams")
+@Table(name = "exams", uniqueConstraints = @UniqueConstraint(columnNames = {"teacher_id", "student_id"}))
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
     @OneToOne
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
     @OneToOne
+    @JoinColumn(name = "student_id")
     private Student student;
     @Column
     private String courseName;
