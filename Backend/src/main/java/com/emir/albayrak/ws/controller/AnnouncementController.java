@@ -31,8 +31,6 @@ public class AnnouncementController {
             msg = "Kayıtlı bir duyuru bulunamadı";
         }
         DataResult<List<Announcement>> dataResult = new SuccessDataResult<>(list, msg);
-        System.out.println("DataResult " + dataResult);
-        System.out.println("list  size :" + list.size());
         list.forEach(System.out::println);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
