@@ -12,9 +12,16 @@ public class OgrenciViewModel extends ViewModel {
     private final MutableLiveData<String> studentUserName= new MutableLiveData<>();
     private final MutableLiveData<String> studentPassword= new MutableLiveData<>();
 
+    private final MutableLiveData<Integer> studentId=new MutableLiveData<>();
 
 
 
+    public MutableLiveData<Integer> getStudentId() {
+        return studentId;
+    }
+    public void setStudentId(Integer id){
+        studentId.setValue(id);
+    }
     public void setStudentName(String name) {studentName.setValue(name);}
     public LiveData<String> getStudentName() {return studentName;}
 

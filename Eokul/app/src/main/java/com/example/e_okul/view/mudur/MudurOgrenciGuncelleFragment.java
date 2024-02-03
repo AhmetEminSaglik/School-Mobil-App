@@ -25,6 +25,7 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements OnUpdateSt
     private String no;
     private String username;
     private String password;
+    private String id;
 
     private FragmentMudurOgrenciGuncelleBinding binding;
 
@@ -61,6 +62,9 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements OnUpdateSt
         ogrenciViewModel.getStudentPassword().observe(getViewLifecycleOwner(),studentPassword ->
                 this.password=studentPassword
         );
+        ogrenciViewModel.getStudentId().observe(getViewLifecycleOwner(),studentId ->
+                this.id=String.valueOf(studentId)
+        );
 
         ogrenciViewModel.getStudentNo().observe(getViewLifecycleOwner(), studentNo -> {
             this.no = studentNo;
@@ -76,7 +80,7 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements OnUpdateSt
             student.setName(binding.adEditText.getText().toString());
             student.setLastname(binding.soyadEditText.getText().toString());
             student.setParentId(3);
-            student.setId(8);// id alınacak
+            student.setId(Integer.parseInt(id));// id alınacak
             student.setNo(binding.noEditText.getText().toString());
             student.setUsername(binding.kullaniciAdiEditText.getText().toString());
             student.setRoleId(3);
@@ -93,6 +97,7 @@ public class MudurOgrenciGuncelleFragment extends Fragment implements OnUpdateSt
         binding.noEditText.setText(String.valueOf(no));
         binding.kullaniciAdiEditText.setText(username);
         binding.sifreEditText.setText(password);
+
 
     }
 

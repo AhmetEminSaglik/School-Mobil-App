@@ -41,11 +41,13 @@ public class MudurGirisFragment extends Fragment implements OnGetHeadmasterByUse
 
 
         binding.buttonLogin.setOnClickListener(view1 -> {
-            loginCredentials.setUsername(binding.editTextUsername.getText().toString());
+           /* loginCredentials.setUsername(binding.editTextUsername.getText().toString());
             loginCredentials.setPassword(binding.editTextPassword.getText().toString());
 
             managerAllHeadMaster.getHeadmasterByUsername(loginCredentials.getUsername(), loginCredentials, this);
-            managerAllHeadMaster.login(this, loginCredentials);
+            managerAllHeadMaster.login(this, loginCredentials);*/
+            NavController navController = Navigation.findNavController(requireView());
+            navController.navigate(R.id.action_mudurGirisFragment_to_mudurAnaSayfaFragment);
         });
 
     }

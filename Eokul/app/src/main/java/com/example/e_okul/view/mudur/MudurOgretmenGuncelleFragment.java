@@ -23,7 +23,8 @@ public class MudurOgretmenGuncelleFragment extends Fragment implements OnUpdateT
     private String name;
     private String lastname;
     private String branch;
-    private int id;
+    String username;
+    private String id;
 
 
     @Override
@@ -49,8 +50,11 @@ public class MudurOgretmenGuncelleFragment extends Fragment implements OnUpdateT
         ogretmenViewModel.getTeacherLastName().observe(getViewLifecycleOwner(),
                 teacherLastname -> this.lastname = teacherLastname
         );
+        ogretmenViewModel.getTeacherUsername().observe(getViewLifecycleOwner(),
+                teacherUsername -> this.username = teacherUsername
+        );
         ogretmenViewModel.getTeacherId().observe(getViewLifecycleOwner(),
-                teacherId-> this.id=teacherId
+                teacherId-> this.id= String.valueOf(teacherId)
         );
 
         ogretmenViewModel.getTeacherBranch().observe(getViewLifecycleOwner(), teacherBranch -> {
@@ -60,17 +64,22 @@ public class MudurOgretmenGuncelleFragment extends Fragment implements OnUpdateT
         });
 
 
+
+
         Teacher teacher= new Teacher();
 
 
 
-        ManagerAllTeacher t=ManagerAllTeacher.getInstance(getContext());
+
+
+        ManagerAllTeacher t =ManagerAllTeacher.getInstance(getContext());
         binding.guncelleButton.setOnClickListener(view1 ->{
             teacher.setName(binding.adEditText.getText().toString());
             teacher.setLastname(binding.soyadEditText.getText().toString());
             teacher.setBranch(binding.bransEditText.getText().toString());
-            teacher.setId(ogretmenViewModel.getTeacherId().getValue());// id alınacak
-            teacher.setUsername("fath");
+
+            teacher.setId(Integer.parseInt(id));// id alınacak
+            teacher.setUsername(binding.kullaniciAdiEditText.getText().toString());
             t.updateTeacher(teacher,this);
         });
     }
@@ -79,7 +88,10 @@ public class MudurOgretmenGuncelleFragment extends Fragment implements OnUpdateT
     private void updateUI() {
         binding.adEditText.setText(name);
         binding.soyadEditText.setText(lastname);
-        binding.bransEditText.setText(String.valueOf(branch));
+        binding.bransEditText.setText(branch);
+        binding.kullaniciAdiEditText.setText(username);
+
+
     }
 
     @Override

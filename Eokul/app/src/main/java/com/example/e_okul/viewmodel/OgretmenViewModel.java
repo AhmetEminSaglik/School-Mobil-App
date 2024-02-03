@@ -9,6 +9,7 @@ public class OgretmenViewModel extends ViewModel {
     private final MutableLiveData<String> teacherName = new MutableLiveData<>();
     private final MutableLiveData<String> teacherLastName= new MutableLiveData<>();
     private final MutableLiveData<String> teacherBranch= new MutableLiveData<>();
+    private final MutableLiveData<String> teacherUsername= new MutableLiveData<>();
     private final MutableLiveData<Integer> teacherId=new MutableLiveData<>();
 
 
@@ -21,6 +22,9 @@ public class OgretmenViewModel extends ViewModel {
 
     public void setTeacherName(String name) {teacherName.setValue(name);}
     public LiveData<String> getTeacherName() {return teacherName;}
+
+    public void setTeacherUsername(String username) {teacherUsername.setValue(username);}
+    public LiveData<String> getTeacherUsername() {return teacherUsername;}
 
     public void setTeacherLastName(String lastname){teacherLastName.setValue(lastname);}
     public LiveData<String> getTeacherLastName(){return teacherLastName;}

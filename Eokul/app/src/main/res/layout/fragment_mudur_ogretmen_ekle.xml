@@ -61,6 +61,17 @@
         android:textAlignment="center"
         android:inputType="text"
         android:layout_gravity="center" />
+        <EditText
+            android:id="@+id/kullaniciAdiEditText"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Kullanıcı Adı"
+            android:background="@drawable/edit_text_style"
+            android:layout_marginBottom="8dp"
+            android:autofillHints=""
+            android:textAlignment="center"
+            android:inputType="text"
+            android:layout_gravity="center" />
 
     <!-- Ekle Butonu -->
         <Button

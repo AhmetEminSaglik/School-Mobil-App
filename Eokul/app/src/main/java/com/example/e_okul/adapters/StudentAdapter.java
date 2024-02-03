@@ -127,6 +127,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         ogrenciViewModel.setStudentNo(student.getNo());
         ogrenciViewModel.setStudentUserName(student.getUsername());
         ogrenciViewModel.setStudentPassword(student.getPassword());
+        ogrenciViewModel.setStudentId(student.getId());
 
     }
 
