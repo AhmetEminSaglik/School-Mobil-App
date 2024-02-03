@@ -3,7 +3,6 @@ package com.emir.albayrak.ws.controller;
 import com.emir.albayrak.ws.business.abstracts.model.ExamService;
 import com.emir.albayrak.ws.business.abstracts.model.StudentService;
 import com.emir.albayrak.ws.business.abstracts.model.TeacherService;
-import com.emir.albayrak.ws.model.Announcement;
 import com.emir.albayrak.ws.model.Exam;
 import com.emir.albayrak.ws.model.Student;
 import com.emir.albayrak.ws.model.Teacher;
@@ -58,6 +57,14 @@ public class ExamController {
         customLog.info("exam : " + exam);
         exam = service.save(exam);
         String msg = "Sınav kaydedildi.";
+        DataResult<Exam> dataResult = new SuccessDataResult<>(exam, msg);
+        return ResponseEntity.status(HttpStatus.OK).body(dataResult);
+    }
+
+    @PutMapping
+    public ResponseEntity<DataResult<Exam>> update(@RequestBody Exam exam) {
+        exam = service.update(exam);
+        String msg = "Sınav Güncellendi.";
         DataResult<Exam> dataResult = new SuccessDataResult<>(exam, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }

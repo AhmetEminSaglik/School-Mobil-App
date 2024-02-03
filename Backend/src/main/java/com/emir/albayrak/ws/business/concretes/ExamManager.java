@@ -24,4 +24,19 @@ public class ExamManager implements ExamService {
     public Exam save(Exam exam) {
         return rep.save(exam);
     }
+
+    @Override
+    public Exam update(Exam exam) {
+        Exam existingExam = findById(exam.getId());
+        existingExam.setStudent(exam.getStudent());
+        existingExam.setTeacher(exam.getTeacher());
+        existingExam.setFinalResult(exam.getFinalResult());
+        existingExam.setVizeResult(exam.getVizeResult());
+        return save(existingExam);
+    }
+
+    @Override
+    public Exam findById(int id) {
+        return rep.findById(id);
+    }
 }

@@ -9,4 +9,6 @@ public interface ExamRepository extends JpaRepository<Exam, Integer> {
     List<Exam> findAll();
 
     Exam save(Exam exam);
+
+    Exam findById(int id);
 }
