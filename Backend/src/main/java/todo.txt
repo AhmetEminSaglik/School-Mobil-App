@@ -1,0 +1,6 @@
+Eklenen her ogretmen butun ogrencilerden sorumlu
+
+Duyurular :
+Ogretmen duyuru yapinca butun ogrencilere duyuru gidecek
+
+Ogretmen  her ogrenci icin vize ve final notlarini tek tek girecek

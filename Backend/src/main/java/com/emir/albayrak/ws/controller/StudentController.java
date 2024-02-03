@@ -129,7 +129,6 @@ public class StudentController {
         oldStudent.setPassword(newStudent.getPassword());
         oldStudent.setName(newStudent.getName());
         oldStudent.setLastname(newStudent.getLastname());
-        oldStudent.setParentId(newStudent.getParentId());
 
         userService.save(oldStudent);
         String msg = "Öğrenci güncellendi.";

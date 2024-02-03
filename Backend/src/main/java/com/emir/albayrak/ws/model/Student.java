@@ -16,9 +16,6 @@ import lombok.*;
 public class Student extends User {
     @Column
     private String no;
-    @Column
-    private int parentId;
-
 
     @Override
     public void setRoleIdToUser() {
@@ -29,7 +26,6 @@ public class Student extends User {
     public String toString() {
         return "Student{" + super.toString() +
                 ", no='" + no + '\'' +
-                ", parentId='" + parentId + '\'' +
                 "}";
     }
 
@@ -41,11 +37,4 @@ public class Student extends User {
         this.no = no;
     }
 
-    public int getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
-    }
 }
