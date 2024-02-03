@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.e_okul.databinding.FragmentOgrenciAnaSayfaBinding;
 import com.example.e_okul.viewmodel.OgrenciViewModel;
 
@@ -30,19 +29,19 @@ public class OgrenciAnaSayfaFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // ViewModelProvider aracılığıyla ViewModel'ı alın
+
         OgrenciViewModel ogrenciViewModel = new ViewModelProvider(requireActivity()).get(OgrenciViewModel.class);
 
-        // ViewModel'dan veriyi observe edin
         ogrenciViewModel.getStudentName().observe(getViewLifecycleOwner(), studentName -> {
             this.name = studentName;
-            updateUI();
         });
 
         ogrenciViewModel.getStudentLastname().observe(getViewLifecycleOwner(), studentSurname -> {
             this.surname = studentSurname;
             updateUI();
         });
+
+
 
     }
 

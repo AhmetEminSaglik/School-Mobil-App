@@ -4,32 +4,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.mudur.MudurOgretmenIslemleriFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/gradient_background">
 
     <TextView
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:text="Müdür Ana Sayfası"
-        android:textSize="32sp"
-        android:textStyle="bold" />
+        android:text="Öğretmen İşlemleri"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="#F4F0F0" />
 
-    <Button
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/linear_layout_style">
+        <Button
 
-        android:id="@+id/ogretmenEkleButton"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:text="Öğretmen Ekle"
-        android:textSize="25sp"/>
+            android:id="@+id/ogretmenEklebutton"
+            android:layout_width="245dp"
+            android:layout_height="90dp"
+            android:text="Öğretmen Ekle"
+            android:textSize="20sp"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_custom"
+            android:textColor="#4D4C4C" />
 
-    <Button
-        android:id="@+id/ogretmenListesiButton"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:text="Öğretmen Listesi"
-        android:textSize="25sp" />
+        <!-- Boşluk -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- Öğretmen Girişi Butonu -->
+        <Button
+            android:id="@+id/ogretmenListesiButton"
+            android:layout_width="245dp"
+            android:layout_height="90dp"
+            android:text="Öğretmen Listesi"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_custom"
+            android:textColor="#4D4C4C" />
+
+        <!-- Boşluk -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
 
 
+
+    </LinearLayout>
 
 </LinearLayout>

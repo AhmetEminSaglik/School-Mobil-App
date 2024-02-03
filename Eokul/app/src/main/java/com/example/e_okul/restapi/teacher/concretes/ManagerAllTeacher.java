@@ -1,28 +1,25 @@
 package com.example.e_okul.restapi.teacher.concretes;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import com.example.e_okul.model.LoginCredentials;
-import com.example.e_okul.model.Student;
 import com.example.e_okul.model.Teacher;
-import com.example.e_okul.model.response.abstracts.RestApiErrorResponse;
 import com.example.e_okul.model.response.abstracts.RestApiResponse;
 import com.example.e_okul.restapi.base.BaseManager;
-import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
-import com.google.gson.Gson;
-
-import java.io.IOException;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ManagerAllTeacher extends BaseManager {
+    @SuppressLint("StaticFieldLeak")
     private static Context context;
+    @SuppressLint("StaticFieldLeak")
     private static ManagerAllTeacher managerAllTeacher = new ManagerAllTeacher();
 
     public static synchronized ManagerAllTeacher getInstance(Context newContext) {
@@ -30,37 +27,67 @@ public class ManagerAllTeacher extends BaseManager {
         return managerAllTeacher;
     }
 
-    public Teacher login(LoginCredentials credentials) {
+    public void login(final OnTeacherLoginListener listener, LoginCredentials credentials) {
         Call<RestApiResponse<Teacher>> call = getTeacherRestApiClient().login(credentials);
-        Teacher teacher = null;
-        try {
-            Response<RestApiResponse<Teacher>> response = call.execute();
-            if (response.code() == 200) {
-                teacher = response.body().getData();
-                showToastMsg(response.body().getMessage());
 
-            } else {
-                Gson gson = new Gson();
-                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
-                String errMsg = errorResponse.getMessage();
-                if (errMsg != null) {
-                    Log.e("Error  ", errMsg);
-                    showToastMsg(errMsg);
-
+        call.enqueue(new Callback<RestApiResponse<Teacher>>() {
+            @Override
+            public void onResponse(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Response<RestApiResponse<Teacher>> response) {
+                try {
+                    if (response.isSuccessful() && response.body() != null) {
+                        Teacher teacher = response.body().getData();
+                        showToastMsg(response.body().getMessage());
+                        listener.loginSuccess(teacher);
+                    } else {
+                        assert response.errorBody() != null;
+                        String errorMessage =response.errorBody().string();
+                        showToastMsg(errorMessage);
+                        listener.loginFailed();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    listener.loginFailed();
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return teacher;
+
+            @Override
+            public void onFailure(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Throwable t) {
+                try {
+                    t.printStackTrace();
+                    showToastMsg("Bağlantı hatası: " + t.getMessage());
+                    listener.loginFailed();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
+    public void getTeacherByUsername(String username, LoginCredentials loginCredentials, final OnGetTeacherByUsernameListener listener) {
+        Call<RestApiResponse<Teacher>> call = getTeacherRestApiClient().getByUsername(username);
+
+        call.enqueue(new Callback<RestApiResponse<Teacher>>() {
+            @Override
+            public void onResponse(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Response<RestApiResponse<Teacher>> response) {
+                if (response.body() != null) {
+                    if (response.body().isSuccess()) {
+                        listener.success();
+                    } else {
+                        listener.failed();
+                    }
+                } else {
+                    // response.body() null ise ilgili işlemleri yapın
+                    listener.failed();
+                }}
+            @Override
+            public void onFailure(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Throwable t) {
+            }});}
 
     public void getAllTeacher(final OnGetTeachersListener listener){
         Call<RestApiResponse<List<Teacher>>> call=getTeacherRestApiClient().getAll();
 
         call.enqueue(new Callback<RestApiResponse<List<Teacher>>>() {
             @Override
-            public void onResponse(Call<RestApiResponse<List<Teacher>>> call, Response<RestApiResponse<List<Teacher>>> response) {
+            public void onResponse(@NonNull Call<RestApiResponse<List<Teacher>>> call, @NonNull Response<RestApiResponse<List<Teacher>>> response) {
                 if(response.isSuccessful() && response.body()!=null){
                     List<Teacher> teacherList = response.body().getData();
                     showToastMsg(response.body().getMessage());
@@ -72,7 +99,7 @@ public class ManagerAllTeacher extends BaseManager {
             }
 
             @Override
-            public void onFailure(Call<RestApiResponse<List<Teacher>>> call, Throwable t) {
+            public void onFailure(@NonNull Call<RestApiResponse<List<Teacher>>> call, @NonNull Throwable t) {
                 t.printStackTrace();
                 listener.onGetTeachersFailed();
             }
@@ -84,9 +111,9 @@ public class ManagerAllTeacher extends BaseManager {
         Call<RestApiResponse<Teacher>> call = getTeacherRestApiClient().save(teacher);
         call.enqueue(new Callback<RestApiResponse<Teacher>>() {
             @Override
-            public void onResponse(Call<RestApiResponse<Teacher>> call, Response<RestApiResponse<Teacher>> response) {
+            public void onResponse(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Response<RestApiResponse<Teacher>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Teacher savedTeacher = response.body().getData();
+
                     showToastMsg(response.body().getMessage());
                     listener.onSaveSuccess();
                 }
@@ -95,7 +122,7 @@ public class ManagerAllTeacher extends BaseManager {
                 }
             }
             @Override
-            public void onFailure(Call<RestApiResponse<Teacher>> call, Throwable t) {
+            public void onFailure(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Throwable t) {
                 t.printStackTrace();
                 listener.onSaveFailed();
 
@@ -107,7 +134,7 @@ public class ManagerAllTeacher extends BaseManager {
         Call<RestApiResponse<Teacher>> call = getTeacherRestApiClient().delete(id);
         call.enqueue(new Callback<RestApiResponse<Teacher>>() {
             @Override
-            public void onResponse(Call<RestApiResponse<Teacher>> call, Response<RestApiResponse<Teacher>> response) {
+            public void onResponse(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Response<RestApiResponse<Teacher>> response) {
                 if (response.isSuccessful()) {
 
 
@@ -119,7 +146,7 @@ public class ManagerAllTeacher extends BaseManager {
             }
 
             @Override
-            public void onFailure(Call<RestApiResponse<Teacher>> call, Throwable t) {
+            public void onFailure(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Throwable t) {
                 t.printStackTrace();
                 // Handle failure, show error message, etc.
                 listener.onDeleteFailed();
@@ -133,14 +160,14 @@ public class ManagerAllTeacher extends BaseManager {
 
         call.enqueue(new Callback<RestApiResponse<Teacher>>() {
             @Override
-            public void onResponse(Call<RestApiResponse<Teacher>> call, Response<RestApiResponse<Teacher>> response) {
+            public void onResponse(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Response<RestApiResponse<Teacher>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     RestApiResponse<Teacher> apiResponse = response.body();
 
                     // Kontrol etmek istediğiniz durumları burada işleyin
                     if (apiResponse.isSuccess()) {
                         // Güncelleme başarılı ise burada işlemleri gerçekleştirin
-                        Teacher updatedTeacher = apiResponse.getData();
+
                         listener.onUpdateSuccess();
                     } else {
                         // Güncelleme başarısız ise burada işlemleri gerçekleştirin
@@ -156,7 +183,7 @@ public class ManagerAllTeacher extends BaseManager {
 
 
             @Override
-            public void onFailure(Call<RestApiResponse<Teacher>> call, Throwable t) {
+            public void onFailure(@NonNull Call<RestApiResponse<Teacher>> call, @NonNull Throwable t) {
                 // Network hatası veya diğer hatalar burada işlenir
                 listener.onUpdateFailed();
             }

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_anaGirisFragment_to_ogrenciGirisFragment"
             app:destination="@id/ogrenciGirisFragment" />
+        <action
+            android:id="@+id/action_anaGirisFragment_to_ogretmenGirisFragment"
+            app:destination="@id/ogretmenGirisFragment" />
     </fragment>
     <fragment
         android:id="@+id/mudurGirisFragment"
@@ -93,7 +96,14 @@
         android:id="@+id/ogrenciAnaSayfaFragment"
         android:name="com.example.e_okul.view.ogrenci.OgrenciAnaSayfaFragment"
         android:label="fragment_ogrenci_ana_sayfa"
-        tools:layout="@layout/fragment_ogrenci_ana_sayfa" />
+        tools:layout="@layout/fragment_ogrenci_ana_sayfa" >
+        <action
+            android:id="@+id/action_ogrenciAnaSayfaFragment_to_ogrenciNotlarFragment"
+            app:destination="@id/ogrenciNotlarFragment" />
+        <action
+            android:id="@+id/action_ogrenciAnaSayfaFragment_to_ogrenciDuyurularFragment"
+            app:destination="@id/ogrenciDuyurularFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mudurOgretmenIslemleriFragment"
         android:name="com.example.e_okul.view.mudur.MudurOgretmenIslemleriFragment"
@@ -128,4 +138,54 @@
         android:name="com.example.e_okul.view.mudur.MudurOgretmenGuncelleFragment"
         android:label="fragment_mudur_ogretmen_guncelle"
         tools:layout="@layout/fragment_mudur_ogretmen_guncelle" />
+    <fragment
+        android:id="@+id/ogrenciNotlarFragment"
+        android:name="com.example.e_okul.view.ogrenci.OgrenciNotlarFragment"
+        android:label="fragment_ogrenci_notlar"
+        tools:layout="@layout/fragment_ogrenci_notlar" />
+    <fragment
+        android:id="@+id/ogretmenGirisFragment"
+        android:name="com.example.e_okul.view.ogretmen.OgretmenGirisFragment"
+        android:label="fragment_ogretmen_giris"
+        tools:layout="@layout/fragment_ogretmen_giris" >
+        <action
+            android:id="@+id/action_ogretmenGirisFragment_to_ogretmenAnaSayfaFragment"
+            app:destination="@id/ogretmenAnaSayfaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ogrenciDuyurularFragment"
+        android:name="com.example.e_okul.view.ogrenci.OgrenciDuyurularFragment"
+        android:label="fragment_ogrenci_duyurular"
+        tools:layout="@layout/fragment_ogrenci_duyurular" />
+    <fragment
+        android:id="@+id/ogretmenAnaSayfaFragment"
+        android:name="com.example.e_okul.view.ogretmen.OgretmenAnaSayfaFragment"
+        android:label="fragment_ogretmen_ana_sayfa"
+        tools:layout="@layout/fragment_ogretmen_ana_sayfa" >
+        <action
+            android:id="@+id/action_ogretmenAnaSayfaFragment_to_ogretmenDuyurularFragment"
+            app:destination="@id/ogretmenDuyurularFragment" />
+        <action
+            android:id="@+id/action_ogretmenAnaSayfaFragment_to_ogretmenOgrenciListesiFragment"
+            app:destination="@id/ogretmenOgrenciListesiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ogretmenDuyurularFragment"
+        android:name="com.example.e_okul.view.ogretmen.OgretmenDuyurularFragment"
+        android:label="fragment_ogretmen_duyurular"
+        tools:layout="@layout/fragment_ogretmen_duyurular" />
+    <fragment
+        android:id="@+id/ogretmenNotGirFragment"
+        android:name="com.example.e_okul.view.ogretmen.OgretmenNotGirFragment"
+        android:label="fragment_ogretmen_not_gir"
+        tools:layout="@layout/fragment_ogretmen_not_gir" />
+    <fragment
+        android:id="@+id/ogretmenOgrenciListesiFragment"
+        android:name="com.example.e_okul.view.ogretmen.OgretmenOgrenciListesiFragment"
+        android:label="fragment_ogretmen_ogrenci_listesi"
+        tools:layout="@layout/fragment_ogretmen_ogrenci_listesi" >
+        <action
+            android:id="@+id/action_ogretmenOgrenciListesiFragment_to_ogretmenNotGirFragment"
+            app:destination="@id/ogretmenNotGirFragment" />
+    </fragment>
 </navigation>

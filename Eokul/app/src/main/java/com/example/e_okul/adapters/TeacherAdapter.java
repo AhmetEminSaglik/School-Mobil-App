@@ -120,6 +120,7 @@ public class TeacherAdapter extends RecyclerView.Adapter<TeacherAdapter.TeacherV
         ogretmenViewModel.setTeacherName(teacher.getName());
         ogretmenViewModel.setTeacherLastName(teacher.getLastname());
         ogretmenViewModel.setTeacherBranch(teacher.getBranch());
+        ogretmenViewModel.setTeacherId(teacher.getId());
     }
 }
 

@@ -3,52 +3,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
+    android:background="@drawable/gradient_background"
     android:paddingTop="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp"
     tools:context=".view.ogrenci.OgrenciGirisFragment">
 
-    <TextView
-        android:layout_marginStart="100dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text=" Öğrenci Girişi"
-        android:textSize="24sp"
-        android:textStyle="bold" />
 
-    <EditText
-        android:layout_marginTop="50dp"
-        android:id="@+id/editTextNo"
-        android:layout_width="488dp"
-        android:layout_height="48dp"
-        android:hint="Öğrenci No"
-        android:inputType="text" />
 
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="488dp"
-        android:layout_height="48dp"
-        android:layout_below="@id/editTextNo"
-        android:layout_marginTop="8dp"
-        android:hint="Şifre"
-        android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPassword"
-        android:layout_marginTop="16dp"
-        android:text="Giriş Yap" />
+    <LinearLayout
+        android:layout_marginTop="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/linear_layout_style_2">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Öğrenci Girişi"
+            android:textColor="@color/black"
+            android:textSize="32sp"
+            android:textStyle="bold" />
 
+        <EditText
+            android:layout_marginTop="110dp"
+            android:id="@+id/editTextUsername"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:hint="Öğrenci No"
+            android:textAlignment="center"
+            android:inputType="text"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_text_style"
+            />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="8dp"
+            android:hint="Şifre"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:background="@drawable/edit_text_style"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/sign_up_button"
+            android:text="Giriş Yap"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+    <!-- LinearLayout Bitiyor -->
 
 </RelativeLayout>

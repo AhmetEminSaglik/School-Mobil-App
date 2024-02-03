@@ -1,28 +1,90 @@
 package com.example.e_okul.restapi.headmaster.concretes;
 
 
-import com.example.e_okul.model.Teacher;
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import com.example.e_okul.model.HeadMaster;
+import com.example.e_okul.model.LoginCredentials;
 import com.example.e_okul.model.response.abstracts.RestApiResponse;
 import com.example.e_okul.restapi.base.BaseManager;
-
-import java.util.List;
-
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ManagerAllHeadMaster extends BaseManager {
-    private static ManagerAllHeadMaster managerAllHeadMaster = new ManagerAllHeadMaster();
+    @SuppressLint("StaticFieldLeak")
+    private static Context context;
+    @SuppressLint("StaticFieldLeak")
+    private static final ManagerAllHeadMaster managerAllHeadMaster = new ManagerAllHeadMaster();
 
-    public static synchronized ManagerAllHeadMaster getInstance() {
+    public static synchronized ManagerAllHeadMaster getInstance(Context newContext) {
+        context = newContext;
+
         return managerAllHeadMaster;
     }
 
-    public Call<RestApiResponse<List<Teacher>>> getAllTeacher() {
-        return getTeacherRestApiClient().getAll();
+    public void getHeadmasterByUsername(String username, LoginCredentials loginCredentials, final OnGetHeadmasterByUsernameListener listener) {
+        Call<RestApiResponse<HeadMaster>> call = getHeadMasterRestApiClient().getHeadmasterByUsername(username);
+
+        call.enqueue(new Callback<RestApiResponse<HeadMaster>>() {
+            @Override
+            public void onResponse(@NonNull Call<RestApiResponse<HeadMaster>> call, @NonNull Response<RestApiResponse<HeadMaster>> response) {
+                if (response.body() != null) {
+                    if (response.body().isSuccess()) {
+                        listener.success();
+                    } else {
+                        listener.failed();
+                    }
+                } else {
+                    listener.failed();
+                }
+            }
+            @Override
+            public void onFailure(@NonNull Call<RestApiResponse<HeadMaster>> call, @NonNull Throwable t) {
+            }});}
+
+    public void login(final OnHeadmasterLoginListener listener, LoginCredentials credentials) {
+        Call<RestApiResponse<HeadMaster>> call = getHeadMasterRestApiClient().login(credentials);
+
+        call.enqueue(new Callback<RestApiResponse<HeadMaster>>() {
+            @Override
+            public void onResponse(@NonNull Call<RestApiResponse<HeadMaster>> call, @NonNull Response<RestApiResponse<HeadMaster>> response) {
+                try {
+                    if (response.isSuccessful() && response.body() != null) {
+                        HeadMaster headMaster = response.body().getData();
+                        showToastMsg(response.body().getMessage());
+                        listener.loginSuccess(headMaster);
+                    } else {
+                        assert response.errorBody() != null;
+                        String errorMessage =response.errorBody().string();
+                        showToastMsg(errorMessage);
+                        listener.loginFailed();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    listener.loginFailed();
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<RestApiResponse<HeadMaster>> call, @NonNull Throwable t) {
+                try {
+                    t.printStackTrace();
+                    showToastMsg("Bağlantı hatası: " + t.getMessage());
+                    listener.loginFailed();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    private void showToastMsg(String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
-//    public Call<List<User>> getAllUser() {
-    //      return getUserRestApiClient().getAllUsers();
-    //}
 
 
 /*

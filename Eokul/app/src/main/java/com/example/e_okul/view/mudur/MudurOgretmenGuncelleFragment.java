@@ -23,6 +23,7 @@ public class MudurOgretmenGuncelleFragment extends Fragment implements OnUpdateT
     private String name;
     private String lastname;
     private String branch;
+    private int id;
 
 
     @Override
@@ -48,6 +49,9 @@ public class MudurOgretmenGuncelleFragment extends Fragment implements OnUpdateT
         ogretmenViewModel.getTeacherLastName().observe(getViewLifecycleOwner(),
                 teacherLastname -> this.lastname = teacherLastname
         );
+        ogretmenViewModel.getTeacherId().observe(getViewLifecycleOwner(),
+                teacherId-> this.id=teacherId
+        );
 
         ogretmenViewModel.getTeacherBranch().observe(getViewLifecycleOwner(), teacherBranch -> {
             this.branch = teacherBranch;
@@ -55,26 +59,29 @@ public class MudurOgretmenGuncelleFragment extends Fragment implements OnUpdateT
             updateUI();
         });
 
+
         Teacher teacher= new Teacher();
-        teacher.setName("Fatih");
-        teacher.setLastname("Altun");
-        teacher.setBranch("Su Yapilari" );
-        teacher.setGraduatedUniversity("");
-        teacher.setId(10);
-        teacher.setRoleId(2);
-        teacher.setUsername("babapro1234");
-        teacher.setPassword("passs");
+
+
 
         ManagerAllTeacher t=ManagerAllTeacher.getInstance(getContext());
-        binding.guncelleButton.setOnClickListener(view1 -> t.updateTeacher(teacher,this));
+        binding.guncelleButton.setOnClickListener(view1 ->{
+            teacher.setName(binding.adEditText.getText().toString());
+            teacher.setLastname(binding.soyadEditText.getText().toString());
+            teacher.setBranch(binding.bransEditText.getText().toString());
+            teacher.setId(ogretmenViewModel.getTeacherId().getValue());// id alınacak
+            teacher.setUsername("fath");
+            t.updateTeacher(teacher,this);
+        });
     }
 
 
     private void updateUI() {
         binding.adEditText.setText(name);
         binding.soyadEditText.setText(lastname);
-        binding.bransEditText.setText(branch);
+        binding.bransEditText.setText(String.valueOf(branch));
     }
+
     @Override
     public void onUpdateSuccess() {
         Toast.makeText(getContext(),"Öğretmen başarılı bir şekilde güncellendi" ,Toast.LENGTH_LONG).show();

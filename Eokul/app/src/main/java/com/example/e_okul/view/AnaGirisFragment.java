@@ -9,13 +9,8 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.e_okul.R;
 import com.example.e_okul.databinding.FragmentAnaGirisBinding;
-import com.example.e_okul.model.Student;
-import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
-
-import java.util.List;
 
 
 public class AnaGirisFragment extends Fragment{
@@ -44,18 +39,25 @@ private FragmentAnaGirisBinding binding;
         super.onViewCreated(view, savedInstanceState);
 
 
-        binding.mudurGirisButton.setOnClickListener (view1 -> loginMudur());
-        binding.ogrenciGirisbutton.setOnClickListener (view12 -> loginOgrenci());
+        binding.mudurGirisButton.setOnClickListener (view1 -> loginHeadmaster());
+        binding.ogrenciGirisbutton.setOnClickListener (view1 -> loginStudent());
+        binding.ogretmenGirisButton.setOnClickListener(view1 -> loginTeacher());
 
 
     }
-    private void loginMudur(){
+    private void loginHeadmaster(){
         NavController navController = Navigation.findNavController(requireView());
         navController.navigate(R.id.action_anaGirisFragment_to_mudurGirisFragment);
     }
-    private void loginOgrenci(){
+    private void loginStudent(){
         NavController navController = Navigation.findNavController(requireView());
         navController.navigate(R.id.action_anaGirisFragment_to_ogrenciGirisFragment);
+    }
+
+    private void loginTeacher(){
+        NavController navController= Navigation.findNavController(requireView());
+        navController.navigate(R.id.action_anaGirisFragment_to_ogretmenGirisFragment);
+
     }
 
 
