@@ -1,24 +1,20 @@
 package com.example.e_okul.view.mudur;
 
-import android.os.Bundle;
 
+import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.e_okul.R;
 import com.example.e_okul.databinding.FragmentMudurAnaSayfaBinding;
 
 
 public class MudurAnaSayfaFragment extends Fragment {
     private FragmentMudurAnaSayfaBinding binding;
-
-
 
 
     @Override
@@ -36,9 +32,10 @@ public class MudurAnaSayfaFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
         binding.ogrenciIslemleriButton.setOnClickListener (view1 -> goToOgrenciIslemleri());
         binding.OgretmenIslemleriButton.setOnClickListener(view1 -> goToOgretmenIslemleri());
-
 
     }
     private void goToOgrenciIslemleri(){
@@ -50,5 +47,7 @@ public class MudurAnaSayfaFragment extends Fragment {
         navController.navigate(R.id.action_mudurAnaSayfaFragment_to_mudurOgretmenIslemleriFragment);
 
     }
+
+
 
 }

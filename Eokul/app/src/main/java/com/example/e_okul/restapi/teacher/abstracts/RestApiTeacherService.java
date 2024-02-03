@@ -25,6 +25,9 @@ public interface RestApiTeacherService {
     @GET(".")
     Call<RestApiResponse<List<Teacher>>> getAll();
 
+    @GET("username/{username}/")
+    Call<RestApiResponse<Teacher>> getByUsername(@Path("username") String username);
+
 
     @PUT(".")
     Call<RestApiResponse<Teacher>> update(@Body Teacher teacher);

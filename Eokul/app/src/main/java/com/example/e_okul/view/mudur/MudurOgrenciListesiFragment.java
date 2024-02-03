@@ -1,6 +1,5 @@
 package com.example.e_okul.view.mudur;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,12 +12,14 @@ import android.view.ViewGroup;
 
 import com.example.e_okul.adapters.StudentAdapter;
 import com.example.e_okul.databinding.FragmentMudurOgrenciListesiBinding;
+import com.example.e_okul.model.LoginCredentials;
 import com.example.e_okul.model.Student;
 import com.example.e_okul.restapi.student.concretes.ManagerAllStudent;
+import com.example.e_okul.restapi.student.concretes.OnGetStudentsListener;
 
 import java.util.List;
 
-public class MudurOgrenciListesiFragment extends Fragment implements ManagerAllStudent.OnGetStudentsListener{
+public class MudurOgrenciListesiFragment extends Fragment implements OnGetStudentsListener {
 
     private StudentAdapter studentAdapter;
     private FragmentMudurOgrenciListesiBinding binding;
@@ -44,11 +45,7 @@ public class MudurOgrenciListesiFragment extends Fragment implements ManagerAllS
         binding.recyclerView.setLayoutManager(layoutManager);
     }
 
-    @Override
-    public void onSaveSuccess(Student student) {}
 
-    @Override
-    public void onSaveFailed() {}
 
     @Override
     public void onGetStudentsSuccess(List<Student> studentList) {
@@ -58,10 +55,12 @@ public class MudurOgrenciListesiFragment extends Fragment implements ManagerAllS
 
     @Override
     public void onGetStudentsFailed() {}
-    @SuppressLint("NotifyDataSetChanged")
-    @Override
-    public void onDeleteSuccess() {}
 
     @Override
     public void onGetStudentByIdSucces(Student student) {}
+
+    @Override
+    public void onGetStudentByUsernameSuccess(Student student, LoginCredentials loginCredentials) {
+
+    }
 }

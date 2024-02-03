@@ -5,25 +5,21 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.e_okul.model.LoginCredentials;
 import com.example.e_okul.model.Student;
 import com.example.e_okul.model.response.abstracts.RestApiErrorResponse;
 import com.example.e_okul.model.response.abstracts.RestApiResponse;
 import com.example.e_okul.restapi.base.BaseManager;
 import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-
 public class ManagerAllStudent extends BaseManager {
-    public static ManagerAllStudent.OnGetStudentsListener OnGetStudentsListener;
-    public static ManagerAllStudent.OnUpdateStudentListener OnUpdateStudentListener;
     private static WeakReference<Context> contextRef;
     private static final ManagerAllStudent managerAll = new ManagerAllStudent();
 
@@ -32,90 +28,97 @@ public class ManagerAllStudent extends BaseManager {
         return managerAll;
     }
 
-
-    public Student login(LoginCredentials credentials) {
+    public void login(final OnStudentLoginListener listener, LoginCredentials credentials) {
         Call<RestApiResponse<Student>> call = getStudentRestApiClient().login(credentials);
-        Student student = null;
-        try {
-            Response<RestApiResponse<Student>> response = call.execute();
 
-            if (response.code() == 200) {
-                student = response.body().getData();
-                showToastMsg(response.body().getMessage());
-            } else {
-                Gson gson = new Gson();
-                RestApiErrorResponse errorResponse = gson.fromJson(response.errorBody().charStream(), RestApiErrorResponse.class);
-                String errMsg = errorResponse.getMessage();
-                if (errMsg != null) {
-                    Log.e("Error  ", errMsg);
-                    showToastMsg(errMsg);
-
+        call.enqueue(new Callback<RestApiResponse<Student>>() {
+            @Override
+            public void onResponse(@NonNull Call<RestApiResponse<Student>> call, @NonNull Response<RestApiResponse<Student>> response) {
+                try {
+                    if (response.isSuccessful() && response.body() != null) {
+                        Student student = response.body().getData();
+                        showToastMsg(response.body().getMessage());
+                        listener.onLoginSuccess(student);
+                    } else {
+                        assert response.errorBody() != null;
+                        String errorMessage =response.errorBody().string();
+                        showToastMsg(errorMessage);
+                        listener.onLoginFailed();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    listener.onLoginFailed();
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return student;
+
+            @Override
+            public void onFailure(@NonNull Call<RestApiResponse<Student>> call, @NonNull Throwable t) {
+                try {
+                    t.printStackTrace();
+                    showToastMsg("Bağlantı hatası: " + t.getMessage());
+                    listener.onLoginFailed();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
- 
-  public void getAllStudents(final OnGetStudentsListener listener) {
+
+    public void getAllStudents(final OnGetStudentsListener listener) {
       Call<RestApiResponse<List<Student>>> call = getStudentRestApiClient().getAll();
 
       call.enqueue(new Callback<RestApiResponse<List<Student>>>() {
           @Override
-          public void onResponse(Call<RestApiResponse<List<Student>>> call, Response<RestApiResponse<List<Student>>> response) {
+          public void onResponse(@NonNull Call<RestApiResponse<List<Student>>> call, @NonNull Response<RestApiResponse<List<Student>>> response) {
               if (response.isSuccessful() && response.body() != null) {
                   List<Student> studentList = response.body().getData();
                   showToastMsg(response.body().getMessage());
                   listener.onGetStudentsSuccess(studentList);
               } else {
-                  handleErrorResponse(response);  // Bu satırı ekledik.
-                  listener.onGetStudentsFailed();
-              }
-          }
+                  handleErrorResponse(response);
+                  listener.onGetStudentsFailed();}}
 
           @Override
-          public void onFailure(Call<RestApiResponse<List<Student>>> call, Throwable t) {
+          public void onFailure(@NonNull Call<RestApiResponse<List<Student>>> call, @NonNull Throwable t) {
               t.printStackTrace();
-              // Handle failure, show error message, etc.
               listener.onGetStudentsFailed();
-          }
-      });
-  }
+          }});}
     public void getStudentByNo(int studentId, final OnGetStudentsListener listener) {
         Call<RestApiResponse<Student>> call = getStudentRestApiClient().getByNo(studentId);
 
         call.enqueue(new Callback<RestApiResponse<Student>>() {
             @Override
-            public void onResponse(Call<RestApiResponse<Student>> call, Response<RestApiResponse<Student>> response) {
+            public void onResponse(@NonNull Call<RestApiResponse<Student>> call, @NonNull Response<RestApiResponse<Student>> response) {
+                assert response.body() != null;
                 if (response.body().isSuccess()) {
-                    Student student = (Student) response.body().getData();
+                    Student student = response.body().getData();
                     showToastMsg(response.body().getMessage());
                     listener.onGetStudentByIdSucces(student);
                 } else {
-
                     listener.onGetStudentsFailed();
-                }
-            }
-
-            /**
-             * Invoked when a network exception occurred talking to the server or when an unexpected
-             * exception occurred creating the request or processing the response.
-             *
-             * @param call
-             * @param t
-             */
+                }}
             @Override
-            public void onFailure(Call<RestApiResponse<Student>> call, Throwable t) {
+            public void onFailure(@NonNull Call<RestApiResponse<Student>> call, @NonNull Throwable t) {
+            }});}
 
-            }
+    public void getStudentByUsername(String username, LoginCredentials loginCredentials, final OnGetStudentByUserNameListener listener) {
+        Call<RestApiResponse<Student>> call = getStudentRestApiClient().getStudentByUsername(username);
 
-
-        });
-    }
-
-    // Bu metodun kullanıldığı yerde fonksiyonun sonunda ekledik.
+        call.enqueue(new Callback<RestApiResponse<Student>>() {
+            @Override
+            public void onResponse(@NonNull Call<RestApiResponse<Student>> call, @NonNull Response<RestApiResponse<Student>> response) {
+                assert response.body() != null;
+                if (response.body().isSuccess()) {
+                    Student student = response.body().getData();
+                   // showToastMsg(response.body().getMessage());
+                    listener.success();
+                } else {
+                    listener.failed();
+                }}
+            @Override
+            public void onFailure(@NonNull Call<RestApiResponse<Student>> call, @NonNull Throwable t) {
+            }});}
     private void handleErrorResponse(Response<RestApiResponse<List<Student>>> response) {
         Gson gson = new Gson();
         if (response.errorBody() != null) {
@@ -128,97 +131,60 @@ public class ManagerAllStudent extends BaseManager {
         } else {
             Log.e("Error", "Unknown error occurred.");
             showToastMsg("Unknown error occurred.");
-        }
-    }
+        }}
 
-    public interface OnGetStudentsListener {
-        void onSaveSuccess(Student student);
-
-        void onSaveFailed();
-
-        void onGetStudentsSuccess(List<Student> studentList);
-        void onGetStudentsFailed();
-
-        void onDeleteSuccess();
-
-        void onGetStudentByIdSucces(Student student);
-    }
     public void updateStudent(Student student, final OnUpdateStudentListener listener){
         Call<RestApiResponse<Student>> call = getStudentRestApiClient().update(student);
 
         call.enqueue(new Callback<RestApiResponse<Student>>() {
             @Override
-            public void onResponse(Call<RestApiResponse<Student>> call, Response<RestApiResponse<Student>> response) {
+            public void onResponse(@NonNull Call<RestApiResponse<Student>> call, @NonNull Response<RestApiResponse<Student>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     RestApiResponse<Student> apiResponse = response.body();
 
-                    // Kontrol etmek istediğiniz durumları burada işleyin
                     if (apiResponse.isSuccess()) {
-                        // Güncelleme başarılı ise burada işlemleri gerçekleştirin
-                        Student updatedStudent = apiResponse.getData();
+
                         listener.onUpdateSucccess();
                     } else {
-                        // Güncelleme başarısız ise burada işlemleri gerçekleştirin
                         Log.e("updateStudent", "Sunucu tarafında bir hata oluştu: " + apiResponse.getMessage());
                         listener.onUpdateFailed();
                     }
                 } else {
-                    // Response başarısız ise burada işlemleri gerçekleştirin
                     Log.e("updateStudent", "HTTP hatası: " + response.code());
                     listener.onUpdateFailed();
-                }
-            }
+                }}
 
 
             @Override
-            public void onFailure(Call<RestApiResponse<Student>> call, Throwable t) {
-                // Network hatası veya diğer hatalar burada işlenir
+            public void onFailure(@NonNull Call<RestApiResponse<Student>> call, @NonNull Throwable t) {
                 listener.onUpdateFailed();
-            }
-        });
-      
-    }
-    public interface OnUpdateStudentListener{
-    void onUpdateSucccess();
-     void onUpdateFailed();
-    }
+            }});}
 
     public void deleteStudent(String no, final OnDeleteStudentListener listener) {
         Call<RestApiResponse<Void>> call = getStudentRestApiClient().delete(no);
 
         call.enqueue(new Callback<RestApiResponse<Void>>() {
             @Override
-            public void onResponse(Call<RestApiResponse<Void>> call, Response<RestApiResponse<Void>> response) {
+            public void onResponse(@NonNull Call<RestApiResponse<Void>> call, @NonNull Response<RestApiResponse<Void>> response) {
                 if (response.isSuccessful()) {
-
-
                     listener.onDeleteSuccess();
                 } else {
-                    //handleErrorResponse(response);
                     listener.onDeleteFailed();
-                }
-            }
+                }}
 
             @Override
-            public void onFailure(Call<RestApiResponse<Void>> call, Throwable t) {
+            public void onFailure(@NonNull Call<RestApiResponse<Void>> call, @NonNull Throwable t) {
                 t.printStackTrace();
-                // Handle failure, show error message, etc.
+
                 listener.onDeleteFailed();
-            }
-        });
-    }
-    public interface OnDeleteStudentListener {
-        void onDeleteSuccess();
-        void onDeleteFailed();
-    }
+            }});}
 
     public void saveStudent(Student student, final OnSaveStudentListener listener) {
       Call<RestApiResponse<Student>> call = getStudentRestApiClient().save(student);
 
-
       call.enqueue(new Callback<RestApiResponse<Student>>() {
           @Override
-          public void onResponse(Call<RestApiResponse<Student>> call, Response<RestApiResponse<Student>> response) {
+          public void onResponse(@NonNull Call<RestApiResponse<Student>> call, @NonNull Response<RestApiResponse<Student>> response) {
               if (response.isSuccessful() && response.body() != null) {
                   Student savedStudent = response.body().getData();
                   showToastMsg(response.body().getMessage());
@@ -226,8 +192,7 @@ public class ManagerAllStudent extends BaseManager {
               } else {
                   handleErrorResponse(response);
                   listener.onSaveFailed();
-              }
-          }
+              }}
           public void handleErrorResponse(Response<RestApiResponse<Student>> response) {
               Gson gson = new Gson();
               if (response.errorBody() != null) {
@@ -240,39 +205,15 @@ public class ManagerAllStudent extends BaseManager {
               } else {
                   Log.e("Error", "Unknown error occurred.");
                   showToastMsg("Unknown error occurred.");
-              }
-          }
-
+              }}
 
           @Override
-          public void onFailure(Call<RestApiResponse<Student>> call, Throwable t) {
+          public void onFailure(@NonNull Call<RestApiResponse<Student>> call, @NonNull Throwable t) {
               t.printStackTrace();
-              // Handle failure, show error message, etc.
               listener.onSaveFailed();
-          }
-      });
-  }
-
-    public interface OnSaveStudentListener {
-        void onSaveSuccess(Student student);
-
-        void onSaveSuccess(List<Student> studentList);
-
-        void onSaveFailed();
-
-        void onGetStudentByIdSucces(Student student);
-
-
-    }
-
-
+          }});}
     private void showToastMsg(String msg) {
-        Toast.makeText(contextRef.get(), msg, Toast.LENGTH_LONG).show();
-    }
-//    public Call<List<User>> getAllUser() {
-    //      return getUserRestApiClient().getAllUsers();
-    //}
-
+        Toast.makeText(contextRef.get(), msg, Toast.LENGTH_LONG).show();}
 
 /*
     public Call<RestApiResponse<Object>> removeUserReadBookConection(long userId, long bookId) {

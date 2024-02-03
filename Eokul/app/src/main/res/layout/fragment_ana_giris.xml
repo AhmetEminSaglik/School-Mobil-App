@@ -1,35 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.AnaGirisFragment"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:background="@drawable/gradient_background">
 
-    <Button
+    <!-- Başlık: E Okul -->
+    <TextView
+        android:id="@+id/textViewBasik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="E Okul"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="#F4F0F0"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="85dp"/>
+
+    <LinearLayout
+
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_marginTop="80dp"
-        android:id="@+id/ogrenciGirisbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:text="Öğrenci Girişi"
-        android:textSize="25sp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_below="@+id/textViewBasik"
+        android:background="@drawable/linear_layout_style"
 
-    <Button
-        android:id="@+id/ogretmenGirisButton"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:text="Öğretmen Girişi"
-        android:textSize="25sp"
-        android:layout_gravity="center_horizontal" />
+        >
 
-    <Button
-        android:id="@+id/mudurGirisButton"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:text="Müdür Girişi"
-        android:textSize="25sp"
-        android:layout_gravity="center_horizontal"/>
-</LinearLayout>
+        <!-- Öğrenci Girişi Butonu -->
+        <Button
+
+            android:id="@+id/ogrenciGirisbutton"
+            android:layout_width="245dp"
+            android:layout_height="90dp"
+            android:text="Öğrenci Girişi"
+            android:textSize="20sp"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_custom"
+            android:textColor="#4D4C4C" />
+
+        <!-- Boşluk -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- Öğretmen Girişi Butonu -->
+        <Button
+            android:id="@+id/ogretmenGirisButton"
+            android:layout_width="245dp"
+            android:layout_height="90dp"
+            android:text="Öğretmen Girişi"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_custom"
+        android:textColor="#4D4C4C" />
+
+        <!-- Boşluk -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- Müdür Girişi Butonu -->
+        <Button
+            android:id="@+id/mudurGirisButton"
+            android:layout_width="245dp"
+            android:layout_height="90dp"
+            android:text="Müdür Girişi"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_custom"
+        android:textColor="#4D4C4C" />
+    </LinearLayout>
+
+</RelativeLayout>
