@@ -14,7 +14,7 @@ public class HeadMaster extends User {
 
     @Override
     public String toString() {
-        return "Headmaster{" + super.toString() +'\'' +
+        return "Headmaster{" + super.toString() + '\'' +
                 "}";
     }
 }

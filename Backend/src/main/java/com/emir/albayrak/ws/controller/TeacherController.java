@@ -92,7 +92,7 @@ public class TeacherController {
         oldTeacher.setGraduatedUniversity(newTeacher.getGraduatedUniversity());
 
 
-        userService.save(newTeacher);
+        userService.save(oldTeacher);
         String msg = "Öğretmen güncellendi.";
         DataResult<User> dataResult = new SuccessDataResult<>(newTeacher, msg);
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);

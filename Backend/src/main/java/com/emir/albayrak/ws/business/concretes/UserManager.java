@@ -35,7 +35,6 @@ public class UserManager implements UserService {
         String msg;
         if (findByUsername(user.getUsername()) != null) {
             msg = InvalidSignupUsernameException.customErrorMsg;
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorDataResult<>(null, msg));
             return new ErrorDataResult<>(null, msg);
         }
         user = userRepository.save(user);

@@ -34,7 +34,7 @@ public class ExamManager implements ExamService {
         String msg;
         if (exam.getId() == 0) {
             msg = "Sınavı güncelleyebilmek için lütfen kayıtlı sınav id'sini giriniz";
-            dataResult = new ErrorDataResult<>(null, "");
+            dataResult = new ErrorDataResult<>(null, msg);
 
         } else {
             msg = "Sınav güncellenmiştir";

@@ -8,15 +8,12 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "announcement")
+@Table(name = "announcements")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-//        property  = "id",
-//        scope     = Long.class)
 public class Announcement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

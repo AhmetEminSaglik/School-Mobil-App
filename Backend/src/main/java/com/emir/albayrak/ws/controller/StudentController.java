@@ -146,7 +146,7 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/")
     public ResponseEntity<DataResult<Student>> findById(@PathVariable int id) {
         Student student = studentService.findById(id);
         DataResult<Student> dataResult;

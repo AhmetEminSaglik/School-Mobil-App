@@ -27,24 +27,11 @@ public class InitialDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (userService.findAll().size() == 0) {
+        if (userService.findAll().isEmpty()) {
             saveHeadMaster();
             saveTeacher();
             saveStudent();
-        } else {
-            customLog.info("Users are not saved at the InitialDataLoader. Because it is already filled.");
         }
-
-        Student student = studentService.findAll().get(0);
-        customLog.info("Found Student Data : " + student);
-//        customLog.info("Found Parent Data Of Student ID(" + student.getId() + ") : " + studentService.findParent(student.getParentId()));
-        //        User user = new User("Emir", "ALBAYRAK");
-//        User user2 = new User("Ahmet Emin", "SAGLIK");
-//        userService.addUser(user);
-//        userService.addUser(user2);
-//        customLog.info("2 users are added.");
-//        customLog.info(user.toString());
-//        customLog.info(user2.toString());
     }
 
     private void saveHeadMaster() {

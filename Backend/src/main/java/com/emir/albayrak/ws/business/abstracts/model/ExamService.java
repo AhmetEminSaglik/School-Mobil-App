@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface ExamService {
     List<Exam> findAll();
+
     Exam save(Exam exam);
+
     DataResult<Exam> update(Exam exam);
+
     Exam findById(int id);
 }

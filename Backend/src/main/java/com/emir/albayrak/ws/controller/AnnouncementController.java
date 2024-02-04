@@ -12,7 +12,7 @@ import utility.result.SuccessDataResult;
 import java.util.List;
 
 @RestController
-@RequestMapping("/announcement/")
+@RequestMapping("/announcements/")
 public class AnnouncementController {
     private AnnouncementService service;
 
@@ -26,7 +26,7 @@ public class AnnouncementController {
         List<Announcement> list = service.findAll();
         String msg;
         if (!list.isEmpty()) {
-            msg = "Bütün duyurular getirildi. ("+list.size()+" adet)";
+            msg = "Bütün duyurular getirildi. (" + list.size() + " adet)";
         } else {
             msg = "Kayıtlı bir duyuru bulunamadı";
         }

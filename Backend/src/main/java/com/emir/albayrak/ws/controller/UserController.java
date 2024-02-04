@@ -15,7 +15,7 @@ import utility.result.SuccessDataResult;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/users/")
 public class UserController {
 
     private final UserService userService;
@@ -24,8 +24,7 @@ public class UserController {
 
 
     @Autowired
-    public UserController(UserService userService,
-                          LoginService loginService) {
+    public UserController(UserService userService, LoginService loginService) {
         this.userService = userService;
         this.loginService = loginService;
     }
@@ -36,7 +35,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(dataResult);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all/")
     public ResponseEntity<DataResult<List<User>>> getUserList() {
         List<User> userList = userService.findAll();
         String msg = "Kullanıcı listesi başarılı bir şekilde getirildi.";

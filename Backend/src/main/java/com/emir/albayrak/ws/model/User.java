@@ -17,7 +17,6 @@ public abstract class User {
     public User() {
         setRoleIdToUser();
     }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

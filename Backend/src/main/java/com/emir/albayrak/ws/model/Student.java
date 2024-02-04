@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "Student", uniqueConstraints = @UniqueConstraint(columnNames = "no"))
+@Table(name = "students", uniqueConstraints = @UniqueConstraint(columnNames = "no"))
 public class Student extends User {
     @Column
     private String no;

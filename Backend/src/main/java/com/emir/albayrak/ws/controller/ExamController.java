@@ -27,13 +27,13 @@ public class ExamController {
     private TeacherService teacherService;
     private StudentService studentService;
 
+    @Autowired
     public ExamController(ExamService service, TeacherService teacherService, StudentService studentService) {
         this.service = service;
         this.teacherService = teacherService;
         this.studentService = studentService;
     }
 
-    @Autowired
 
     @GetMapping
     public ResponseEntity<DataResult<List<Exam>>> findAll() {
