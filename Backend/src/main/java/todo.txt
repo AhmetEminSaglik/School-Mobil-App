@@ -1,6 +1,4 @@
-Eklenen her ogretmen butun ogrencilerden sorumlu
+İşlemler :
 
-Duyurular :
-Ogretmen duyuru yapinca butun ogrencilere duyuru gidecek
-
-Ogretmen  her ogrenci icin vize ve final notlarini tek tek girecek
+1-) Öğretmen duyuru yapar, bütün öğrenciler görür
+2-) Her Öğretmen bir öğrenci sınav sonucunu kaydeder, sonrasında günceller
